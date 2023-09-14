@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { InputString } from './input-string';
 
 export const FirstPageTemplate = (context) => {
     return html `
@@ -34,8 +35,6 @@ export const FirstPageTemplate = (context) => {
     top: 150px;
     left: 150px;"
     >
-    <div id="outlet"></div>
-    <script type="module" src="router.js"></script>
       <div
       style=
       " background-image: linear-gradient(to left, #000cf9, #00e1ff);;
@@ -60,7 +59,7 @@ export const FirstPageTemplate = (context) => {
         height: 30px;
         border-radius: 10px;
         color: white;
-        font-size: xx-large;
+        font-size: x-large;
         text-align: center;
         padding: 10px 0;
         width: 100%;
@@ -128,10 +127,16 @@ export const FirstPageTemplate = (context) => {
  >About You</div>
      <div class="row">
           <div class="input-component">
-          <input type="text" id="first_name" class="inputText" name="first_name" placeholder="First Name">
+          <input-string
+          width=250
+          placeholder="First Name"
+          type="First Name"
+          @focusout=${(e) => context.validateString(e)}
+          >
+          </input-string>
           </div>
           <div class="input-component">
-          <input type="text" id="last_name" class="inputText" name="last_name" placeholder="Last Name">
+          <input type="text" id="last_name" class="inputText" name="last_name" placeholder="Last Name"  @focusout=${(e) => context.validateString(e)}>
           </div>
           <div class="input-component">
           <input type="text" id="age" class="inputText" name="age" placeholder="Age">
@@ -140,13 +145,13 @@ export const FirstPageTemplate = (context) => {
 
       <div class="row">
           <div class="input-component">
-          <input type="text" id="email" class="inputText" placeholder="email">
+          <input type="text" id="email" class="inputText" placeholder="email" @focusout=${(e) => context.validateEmail(e)}>
           </div>
           <div class="input-component">
           <input type="text" id="phone" class="inputText" placeholder="phone">
           </div>
           <div class="input-component">
-              <input type="text" id="phone" class="inputText" placeholder="School">
+              <input type="text" class="inputText" placeholder="School" @focusout=${(e) => context.validateString(e)}>
           </div>
       </div>
 
@@ -158,7 +163,7 @@ export const FirstPageTemplate = (context) => {
           <input type="text" class="inputText" placeholder="GPA">
           </div>
       </div>
-      <button class="button" @click=${(e) => context.routeToHome(e)} style=
+      <button class="button" @focusout=${(e) => context.routeToHome(e)} style=
       "position: relative;
       top: 325px;
       left: 10px;"

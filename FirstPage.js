@@ -18,6 +18,14 @@ class FirstPage extends LitElement {
         super();
         this.ButtonClicked = false;
         this.studentCheckBoxClicked = false;
+        this.error = false;
+        this.addEventListener('custom-string-event', this.handleChangedValue);
+    }
+
+    handleChangedValue(e) {
+        console.log("here");
+        console.log(e);
+        e.stopPropagation();
     }
 
     studentcheckBox(e) {
@@ -27,6 +35,26 @@ class FirstPage extends LitElement {
     routeToHome(e) {
         initRouter();
         Router.go("/home");
+    }
+
+    validateEmail(e) {
+        console.log(e);
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        //if (!emailRegex.test(email)) {
+          //  this.error = "Invalid Email";
+       // } else {
+      //      this.error = "";
+     //   }
+    }
+
+    validateString(e) {
+        console.log(e);
+        const alphabetRegex = /^[a-zA-Z]+$/;
+       // if (!alphabetRegex.test(input.trim())) {
+         //   this.error = "Invalid Input";
+        //} else {
+          //  this.error = "";
+        //}
     }
 
 }
