@@ -127,51 +127,97 @@ export const FirstPageTemplate = (context) => {
  >About You</div>
      <div class="row">
           <div class="input-component">
-          <input-string
-          width=250
-          placeholder="First Name"
-          type="First Name"
-          @focusout=${(e) => context.validateString(e)}
-          >
-          </input-string>
+            <input-string
+            width=250
+            placeholder="First Name"
+            type="First Name"
+            >
+            </input-string>
           </div>
           <div class="input-component">
-          <input type="text" id="last_name" class="inputText" name="last_name" placeholder="Last Name"  @focusout=${(e) => context.validateString(e)}>
+            <input-string
+            width=250
+            placeholder="Last Name"
+            type="Last Name"
+            >
+            </input-string>
           </div>
           <div class="input-component">
-          <input type="text" id="age" class="inputText" name="age" placeholder="Age">
+            <input-string
+            width=250
+            placeholder="Age"
+            type="Age"
+            >
+            </input-string>
           </div>
       </div>
 
       <div class="row">
           <div class="input-component">
-          <input type="text" id="email" class="inputText" placeholder="email" @focusout=${(e) => context.validateEmail(e)}>
+            <input-string
+            width=250
+            placeholder="Email"
+            type="Email"
+            >
+            </input-string>
           </div>
           <div class="input-component">
-          <input type="text" id="phone" class="inputText" placeholder="phone">
+                <input-string
+                width=250
+                placeholder="Phone Number"
+                type="Phone Number"
+                >
+                </input-string>
           </div>
           <div class="input-component">
-              <input type="text" class="inputText" placeholder="School" @focusout=${(e) => context.validateString(e)}>
+            <input-string
+            width=250
+            placeholder="School"
+            type="School"
+            >
+            </input-string>
           </div>
       </div>
 
       <div class="row">
           <div class="input-component">
-          <input type="text" class="inputText" placeholder="Years completed">
+            <input-string
+            width=250
+            placeholder="Years Completed"
+            type="Years Completed"
+            >
+            </input-string>
           </div>
           <div class="input-component">
-          <input type="text" class="inputText" placeholder="GPA">
+            <input-string
+            width=250
+            placeholder="GPA"
+            type="GPA"
+            >
+            </input-string>
           </div>
       </div>
+      <div style="
+      height:18.5px;
+      margin-left: 5px;
+      color: red;
+        ">
+      ${context.error ? html`${context.error}` : html``}
+      </div>
+      <button class="button" @click=${(e) =>  buildEmploymentSection(e)} style=
+      "position: relative;
+      top: 200px;
+      left: 10px;"
+      > Add</button>
       <button class="button" @focusout=${(e) => context.routeToHome(e)} style=
       "position: relative;
-      top: 325px;
+      top: 306px;
       left: 10px;"
       >
       I'll do this later</button>
       <button class="button" @click=${(e) => context.routeToHome(e)} style=
       "position: relative;
-      top: 325px;
+      top: 306px;
       left: 570px;"
       >
       Continue</button>
@@ -216,4 +262,42 @@ export const FirstPageTemplate = (context) => {
 </div>
 </div>
     `;
+}
+
+function buildPreviousEmployment() {
+    console.log("here");
+    return html`<div class="row">
+    <div class="input-component">
+      <input-string
+      width=250
+      placeholder="Position"
+      type="Position"
+      >
+      </input-string>
+    </div>
+    <div class="input-component">
+          <input-string
+          width=250
+          placeholder="Company"
+          type="Company"
+          >
+          </input-string>
+    </div>
+    <div class="input-component">
+      <input-string
+      width=250
+      placeholder="Start Date"
+      type="Start Date"
+      >
+      </input-string>
+    </div>
+    <div class="input-component">
+      <input-string
+      width=250
+      placeholder="End Date"
+      type="End Date"
+      >
+      </input-string>
+    </div>
+</div>`
 }

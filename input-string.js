@@ -19,12 +19,12 @@ export class InputString extends LitElement {
         super();
         this.value = "";
         this.width = "";
-        this.placeholder = ""
+        this.placeholder = "";
         this.type = "";
     }
 
     dispatchCustomEvent(e) {
-        console.log("in event");
+        this.value = this.shadowRoot.querySelector('.inputText').value;
         const customEvent = new CustomEvent('custom-string-event', {
             detail: {
                 type: this.type,
