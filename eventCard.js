@@ -8,7 +8,7 @@ export class EventCard extends LitElement {
 
     static get properties() {
         return {
-           value: { type: String },
+           title: { type: String },
            description : { type: String},
            img : {type : String},
            width: { type: String },
@@ -27,18 +27,11 @@ export class EventCard extends LitElement {
         this.type = "";
     }
 
-    dispatchCustomEvent(e) {
-        this.value = this.shadowRoot.querySelector('.inputText').value;
-        const customEvent = new CustomEvent('custom-string-event', {
-            detail: {
-                type: this.type,
-                value: this.value
-            },
-            bubbles: true, 
-            composed: true 
-        });
-
-        this.dispatchEvent(customEvent);
+    connectedCallback() {
+        super.connectedCallback();
+        console.log(this.title);
+        console.log(this.description);
+        console.log(this.img);
     }
 }
 
