@@ -3,35 +3,37 @@ import { eventCardTemplate } from './eventCardTemplate';
 
 export class EventCard extends LitElement {
     render() {
-      return eventCardTemplate (this);
+        return eventCardTemplate(this);
     }
 
     static get properties() {
         return {
-           title: { type: String },
-           description : { type: String},
-           img : {type : String},
-           width: { type: String },
-           placeholder: { type: String },
-           type: { type: String }
+            title: { type: String },
+            description: { type: String },
+            img: { type: String },
+            placeholder: { type: String },
+            popupOpen: { type: Boolean }
+
         };
-        }
-    
+    }
+
     constructor() {
         super();
         this.title = "";
         this.description = "";
         this.img = "";
-        this.width = "";
         this.placeholder = "";
-        this.type = "";
+        this.popupOpen = false
+
     }
 
-    connectedCallback() {
-        super.connectedCallback();
-        console.log(this.title);
-        console.log(this.description);
-        console.log(this.img);
+    togglePopup(e) {
+        this.popupOpen = !this.popupOpen
+        console.log("here");
+    }
+
+    closePopup(e) {
+        this.popupOpen = false
     }
 }
 
