@@ -53,6 +53,7 @@ export const FirstPageTemplate = (context) => {
       top: 18px;
       width: 300px;
       left: 50px;
+      
       ">
       <header style=
         "background-color: rgb(6, 28, 113);
