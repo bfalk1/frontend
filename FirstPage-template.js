@@ -204,12 +204,7 @@ export const FirstPageTemplate = (context) => {
         ">
       ${context.error ? html`${context.error}` : html``}
       </div>
-      <button class="button" @click=${(e) =>  buildEmploymentSection(e)} style=
-      "position: relative;
-      top: 200px;
-      left: 10px;"
-      > Add</button>
-      <button class="button" @focusout=${(e) => context.routeToHome(e)} style=
+      <button class="button" id="'submitButton" @focusout=${(e) => context.routeToHome(e)} style=
       "position: relative;
       top: 306px;
       left: 10px;"
