@@ -8,15 +8,21 @@ class HomePage extends LitElement {
 
     static get properties() {
         return {
-            ButtonClicked: { Type: Boolean},
-            studentCheckBoxClicked: { Type: Boolean}
+            popupOpen: {type: Boolean}
         };
         }
     
         constructor() {
             super();
         }
-
+        togglePopup(e) {
+            this.popupOpen = !this.popupOpen
+            console.log(this.popupOpen);
+        }
+    
+        closePopup(e) {
+            this.popupOpen = false
+        }
 }
 
 
