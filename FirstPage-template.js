@@ -5,7 +5,7 @@ export const FirstPageTemplate = (context) => {
     return html `
     <style>
     .button {
-        background-image: linear-gradient(to left, #000cf9, #00e1ff);
+        background-color: rgb(6, 28, 113);
         color: #fff;
         padding: 10px 20px;
         border: none;
@@ -37,7 +37,7 @@ export const FirstPageTemplate = (context) => {
     >
       <div
       style=
-      " background-image: linear-gradient(to left, #000cf9, #00e1ff);;
+      " background-color: rgb(6, 28, 113);
       border-radius: 10px;
       height: 50px;
       text-align: center;
@@ -55,7 +55,7 @@ export const FirstPageTemplate = (context) => {
       left: 50px;
       ">
       <header style=
-        "background-color: blue;
+        "background-color: rgb(6, 28, 113);
         height: 30px;
         border-radius: 10px;
         color: white;
@@ -63,7 +63,6 @@ export const FirstPageTemplate = (context) => {
         text-align: center;
         padding: 10px 0;
         width: 100%;
-        background-image: linear-gradient(to left, #000cf9, #00e1ff);
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">Already a Member ?</header>
 
     </div>
@@ -80,7 +79,7 @@ export const FirstPageTemplate = (context) => {
       margin-right: 5px;
   }
   .button {
-      background-image: linear-gradient(to left, #000cf9, #00e1ff);
+      background-image: rgb(6, 28, 113);
       color: #fff;
       padding: 10px 20px;
       border: none;
@@ -114,7 +113,7 @@ export const FirstPageTemplate = (context) => {
       border-color: lightgray;
      " class="container">
      <div style="height: 55px;
-     background-image: linear-gradient(to left, #000cf9, #00e1ff);
+     background-color: rgb(6, 28, 113);
      border-radius: 9px;
      border-bottom-left-radius: 0;
      border-bottom-right-radius: 0;
@@ -260,7 +259,7 @@ export const FirstPageTemplate = (context) => {
       @click=${(e) => context.employeecheckBox(e)}
       >
       I'm an Employer</button>
-</div>
+  </div>
 </div>
     `;
 }
