@@ -204,6 +204,11 @@ export const FirstPageTemplate = (context) => {
         ">
       ${context.error ? html`${context.error}` : html``}
       </div>
+      <button class="button" @click=${(e) =>  buildEmploymentSection(e)} style=
+      "position: relative;
+      top: 200px;
+      left: 10px;"
+      > Add</button>
       <button class="button" @focusout=${(e) => context.routeToHome(e)} style=
       "position: relative;
       top: 306px;
@@ -252,9 +257,48 @@ export const FirstPageTemplate = (context) => {
       "position: relative;
       top: 22px;
       left: 134px;"
+      @click=${(e) => context.employeecheckBox(e)}
       >
       I'm an Employer</button>
 </div>
 </div>
     `;
+}
+
+function buildPreviousEmployment() {
+    console.log("here");
+    return html`<div class="row">
+    <div class="input-component">
+      <input-string
+      width=250
+      placeholder="Position"
+      type="Position"
+      >
+      </input-string>
+    </div>
+    <div class="input-component">
+          <input-string
+          width=250
+          placeholder="Company"
+          type="Company"
+          >
+          </input-string>
+    </div>
+    <div class="input-component">
+      <input-string
+      width=250
+      placeholder="Start Date"
+      type="Start Date"
+      >
+      </input-string>
+    </div>
+    <div class="input-component">
+      <input-string
+      width=250
+      placeholder="End Date"
+      type="End Date"
+      >
+      </input-string>
+    </div>
+</div>`
 }

@@ -3,7 +3,6 @@ import { Router } from "@vaadin/router";
 import {FirstPageTemplate} from './FirstPage-template';
 import { initRouter } from "./router";
 
-
 class FirstPage extends LitElement {
   render() {
     return FirstPageTemplate(this);
@@ -12,6 +11,7 @@ class FirstPage extends LitElement {
     return {
         ButtonClicked: { Type: Boolean},
         studentCheckBoxClicked: { Type: Boolean},
+        employeeCheckBoxClicked: { Type: Boolean},
         error: { Type: String},
         employmentButton: { Type: String},
     };
@@ -21,6 +21,7 @@ class FirstPage extends LitElement {
         super();
         this.ButtonClicked = false;
         this.studentCheckBoxClicked = false;
+        this.employeeCheckBoxClicked = false;
         this.error = null;
         this.UserAttributes = {};
         this.employmentButton = false;
@@ -54,10 +55,12 @@ class FirstPage extends LitElement {
     studentcheckBox(e) {
         this.studentCheckBoxClicked = true;
     }
+    employeecheckBox(e) {
+        this.employeeCheckBoxClicked = true;
+    }
 
     routeToHome(e) {
         console.log(this.UserAttributes);
-        this.sendUserToDatabase();
         initRouter();
         Router.go("/home");
     }
@@ -120,34 +123,9 @@ class FirstPage extends LitElement {
         }
     }
 
-    sendUserToDatabase() {
-        fetch('/api/items')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        console.log(response);
-        //return response.json();
-      })
-      .then(data => {
-        // Process and use the data in your component
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-        const customEvent = new CustomEvent('UserAttributesUpdateEvent', {
-            detail: {
-                value: this.UserAttributes, 
-                name: this.UserAttributes["First Name"]
-            },
-            bubbles: true, 
-            composed: true 
-        });
-
-        this.dispatchEvent(customEvent);
+    buildEmploymentSection() {
+        this.employmentButton = true;
     }
-    
 
 }
 
