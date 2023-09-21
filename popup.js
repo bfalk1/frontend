@@ -26,8 +26,8 @@ class PopupPage extends LitElement {
         closePopup(e) {
             this.popupOpen = false
         }
-        setPopupData(event){
-            this.popupData = event;
+        setPopupData(data){
+            this.popupData = data;
         }
         
 }

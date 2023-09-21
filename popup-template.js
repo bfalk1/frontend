@@ -8,8 +8,8 @@ export const PopupTemplate = (context) => {
     }
   };
   // Function to open the pop-up with event data
-  const openPopup = (e, eventData) => {
-    context.setPopupData(eventData);
+  const openPopup = (e, data) => {
+    context.setPopupData(data);
     context.togglePopup(e);
   };
 
@@ -52,16 +52,14 @@ export const PopupTemplate = (context) => {
       }
       
     </style>
-
-    
-    
+     ${context.popupOpen ? html`
       <div class="popup" @click=${handleBackgroundClick}>
         <div class="popup-content">
           <button class="close-button" @click=${(e) => context.closePopup()} >X</button>
           <h1>${context.popupData.title}</h1>
           <p>${context.popupData.longdescription}</p>
-          <button class="enroll-button" @click=${(e) => context.handleEnroll(e)}>Enroll</button>
         </div>
-      </div>
+      </div>` 
+    : html``}
   `;
 };
