@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { PopupTemplate } from './popup-template';
 
-class PopupPage extends LitElement {
+export class PopupPage extends LitElement {
     render() {
       return PopupTemplate(this);
     }
@@ -9,18 +9,21 @@ class PopupPage extends LitElement {
     static get properties() {
         return {
             popupOpen: {type: Boolean},
-            popupData: {}
+            popupData: {type: Object},
+            buttonTitle: {type: String}
         };
         }
     
         constructor() {
             super();
-            this.popupData = {}
-            this.popupOpen = false
+            this.popupData = {};
+            this.popupOpen = false;
+            this.buttonTitle = "";
         }
         togglePopup(e) {
             this.popupOpen = !this.popupOpen
             console.log(e);
+            
             
         }
         closePopup(e) {
@@ -33,4 +36,4 @@ class PopupPage extends LitElement {
 }
 
 
-customElements.define('home-page', HomePage);
+customElements.define('pop-up', PopupPage);

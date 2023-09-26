@@ -15,7 +15,6 @@ export const PopupTemplate = (context) => {
 
   return html`
     <style>
-
       .popup {
         position: fixed;
         top: 0;
@@ -50,6 +49,16 @@ export const PopupTemplate = (context) => {
         top: 0%;
         right: 0%;
       }
+      .button {
+        background-color: rgb(6, 28, 113);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        
+    }
       
     </style>
      ${context.popupOpen ? html`
@@ -60,6 +69,6 @@ export const PopupTemplate = (context) => {
           <p>${context.popupData.longdescription}</p>
         </div>
       </div>` 
-    : html``}
+    : html`<button class="button" @click=${(e) => context.togglePopup(e)}>${context.buttonTitle}</button>`}
   `;
 };

@@ -1,5 +1,7 @@
 import { html } from 'lit';
 import { InputString } from './input-string';
+import {InfoboxPage} from './infobox';
+
 
 export const FirstPageTemplate = (context) => {
     return html `
@@ -67,6 +69,8 @@ export const FirstPageTemplate = (context) => {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">Already a Member ?</header>
 
     </div>
+    
+    
     ${context.studentCheckBoxClicked ? html`<style>
     .inputText {
       flex: 1;
@@ -256,7 +260,10 @@ export const FirstPageTemplate = (context) => {
       >
       I'm an Employer</button>
   </div>
+  
 </div>
+<info-box> </info-box >
+
     `;
 }
 

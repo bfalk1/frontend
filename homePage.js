@@ -29,6 +29,9 @@ class HomePage extends LitElement {
         setPopupData(event){
             this.popupData = event;
         }
+        handelEnroll(e){
+            
+        }
 }
 
 

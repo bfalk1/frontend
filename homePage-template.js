@@ -2,6 +2,7 @@ import { html, css } from 'lit';
 import { EventCard } from './eventCard';
 import { InputString } from './input-string';
 
+
 export const HomePageTemplate = (context) => {
   // Function to close the pop-up when clicked outside
   const handleBackgroundClick = (e) => {
@@ -11,6 +12,36 @@ export const HomePageTemplate = (context) => {
   };
 
   const eventData = [
+    {
+      "id": 1,
+      "title": "Web Dev",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Google",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Junior Developer",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Apple",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Graphic Designer",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Microsoft",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
     {
       "id": 1,
       "title": "Web Dev",
@@ -57,9 +88,9 @@ export const HomePageTemplate = (context) => {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
         overflow-y: auto;
-        max-height: 600px;
-        padding: 60px;
-        padding-top: 80px;
+        max-height: 800px;
+        padding-top:80px;
+       
       }
 
       .popup {
