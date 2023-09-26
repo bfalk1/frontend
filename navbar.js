@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { PopupTemplate } from './popup-template';
+import { NavbarTemplate } from './navbarTemplate';
 
 export class Navbar extends LitElement {
     render() {
@@ -8,15 +8,18 @@ export class Navbar extends LitElement {
 
     static get properties() {
         return {
-            
+            dropdown : {type: Boolean},
         };
         }
-    
+        
         constructor() {
             super();
+            this.dropdown = false
         }
         
-        
+        toggleDropdown(e){
+            this.dropdown = !this.dropdown;
+        }
 }
 
 

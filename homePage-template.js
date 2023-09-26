@@ -1,6 +1,7 @@
 import { html, css } from 'lit';
 import { EventCard } from './eventCard';
 import { InputString } from './input-string';
+import { Navbar } from './navbar';
 
 
 export const HomePageTemplate = (context) => {
@@ -141,7 +142,7 @@ export const HomePageTemplate = (context) => {
         left: 10%%;
       }
     </style>
-
+    <navbar></navbar>
     <div class="event-grid">
       ${eventData.map(event => html`
         <button class="card-button" @click=${(e) => openPopup(e, event)}>
@@ -154,6 +155,7 @@ export const HomePageTemplate = (context) => {
         </button>
       `)}
     </div>
+    
 
     ${context.popupOpen ? html`
       <div class="popup" @click=${handleBackgroundClick}>

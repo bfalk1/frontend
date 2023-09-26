@@ -1,4 +1,4 @@
-import { html, css } from 'lit';
+import { html} from 'lit';
 
 export const MyEventsTemplate = (context) => {
     const handleBackgroundClick = (e) => {
