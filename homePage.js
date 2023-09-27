@@ -17,6 +17,7 @@ class HomePage extends LitElement {
             super();
             this.popupData = {}
             this.popupOpen = false
+            this.eventData= [];
         }
         togglePopup(e) {
             this.popupOpen = !this.popupOpen

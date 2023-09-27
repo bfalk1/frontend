@@ -13,6 +13,16 @@ export function initRouter() {
       path: "/home",
       component: "home-page", 
       action: () => import("./homePage") 
+    },
+    {
+      path: "/profile",
+      component: "profile-page", 
+      action: () => import("./homePage") 
+    },
+    {
+      path: "/myEvents",
+      component: "my-events", 
+      action: () => import("./myEvents") 
     }
   ]);
 }
@@ -20,5 +30,4 @@ export function initRouter() {
 
 window.addEventListener("load", () => {
     initRouter();
-  
   });

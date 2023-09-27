@@ -1,5 +1,7 @@
 import { LitElement, html } from 'lit';
 import { NavbarTemplate } from './navbarTemplate';
+import { Router } from "@vaadin/router";
+import { initRouter } from "./router";
 
 export class Navbar extends LitElement {
     render() {
@@ -8,19 +10,35 @@ export class Navbar extends LitElement {
 
     static get properties() {
         return {
-            dropdown : {type: Boolean},
+            isDropdownOpen : {type: Boolean}
         };
         }
         
         constructor() {
             super();
-            this.dropdown = false
+            this.isDropdownOpen = false;
         }
         
         toggleDropdown(e){
-            this.dropdown = !this.dropdown;
+            this.isDropdownOpen = !this.isDropdownOpen;
+        }
+        routeToFirst(){
+            initRouter();
+            Router.go("/");
+        }
+        routeToHome(){
+            initRouter();
+            Router.go("/home");
+        }
+        routeToProfile(){
+            initRouter();
+            Router.go("/Profile");
+        }
+        routeToMyEvents(e){
+            initRouter();
+            Router.go("/myEvents");
         }
 }
 
 
-customElements.define('navbar', Navbar);
+customElements.define('nav-bar', Navbar);

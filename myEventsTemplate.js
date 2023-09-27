@@ -1,4 +1,5 @@
 import { html} from 'lit';
+import { EventCard } from './eventCard';
 
 export const MyEventsTemplate = (context) => {
     const handleBackgroundClick = (e) => {

@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { InputString } from './input-string';
 import {InfoboxPage} from './infobox';
+import { Navbar } from './navbar';
 
 
 export const FirstPageTemplate = (context) => {
@@ -69,6 +70,8 @@ export const FirstPageTemplate = (context) => {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">Already a Member ?</header>
 
     </div>
+
+    
     
     
     ${context.studentCheckBoxClicked ? html`<style>
@@ -106,6 +109,7 @@ export const FirstPageTemplate = (context) => {
   }
 
   </style>
+  
   <div style="
       height: 600px;
       width: 800px;
@@ -129,6 +133,7 @@ export const FirstPageTemplate = (context) => {
      border-bottom-style: solid;
      border-color: lightgray;"
  >About You</div>
+ 
      <div class="row">
           <div class="input-component">
             <input-string
@@ -222,6 +227,7 @@ export const FirstPageTemplate = (context) => {
       Continue</button>
   </div>` : 
   html ``}
+  
     <div style="
       width: 298px;
       height: 300px;
