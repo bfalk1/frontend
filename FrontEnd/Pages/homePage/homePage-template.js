@@ -125,7 +125,7 @@ export const HomePageTemplate = (context) => {
         background-color: white;
         color: black;
         border: none;
-        padding: 10px 20px;
+        
         display: inline-block;
         cursor: pointer;
         border-radius: 5px;

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import {infoboxTemplate} from './infoboxTemplate';
 
-export class InfoboxPage extends LitElement {
+export class Infobox extends LitElement {
     render() {
       return infoboxTemplate(this);
     }
@@ -26,4 +26,4 @@ export class InfoboxPage extends LitElement {
 }
 
 
-customElements.define('info-box', InfoboxPage);
+customElements.define('info-box', Infobox);

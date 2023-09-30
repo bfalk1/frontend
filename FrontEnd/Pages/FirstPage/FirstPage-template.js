@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { InputString } from '../../Components/input-string/input-string';
 import { Navbar } from '../../Components/navbar/navbar';
+import {Infobox} from '../../Components/infobox/infobox'
 
 export const FirstPageTemplate = (context) => {
     return html `
@@ -319,7 +320,10 @@ export const FirstPageTemplate = (context) => {
       >
       Enterprise sign up</button>
   </div>
+  
 </div>
+
+${!context.studentCheckBoxClicked ? html`<info-box></info-box>` : html``}
     `;
 }
 

@@ -18,7 +18,7 @@ export const infoboxTemplate = (context) => {
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        z-index: -10;
+        
       }
 
       .title {

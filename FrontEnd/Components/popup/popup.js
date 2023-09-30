@@ -10,7 +10,8 @@ export class PopupPage extends LitElement {
         return {
             popupOpen: {type: Boolean},
             popupData: {type: Object},
-            buttonTitle: {type: String}
+            buttonTitle: {type: String},
+            content: {type: html}
         };
         }
     
@@ -19,6 +20,7 @@ export class PopupPage extends LitElement {
             this.popupData = {};
             this.popupOpen = false;
             this.buttonTitle = "";
+            this.content = null;
         }
         togglePopup(e) {
             this.popupOpen = !this.popupOpen

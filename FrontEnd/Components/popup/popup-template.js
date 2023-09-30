@@ -65,8 +65,7 @@ export const PopupTemplate = (context) => {
       <div class="popup" @click=${handleBackgroundClick}>
         <div class="popup-content">
           <button class="close-button" @click=${(e) => context.closePopup()} >X</button>
-          <h1>${context.popupData.title}</h1>
-          <p>${context.popupData.longdescription}</p>
+          ${context.content}
         </div>
       </div>` 
     : html`<button class="button" @click=${(e) => context.togglePopup(e)}>${context.buttonTitle}</button>`}
