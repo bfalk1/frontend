@@ -62,13 +62,13 @@ export const MyEventsTemplate = (context) => {
         height: 80%;
       }
       .card-button {
-        background-color: white;
         color: black;
-        border: none;
-        padding: 10px 20px;
+        background-color: rgba(243,242,240,255);
         display: inline-block;
         cursor: pointer;
-        border-radius: 5px;
+        border: none; /* Remove the border */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
       }
       .close-button{
         background-color: red;

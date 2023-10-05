@@ -3,7 +3,7 @@ import { EventCard } from '../../Components/eventCard/eventCard';
 import { PopupPage } from '../../Components/popup/popup';
 import { InputString } from '../../Components/input-string/input-string';
 
-const xptemplate = () =>{
+const xptemplate = (context) =>{
   return html`
   <div>
     <h1>Add New Experience</h1>
@@ -113,7 +113,7 @@ export const ProfileTemplate = (context) => {
       <div class="experience-box">
         <div class="h-stack">
           <h1>Experience</h1>
-          <pop-up buttonTitle="+" .content=${xptemplate()}></pop-up>
+          <pop-up buttonTitle="+" .content=${xptemplate(context)}></pop-up>
         </div>
       </div>
     </div>

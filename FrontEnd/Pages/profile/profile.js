@@ -28,12 +28,12 @@ export class ProfilePage extends LitElement {
         }
        
         addExperience(e){
-          this.experience += this.newXP;
-
+          this.experience.push(this.newXP);
         }
 
         handleChangedValue(e) {
           e.stopPropagation();
+          
           switch(e.detail.type) {
               case "Company" :
                   this.newXP.Company = e.detail.value

@@ -7,6 +7,7 @@ export const eventCardTemplate = (context) => {
         transition: 0.3s;
         border-radius: 5px; /* 5px rounded corners */
         max-width: 300px;
+        background-color: white;
         
       }
       .card-img {

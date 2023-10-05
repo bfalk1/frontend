@@ -11,70 +11,70 @@ export const HomePageTemplate = (context) => {
       context.closePopup();
     }
   };
-    context.eventData = [
-      {
-        "id": 1,
-        "title": "Web Dev",
-        "start-date": "2023-10-15",
-        "end-date": "2023-10-15",
-        "location": "Google",
-        "shortdescription": "A conference on the latest technology trends and innovations.",
-        "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-      },
-      {
-        "id": 2,
-        "title": "Junior Developer",
-        "start-date": "2023-10-15",
-        "end-date": "2023-10-15",
-        "location": "Apple",
-        "shortdescription": "A conference on the latest technology trends and innovations.",
-        "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-      },
-      {
-        "id": 3,
-        "title": "Graphic Designer",
-        "start-date": "2023-10-15",
-        "end-date": "2023-10-15",
-        "location": "Microsoft",
-        "shortdescription": "A conference on the latest technology trends and innovations.",
-        "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-      },
-      {
-        "id": 1,
-        "title": "Web Dev",
-        "start-date": "2023-10-15",
-        "end-date": "2023-10-15",
-        "location": "Google",
-        "shortdescription": "A conference on the latest technology trends and innovations.",
-        "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-      },
-      {
-        "id": 2,
-        "title": "Junior Developer",
-        "start-date": "2023-10-15",
-        "end-date": "2023-10-15",
-        "location": "Apple",
-        "shortdescription": "A conference on the latest technology trends and innovations.",
-        "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-      },
-      {
-        "id": 3,
-        "title": "Graphic Designer",
-        "start-date": "2023-10-15",
-        "end-date": "2023-10-15",
-        "location": "Microsoft",
-        "shortdescription": "A conference on the latest technology trends and innovations.",
-        "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-      },
-      
-    ];
-  
+  context.eventData = [
+    {
+      "id": 1,
+      "title": "Web Dev",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Google",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Junior Developer",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Apple",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Graphic Designer",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Microsoft",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 1,
+      "title": "Web Dev",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Google",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Junior Developer",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Apple",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Graphic Designer",
+      "start-date": "2023-10-15",
+      "end-date": "2023-10-15",
+      "location": "Microsoft",
+      "shortdescription": "A conference on the latest technology trends and innovations.",
+      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
+    },
+
+  ];
+
 
   // Function to open the pop-up with event data
   const openPopup = (e, eventData) => {
@@ -122,13 +122,13 @@ export const HomePageTemplate = (context) => {
         height: 80%;
       }
       .card-button {
-        background-color: white;
         color: black;
-        border: none;
-        
+        background-color: rgba(243,242,240,255);
         display: inline-block;
         cursor: pointer;
-        border-radius: 5px;
+        border: none; /* Remove the border */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
       }
       .close-button{
         background-color: red;
@@ -165,7 +165,7 @@ export const HomePageTemplate = (context) => {
           <p>${context.popupData.longdescription}</p>
           <button class="enroll-button" @click=${(e) => context.handleEnroll(e)}>Enroll</button>
         </div>
-      </div>` 
-    : html``}
+      </div>`
+      : html``}
   `;
 };
