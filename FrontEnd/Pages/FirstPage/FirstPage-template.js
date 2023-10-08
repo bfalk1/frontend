@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { InputString } from '../../Components/input-string/input-string';
+import { InputPassword } from '../../Components/input-password/input-password';
 import { Navbar } from '../../Components/navbar/navbar';
 import {Infobox} from '../../Components/infobox/infobox'
 
@@ -145,20 +146,19 @@ export const FirstPageTemplate = (context) => {
             </input-string>
           </div>
           <div class="input-component">
-                <input-string
-                width=250px;
+              <input-password 
+                width=250
                 placeholder="Password"
-                type="Password"
-                >
-                </input-string>
+                type="Password">
+              </input-password>
           </div>
           <div class="input-component">
-          <input-string
-          width=250px;
-          placeholder="Confirm Password"
+          <input-password
+            width=250
+            placeholder="Confirm Password"
           type="Confirm Password"
           >
-          </input-string>
+          </input-password>
     </div>
       </div>
       <div class="row">
@@ -242,13 +242,13 @@ export const FirstPageTemplate = (context) => {
       </div>
       <button class="button" id="'submitButton" @focusout=${(e) => context.routeToHome(e)} style=
       "position: relative;
-      top: 155px;
+      top: 131px;
       left: 10px;"
       >
       I'll do this later</button>
       <button class="button" @click=${(e) => context.routeToHome(e)} style=
       "position: relative;
-      top: 155px;
+      top: 131px;
       left: 570px;"
       >
       Continue</button>
@@ -280,13 +280,13 @@ export const FirstPageTemplate = (context) => {
         placeholder="Email"
         type="Email">
       </input-string>
-      <input-string 
+      <input-password 
       style="position: relative;
       top: 85px;"
         width=278
         placeholder="Password"
         type="Password">
-      </input-string>
+      </input-password>
       <div style="
       height:18.5px;
       margin-left: 5px;
@@ -299,7 +299,7 @@ export const FirstPageTemplate = (context) => {
       </div>
       <button class="button" id="myButton" style=
       "position: relative;
-      top: 140px;
+      top: 120px;
       left: 73px;
       width: 150px;"
       @click=${(e) => context.memberLogin(e)}

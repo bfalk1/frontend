@@ -5,19 +5,96 @@ import { InputString } from '../../Components/input-string/input-string';
 
 const xptemplate = (context) =>{
   return html`
+  <style>
+  .row {
+    display: flex;
+    margin-bottom: 20px;
+   } 
+   .button {
+    background-color: rgb(6, 28, 113);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 10%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+  </style>
   <div>
-    <h1>Add New Experience</h1>
-    <input-string width=250px; placeholder="Position" type="Position"></input-string>
-    <input-string width=250px; placeholder="Company" type="Company"></input-string>
-    <input-string width=250px; placeholder="Start Date" type="Start Date"></input-string>
-    <input-string width=250px; placeholder="End Date" type="End Date"></input-string>
-    <input-string width=250px; placeholder="Description" type="Description"></input-string>
-    <button @click=${(e) => context.addExperience(e, {})}>Add</button>
+  <h1>Add New Experience</h1>
+  <div class="row">
+  <div class="input-component">
+  <input-string width=250px; placeholder="Position" type="Position"></input-string>
+  </div>
+  <div class="input-component">
+  <input-string width=250px; placeholder="Company" type="Company"></input-string>
+  </div>
+  <div class="input-component">
+  <input-string width=250px; placeholder="Start Date" type="Start Date"></input-string>
+</div>
+</div>
+<div class="row">
+  <div class="input-component">
+  <input-string width=250px; placeholder="End Date" type="End Date"></input-string>
+  </div>
+  <div class="input-component">
+  <input-string width=250px; placeholder="Description" type="Description"></input-string>
+  </div>
+</div>
+
+    <button class="button" @click=${(e) => context.addExperience(e, {})}>Add</button>
   </div>
   `;
 
 }
 
+const personalInfoTemplate = (context) =>{
+  return html`
+  <style>
+  .row {
+    display: flex;
+    margin-bottom: 20px;
+   } 
+   .button {
+    background-color: rgb(6, 28, 113);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 10%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+  </style>
+  <div>
+  <h1>Add New Experience</h1>
+  <div class="row">
+  <div class="input-component">
+  <input-string width=250px; placeholder="FirstName" type="FirstName"></input-string>
+  </div>
+  <div class="input-component">
+  <input-string width=250px; placeholder="School" type="School"></input-string>
+  </div>
+  <div class="input-component">
+  <input-string width=250px; placeholder="GPA" type="GPA"></input-string>
+</div>
+</div>
+<div class="row">
+  <div class="input-component">
+  <input-string width=250px; placeholder="Expected graduation Year" type="Expected graduation Year"></input-string>
+  </div>
+  <div class="input-component">
+  <input-string width=250px; placeholder="About me" type="aboutMe"></input-string>
+  </div>
+</div>
+
+    <button class="button" @click=${(e) => context.editPersonalInformation(e)}>Save</button>
+  </div>
+  `;
+
+}
+/*
 const user = {
   "uid" : 1,
   "name" : "Benajmin Falkner",
@@ -27,6 +104,7 @@ const user = {
   "gpa":"4.0"
 
 }
+*/
 const eventData = [
   {
     "id": 1,
@@ -61,6 +139,7 @@ export const ProfileTemplate = (context) => {
         box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.3);
         padding: 1%;
         margin-top: 80px;
+        border-radius:10px;
         
       }
       .h-stack {
@@ -82,23 +161,47 @@ export const ProfileTemplate = (context) => {
         box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.3);
         padding: 1%;
         margin-top: 10px;
+        border-radius:10px;
       }
+
+      .button {
+        background-color: rgb(6, 28, 113);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
       .xp{
 
       }
     </style>
     <div class="container">
       <div class="profile-box">
-        <h1>${user.name}</h1>
+      <div class="button-container" style="display: flex; justify-content: flex-end;">
+      <svg style="width:20px;position:relative;top: 2px;
+      left: 30px;
+  "viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/></svg>
+      <pop-up width=30 height=30 buttonTitle="" .content=${personalInfoTemplate(context)}></pop-up>
+      </div>
+        <h1 style="border-bottom: lightgray;
+        border-bottom-style: solid; margin-bottom:2px;margin-top: 0px">${context.user.FirstName} ${context.user.LastName}</h1>
         <div class="h-stack">
-          <h2 class="">${user.school}</h2>
-          <h3 class="">GPA: ${user.gpa}</h3>
-          <h3 class="">Year: ${user.year}</h3>
+          <h3 class="">${context.user.school}</h2>
+          <h3 class="">GPA: ${context.user.gpa}</h3>
+          <h3 class="">Year: ${context.user.year}</h3>
           <div></div>
+        </div>
+        <div>
+        <h2 style="border-bottom: lightgray;
+        border-bottom-style: solid;">About Me</h2>
+        ${context.user.aboutMe}
         </div>
       </div>
       <div class="event-grid">
-        <h1>Past Events</h1>
+        <h1 style="border-bottom: lightgray;
+        border-bottom-style: solid;">Past Events</h1>
         ${eventData.map(event => html`
           <button class="card-button" @click=${(e) => openPopup(e, event)}>
             <event-card

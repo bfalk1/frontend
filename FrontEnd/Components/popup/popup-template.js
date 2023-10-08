@@ -57,6 +57,8 @@ export const PopupTemplate = (context) => {
         cursor: pointer;
         border-radius: 10px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        width: ${context.width}px;
+        height: ${context.height}px;
         
     }
       

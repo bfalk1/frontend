@@ -1,6 +1,7 @@
 import { LitElement } from 'lit';
 import { ProfileTemplate } from './profileTemplate';
 import { Navbar } from '../../Components/navbar/navbar';
+import { Router } from "@vaadin/router";
 
 export class ProfilePage extends LitElement {
     render() {
@@ -10,7 +11,9 @@ export class ProfilePage extends LitElement {
     static get properties() {
         return {
           experience: {type: Object},
-          newXP: {type: Object}
+          newXP: {type: Object},
+          user: {type: Object}
+
         };
         }
     
@@ -24,12 +27,57 @@ export class ProfilePage extends LitElement {
               "End Date": "",
               "Description": ""
             }
+            this.user = "";
+            this.addEventListener('custom-user-search-event', this.findSearchedUser);
             this.addEventListener('custom-string-event', this.handleChangedValue);
         }
+
+        connectedCallback() {
+          super.connectedCallback();
+          //const route = Router.getInstance().location.route;
+          //const userId = route.parameters.userId;
+          this.fetchUserData({"Name":"Julian Brickman"});
+      }
+
+      fetchUserData(userData) {
+      /*  fetch("http://localhost:5001/api/currentUser")
+        .then(response => response.json())
+        .then(data => {
+          this.user = (data.Currentuser[0]); // Assign the data
+          console.log(this.user.FirstName); // Log the data here
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+        });*/
+        fetch("http://localhost:5001/api/findUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            this.user = data; // Assign the data
+            console.log(this.user); // Log the data here
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }
+
+      findSearchedUser(e) {
+        console.log("hello world");
+      }
        
         addExperience(e){
           this.experience.push(this.newXP);
         }
+
+        editPersonalInformation(e) {
+          console.log("here");
+        }
+
 
         handleChangedValue(e) {
           e.stopPropagation();
@@ -37,6 +85,7 @@ export class ProfilePage extends LitElement {
           switch(e.detail.type) {
               case "Company" :
                   this.newXP.Company = e.detail.value
+                  console.log(this.user);
                   break;
               case "Position" :
                   this.newXP.Position = e.detail.value
@@ -59,7 +108,7 @@ export class ProfilePage extends LitElement {
         const alphabetRegex = /^[a-zA-Z ]*$/;
         if (alphabetRegex.test(input)) {
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.user[type] = input;
         } else {
            this.error = "Invalid Input";
         }

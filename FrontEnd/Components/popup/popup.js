@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { PopupTemplate } from './popup-template';
+//import { string } from 'prop-types';
 
 export class PopupPage extends LitElement {
     render() {
@@ -11,7 +12,9 @@ export class PopupPage extends LitElement {
             popupOpen: {type: Boolean},
             popupData: {type: Object},
             buttonTitle: {type: String},
-            content: {type: html}
+            content: {type: html},
+            width: {type : String},
+            height: {type : String}
         };
         }
     
@@ -21,6 +24,8 @@ export class PopupPage extends LitElement {
             this.popupOpen = false;
             this.buttonTitle = "";
             this.content = null;
+            this.width = "";
+            this.height = "";
         }
         togglePopup(e) {
             this.popupOpen = !this.popupOpen

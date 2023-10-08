@@ -1,4 +1,5 @@
 import { html } from 'lit-element';
+import { SearchBar } from '../search-bar/search-bar';
 
 export const NavbarTemplate = (context) => {
 
@@ -20,6 +21,7 @@ export const NavbarTemplate = (context) => {
     .navbar-title {
       font-size: 24px;
       margin: 0;
+      margin-left: 10px;
     }
 
     .profile-button {
@@ -29,6 +31,16 @@ export const NavbarTemplate = (context) => {
       padding: 8px 16px;
       cursor: pointer;
     }
+    .button {
+      background-color: #fff;
+      color: rgb(6, 28, 113);
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      margin-left: 5px;
+  }
 
     .dropdown {
       display: ${context.isDropdownOpen ? 'block' : 'none'};
@@ -51,11 +63,13 @@ export const NavbarTemplate = (context) => {
     }
     </style>
       <div class="navbar">
-        <button @click=${(e) => context.routeToFirst(e)}>Landing Page</button>
-        <button @click=${(e) => context.routeToHome(e)}>Home</button>
-        <span class="navbar-title">Blinq</span>
-        <button @click=${(e) => context.routeToMyEvents(e)}>My Events</button>
-        <button @click=${(e) => context.routeToProfile(e)}>Profile</button>
+      <span class="navbar-title">Blinq</span>
+        <button class="button" @click=${(e) => context.routeToFirst(e)}>Landing Page</button>
+        <button class="button" @click=${(e) => context.routeToHome(e)}>Home</button>
+        <button class="button" @click=${(e) => context.routeToMyEvents(e)}>My Events</button>
+        <button class="button" @click=${(e) => context.routeToProfile(e)}>Profile</button>
+        <div style="flex-grow: 1;"></div>
+        <search-bar width=250></search-bar>
       </div>
     `;
 }

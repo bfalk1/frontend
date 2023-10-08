@@ -132,6 +132,15 @@ class FirstPage extends LitElement {
         } else {
             this.error = null;
         }
+        const customEvent = new CustomEvent('custom-user-event', {
+            detail: {
+                value: this.UserAttributes["Email"]
+            },
+            bubbles: true, 
+            composed: true 
+        });
+
+        this.dispatchEvent(customEvent);
         this.addUser(this.UserAttributes);
         initRouter();
         Router.go("/home");
@@ -150,6 +159,15 @@ class FirstPage extends LitElement {
         if (this.currentUser.Password!== this.userPassword) {
             this.error = "Incorrect password or email";
         } else {
+            const customEvent = new CustomEvent('custom-user-event', {
+                detail: {
+                    value: this.UserAttributes["Email"]
+                },
+                bubbles: true, 
+                composed: true 
+            });
+    
+            this.dispatchEvent(customEvent);
             this.routeToHome();
         }
     }
