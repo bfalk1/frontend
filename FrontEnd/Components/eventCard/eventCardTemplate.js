@@ -6,7 +6,7 @@ export const eventCardTemplate = (context) => {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
         transition: 0.3s;
         border-radius: 5px; /* 5px rounded corners */
-        max-width: 300px;
+        width: 300px;
         background-color: white;
         
       }
@@ -16,7 +16,12 @@ export const eventCardTemplate = (context) => {
         border: 0px;
       }
       .title {
-        padding: 5px;
+        padding-top: 5px;
+        text-align: center;
+        border-bottom-style: none; 
+        margin-bottom:2px;
+        color: rgb(6, 28, 113);
+        margin-top: 0px;
       }
       .description {
         padding: 5px;

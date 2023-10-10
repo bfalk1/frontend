@@ -1,5 +1,6 @@
 import { html} from 'lit';
 import { EventCard } from '../../Components/eventCard/eventCard';
+import { Navbar } from '../../Components/navbar/navbar';
 
 export const MyEventsTemplate = (context) => {
     const handleBackgroundClick = (e) => {
@@ -7,32 +8,24 @@ export const MyEventsTemplate = (context) => {
             context.closePopup();
         }
     };
-    const eventData = [
-        {
-          "id": 1,
-          "title": "Web Dev",
-          "start-date": "2023-10-15",
-          "end-date": "2023-10-15",
-          "location": "Google",
-          "shortdescription": "A conference on the latest technology trends and innovations.",
-          "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-        },
-        
-        
-      ];
+
+    const openPopup = (e, eventData) => {
+      context.setPopupData(eventData);
+      context.displayFile(context.submittedEvents,context.popupData.id);
+      context.togglePopup(e);
+    };
     
     return html`
     <style>
-      .event-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        overflow-y: auto;
-        max-height: 800px;
-        padding-top:80px;
-       
-      }
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      overflow-y: auto;
+      max-height: 800px;
+      padding-top:80px;
+      width:100%
+    }
 
       .popup {
         position: fixed;
@@ -76,15 +69,62 @@ export const MyEventsTemplate = (context) => {
         top: 0%;
         right: 0%;
       }
-      .enroll-button{
-        background-color: rgba(0, 0, 0, 0.2) ;
-        position: absolute;
-        left: 10%%;
+        .submit-button{
+          background-color: rgb(6, 28, 113);
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          border-radius: 10px;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+          position: absolute;
+          left: 10%%;
+      }
+
+      .file-input-button {
+        background-color: rgb(6, 28, 113);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
       }
     </style>
-
+    <h1 style="
+    border-bottom: 
+    lightgray; 
+    position: relative;
+    top: 68px;
+    text-align: center;
+    border-bottom-style: solid; 
+    margin-bottom:2px;
+    color: rgb(6, 28, 113);
+    margin-top: 0px">Enrolled Events</h1>
     <div class="event-grid">
-      ${eventData.map(event => html`
+      ${context.eventData.map(event => html`
+        <button class="card-button" @click=${(e) => openPopup(e, event)}>
+          <event-card
+            title=${event.title}
+            description=${event.shortdescription}
+            img=${event.img}
+            placeholder=""
+          ></event-card>
+        </button>
+      `)}
+    </div>
+    <h1 style="
+    border-bottom: 
+    lightgray; 
+    position: relative;
+    top: 68px;
+    text-align: center;
+    border-bottom-style: solid; 
+    margin-bottom:2px;
+    color: rgb(6, 28, 113);
+    margin-top: 0px">Submissions</h1>
+    <div class="event-grid">
+      ${context.submittedEvents.map(event => html`
         <button class="card-button" @click=${(e) => openPopup(e, event)}>
           <event-card
             title=${event.title}
@@ -99,13 +139,49 @@ export const MyEventsTemplate = (context) => {
     ${context.popupOpen ? html`
       <div class="popup" @click=${handleBackgroundClick}>
         <div class="popup-content">
-          <button class="close-button" @click=${(e) => context.closePopup()} >X</button>
-          <h1>${context.popupData.title}</h1>
+          <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
+          <h1 style="
+          border-bottom: 
+          lightgray;
+          text-align: center;
+          border-bottom-style: solid; 
+          margin-bottom:2px;
+          color: rgb(6, 28, 113);
+          margin-top: 0px">${context.popupData.title}</h1>
           <p>${context.popupData.longdescription}</p>
-          <button class="enroll-button" @click=${(e) => context.handleEnroll(e)}>Enroll</button>
+          <button class="submit-button" @click=${(e) => context.fileSubmissionButton(e)}>Add Submission</button>
+          ${context.filePopup ? html`
+          <form 
+          style="position: relative;
+          top: 54px;" action="/upload" method="POST" enctype="multipart/form-data">
+          <input  type="file" name="fileToUpload" id="fileToUpload">
+          <input  type="submit" value="Upload File" @click=${(e) =>context.fileSubmission(e,context.popupData.id)}>
+        </form>`:
+        html ``}
+        ${context.succesfullyUploaded !==null ? html`<h2 style="
+          height:18.5px;
+          margin-left: 5px;
+          position: relative;
+          top: 300px;
+          color:rgb(6, 28, 113);">${context.succesfullyUploaded}</h2>`
+          :html``}
+        ${context.submittedEvents.some(event => event.id === context.popupData.id) ? html`
+        <h1 style="
+          border-bottom: 
+          lightgray;
+          text-align: center;
+          border-bottom-style: solid; 
+          margin-bottom:2px;
+          color: rgb(6, 28, 113);
+          margin-top: 0px;
+          position: relative;
+          top: 220px;">Submissions</h1>
+        
+        `: html``}
         </div>
-      </div>`
-            : html``}
+      </div>
+      
+      `: html``}
   `;
 
 };

@@ -12,17 +12,26 @@ export function initRouter() {
     {
       path: "/home",
       component: "home-page", 
-      action: () => import("./Pages/homePage/homePage") 
-    },
-    {
-      path: "/Profile",
-      component: "profile-page", 
-      action: () => import("./Pages/profile/profile") 
+      //action: () => import("./Pages/homePage/homePage") 
+      action: (context, commands) => {
+        // Load the profile page component and pass the context paramete
+        return import("./Pages/homePage/homePage").then((module) => {
+          const homePageComponent = new module.HomePage();
+          return homePageComponent;
+        });
+      }
     },
     {
       path: "/myEvents",
       component: "my-events", 
-      action: () => import("./Pages/myEvents/myEvents") 
+      //action: () => import("./Pages/myEvents/myEvents") 
+      action: (context, commands) => {
+        // Load the profile page component and pass the context parameter
+        return import("./Pages/myEvents/myEvents").then((module) => {
+          const eventPageComponent = new module.MyEventsPage();
+          return eventPageComponent;
+        });
+      }
     },
     {
       path: "/profile/:userId", // Use a parameter to identify the user
@@ -31,8 +40,7 @@ export function initRouter() {
         // Load the profile page component and pass the context parameter
         return import("./Pages/profile/profile").then((module) => {
           const profileComponent = new module.ProfilePage();
-          profileComponent.userId = context.params.userId;
-          profileComponent.user = userData;
+          profileComponent.user = context.params.userId;
           return profileComponent;
         });
       }

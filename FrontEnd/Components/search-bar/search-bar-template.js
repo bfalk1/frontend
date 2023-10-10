@@ -42,7 +42,7 @@ export const searchBarTemplate = (context) => {
     type="text" 
     value=${context.value}
     class="inputText" 
-    placeholder=${context.placeholder} 
+    placeholder="Search Users" 
     @click=${(e) => context.fetchUsers(e)}
     @input=${(e) => context.searchUsers(e)}
     >
@@ -52,9 +52,11 @@ export const searchBarTemplate = (context) => {
     ${context.usersInSearch ? html` 
     ${context.usersInSearch[0] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[0].Name)}>${context.usersInSearch[0].Name}</div>` : html ``}
     ${context.usersInSearch[1] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[1].Name)}>${context.usersInSearch[1].Name}</div>` : html ``}
-    ${context.usersInSearch[2] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[2].Name)}>${context.usersInSearch[2].Name}</div>` : html ``}`
+    ${context.usersInSearch[2] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[2].Name)}>${context.usersInSearch[2].Name}</div>` : html ``}
+    ${context.usersInSearch && context.usersInSearch.length ===0 ? html `<div class="searchbar">No Users Found</div>`: 
+    html``}`
     
-    : html`${context.usersInSearch && context.usersInSearch.lenght ===0 ? html `<div class="searchbar">${context.usersInSearch[0].Name}</div>`: html``}`}
+    : html``}
     </div>
      `  
 }

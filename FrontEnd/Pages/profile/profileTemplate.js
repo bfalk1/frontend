@@ -94,17 +94,6 @@ const personalInfoTemplate = (context) =>{
   `;
 
 }
-/*
-const user = {
-  "uid" : 1,
-  "name" : "Benajmin Falkner",
-  "school": "Queen's University",
-  "year": "3",
-  "location": "Kingston",
-  "gpa":"4.0"
-
-}
-*/
 const eventData = [
   {
     "id": 1,
@@ -179,12 +168,14 @@ export const ProfileTemplate = (context) => {
     </style>
     <div class="container">
       <div class="profile-box">
-      <div class="button-container" style="display: flex; justify-content: flex-end;">
+      ${context.isCurrentUsersPage ? html`<div class="button-container" style="display: flex; justify-content: flex-end;">
       <svg style="width:20px;position:relative;top: 2px;
       left: 30px;
   "viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/></svg>
       <pop-up width=30 height=30 buttonTitle="" .content=${personalInfoTemplate(context)}></pop-up>
       </div>
+      `
+      :html``}
         <h1 style="border-bottom: lightgray;
         border-bottom-style: solid; margin-bottom:2px;margin-top: 0px">${context.user.FirstName} ${context.user.LastName}</h1>
         <div class="h-stack">
@@ -216,7 +207,7 @@ export const ProfileTemplate = (context) => {
       <div class="experience-box">
         <div class="h-stack">
           <h1>Experience</h1>
-          <pop-up buttonTitle="+" .content=${xptemplate(context)}></pop-up>
+          ${context.isCurrentUsersPage ? html` <pop-up buttonTitle="+" .content=${xptemplate(context)}></pop-up>` :html ``}
         </div>
       </div>
     </div>

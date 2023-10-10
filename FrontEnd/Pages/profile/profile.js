@@ -28,27 +28,28 @@ export class ProfilePage extends LitElement {
               "Description": ""
             }
             this.user = "";
+            this.currentUser = sessionStorage.getItem('Name');
+            this.isCurrentUsersPage = false;
             this.addEventListener('custom-user-search-event', this.findSearchedUser);
             this.addEventListener('custom-string-event', this.handleChangedValue);
         }
 
         connectedCallback() {
           super.connectedCallback();
-          //const route = Router.getInstance().location.route;
-          //const userId = route.parameters.userId;
-          this.fetchUserData({"Name":"Julian Brickman"});
+          if (!this.user) {
+            this.isCurrentUsersPage = true;
+            this.fetchUserData({"Name":String(this.currentUser)});
+            return;
+          }
+          this.fetchUserData({"Name":String(this.user)});
+          if (this.user.trim().toLowerCase() !== this.currentUser.trim().toLowerCase()) {
+            this.isCurrentUsersPage = false;
+          } else {
+            this.isCurrentUsersPage = true;
+          }
       }
 
       fetchUserData(userData) {
-      /*  fetch("http://localhost:5001/api/currentUser")
-        .then(response => response.json())
-        .then(data => {
-          this.user = (data.Currentuser[0]); // Assign the data
-          console.log(this.user.FirstName); // Log the data here
-        })
-        .catch(error => {
-          console.error("Error fetching data:", error);
-        });*/
         fetch("http://localhost:5001/api/findUser", {
           method: "POST",
           headers: {
@@ -104,6 +105,7 @@ export class ProfilePage extends LitElement {
                   return;     
           }
       }
+
       validateString(input,type) {
         const alphabetRegex = /^[a-zA-Z ]*$/;
         if (alphabetRegex.test(input)) {
@@ -112,6 +114,10 @@ export class ProfilePage extends LitElement {
         } else {
            this.error = "Invalid Input";
         }
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
     }
 }
 

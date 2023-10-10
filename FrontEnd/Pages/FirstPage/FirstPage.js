@@ -38,7 +38,7 @@ class FirstPage extends LitElement {
         fetch("http://localhost:5001/api")
         .then(response => response.json())
         .then(data => {
-          this.users = this.convertValuesToLowerCaseJson(data.users); // Assign the data
+          this.users = this.convertValuesToLowerCaseJson(data.Currentuser); // Assign the data
           console.log(this.users); // Log the data here
         })
         .catch(error => {
@@ -47,7 +47,7 @@ class FirstPage extends LitElement {
     }
 
     handleChangedValue(e) {
-        e.stopPropagation();
+        //e.stopPropagation();
         switch(e.detail.type) {
             case "Email" :
                 this.userEmailLogin(e.detail.value,null);
@@ -91,6 +91,7 @@ class FirstPage extends LitElement {
         this.currentUser = null;
         this.userPassword = null;
     }
+
     employeecheckBox(e) {
         this.employeeCheckBoxClicked = true;
     }
@@ -99,7 +100,6 @@ class FirstPage extends LitElement {
         if (this.currentUser) {
             return true;
         }
-        console.log(this.UserAttributes["Password"]);
         if (this.UserAttributes["Password"]!== undefined && this.UserAttributes["email"]!== undefined) {
             return true;
         } else {
@@ -132,21 +132,15 @@ class FirstPage extends LitElement {
         } else {
             this.error = null;
         }
-        const customEvent = new CustomEvent('custom-user-event', {
-            detail: {
-                value: this.UserAttributes["Email"]
-            },
-            bubbles: true, 
-            composed: true 
-        });
 
-        this.dispatchEvent(customEvent);
+        sessionStorage.setItem('Name', String(this.UserAttributes["FirstName"]+this.UserAttributes["LastName"]));
         this.addUser(this.UserAttributes);
-        initRouter();
-        Router.go("/home");
+        Router.go(`/home`);
     }
 
     memberLogin(e) {
+        console.log(this.currentUser);
+        console.log(this.userPassword);
         if (!this.currentUser) {
             this.error = "Please Enter valid Email Address";
             return;
@@ -154,21 +148,11 @@ class FirstPage extends LitElement {
             this.error = "Please Enter Password";
             return;
         }
-        console.log(this.currentUser.Password);
-        console.log(this.userPassword);
         if (this.currentUser.Password!== this.userPassword) {
             this.error = "Incorrect password or email";
         } else {
-            const customEvent = new CustomEvent('custom-user-event', {
-                detail: {
-                    value: this.UserAttributes["Email"]
-                },
-                bubbles: true, 
-                composed: true 
-            });
-    
-            this.dispatchEvent(customEvent);
-            this.routeToHome();
+            sessionStorage.setItem('Name', String(this.currentUser.Name));
+            Router.go(`/home`);
         }
     }
 
@@ -222,7 +206,6 @@ class FirstPage extends LitElement {
             this.UserAttributes[type] = input;
         } else {
             this.error = "Please Enter a Valid Age";
-            console.log(this.error);
         }
     }
 

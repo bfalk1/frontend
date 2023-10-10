@@ -11,69 +11,6 @@ export const HomePageTemplate = (context) => {
       context.closePopup();
     }
   };
-  context.eventData = [
-    {
-      "id": 1,
-      "title": "Web Dev",
-      "start-date": "2023-10-15",
-      "end-date": "2023-10-15",
-      "location": "Google",
-      "shortdescription": "A conference on the latest technology trends and innovations.",
-      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-    },
-    {
-      "id": 2,
-      "title": "Junior Developer",
-      "start-date": "2023-10-15",
-      "end-date": "2023-10-15",
-      "location": "Apple",
-      "shortdescription": "A conference on the latest technology trends and innovations.",
-      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-    },
-    {
-      "id": 3,
-      "title": "Graphic Designer",
-      "start-date": "2023-10-15",
-      "end-date": "2023-10-15",
-      "location": "Microsoft",
-      "shortdescription": "A conference on the latest technology trends and innovations.",
-      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-    },
-    {
-      "id": 1,
-      "title": "Web Dev",
-      "start-date": "2023-10-15",
-      "end-date": "2023-10-15",
-      "location": "Google",
-      "shortdescription": "A conference on the latest technology trends and innovations.",
-      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-    },
-    {
-      "id": 2,
-      "title": "Junior Developer",
-      "start-date": "2023-10-15",
-      "end-date": "2023-10-15",
-      "location": "Apple",
-      "shortdescription": "A conference on the latest technology trends and innovations.",
-      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-    },
-    {
-      "id": 3,
-      "title": "Graphic Designer",
-      "start-date": "2023-10-15",
-      "end-date": "2023-10-15",
-      "location": "Microsoft",
-      "shortdescription": "A conference on the latest technology trends and innovations.",
-      "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-    },
-
-  ];
 
 
   // Function to open the pop-up with event data
@@ -86,12 +23,12 @@ export const HomePageTemplate = (context) => {
     <style>
       .event-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         overflow-y: auto;
         max-height: 800px;
         padding-top:80px;
-       
+        width:100%
       }
 
       .popup {
@@ -137,12 +74,28 @@ export const HomePageTemplate = (context) => {
         right: 0%;
       }
       .enroll-button{
-        background-color: rgba(0, 0, 0, 0.2) ;
-        position: absolute;
-        left: 10%%;
+          background-color: rgb(6, 28, 113);
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          border-radius: 10px;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+          position: absolute;
+          left: 10%%;
       }
     </style>
 
+    <h1 style="
+    border-bottom: 
+    lightgray; 
+    position: relative;
+    top: 68px;
+    text-align: center;
+    border-bottom-style: solid; 
+    margin-bottom:2px;
+    color: rgb(6, 28, 113);
+    margin-top: 0px">Upcoming Events</h1>
     <div class="event-grid">
       ${context.eventData.map(event => html`
         <button class="card-button" @click=${(e) => openPopup(e, event)}>
@@ -163,7 +116,14 @@ export const HomePageTemplate = (context) => {
           <button class="close-button" @click=${(e) => context.closePopup()} >X</button>
           <h1>${context.popupData.title}</h1>
           <p>${context.popupData.longdescription}</p>
-          <button class="enroll-button" @click=${(e) => context.handleEnroll(e)}>Enroll</button>
+          <button class="enroll-button" @click=${(e) => context.handleEnroll(e,context.popupData)}>Enroll</button>
+          ${context.succesfullyEnrolled !==null ? html`<h2 style="
+          height:18.5px;
+          margin-left: 5px;
+          position: relative;
+          top: 300px;
+          color:rgb(6, 28, 113);">${context.succesfullyEnrolled}</h2>`
+          :html``}
         </div>
       </div>`
       : html``}

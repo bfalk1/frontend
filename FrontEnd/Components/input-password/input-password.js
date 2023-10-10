@@ -50,7 +50,6 @@ export class InputPassword extends LitElement {
     }
 
     dispatchCustomEvent(e) {
-        console.log(this.value);
         const customEvent = new CustomEvent('custom-string-event', {
             detail: {
                 type: this.type,

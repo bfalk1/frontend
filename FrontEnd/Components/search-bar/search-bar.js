@@ -46,6 +46,11 @@ export class SearchBar extends LitElement {
     }
 
     searchUsers(e) {
+        if (e.inputType === "deleteContentBackward") {
+            this.usersInSearch = null;
+            this.shadowRoot.querySelector('.inputText').value = "";
+            return;
+        }
         if (!this.usersInSearch) {
             this.usersInSearch = this.users;
        }
@@ -56,10 +61,14 @@ export class SearchBar extends LitElement {
             }
        }
        this.usersInSearch = tempArray;
+       console.log(this.usersInSearch);
     }
 
     routeToSearchedUser (e,userName) {
+        this.usersInSearch = null;
+        this.shadowRoot.querySelector('.inputText').value = "";
         const userId = userName.trim();
+        console.log(userId);
         Router.go(`/profile/${userId}`);
     }
 }

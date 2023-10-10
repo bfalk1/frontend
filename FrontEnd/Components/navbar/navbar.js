@@ -11,13 +11,52 @@ export class Navbar extends LitElement {
 
     static get properties() {
         return {
-            isDropdownOpen : {type: Boolean}
+            isDropdownOpen : {type: Boolean},
+            inMainApplication : {type: Boolean},
+            triggerRerender : {type: Number}
         };
         }
         
         constructor() {
             super();
             this.isDropdownOpen = false;
+            this.triggerRerender = 0;
+            this.addEventListener('custom-string-event', this.handleChangedValue);
+            this.inMainApplication = false;
+            this.currentUser = sessionStorage.getItem('Name');
+            console.log(this.currentUser);
+        }
+
+        connectedCallback() {
+            super.connectedCallback();
+            // This is very bad code, need to refactor later on
+            var currentURL = window.location.href;
+            if (currentURL === "http://localhost:8000/") {
+                this.inMainApplication = false;
+            } else {
+                this.inMainApplication = true;
+            }
+            window.addEventListener("popstate", () => {
+                this.triggerReload();
+            });
+            window.addEventListener("beforeunload", () => {
+                this.triggerReload();
+              });
+        }
+
+        triggerReload() {
+              this.triggerRerender+=1;
+                var currentURL = window.location.href;
+                if (currentURL === "http://localhost:8000/") {
+                    this.inMainApplication = false;
+                } else {
+                    this.inMainApplication = true;
+                }
+          
+        }
+
+        handleChangedValue(e) {
+            console.log("here");
         }
         
         toggleDropdown(e){
@@ -27,16 +66,15 @@ export class Navbar extends LitElement {
             initRouter();
             Router.go("/");
         }
-        routeToHome(){
-            initRouter();
+        routeToHome() {
+            var currentURL = window.location.href;
             Router.go("/home");
         }
         routeToProfile(){
-            initRouter();
-            Router.go("/Profile");
+            Router.go(`/profile/${this.currentUser}`);
         }
-        routeToMyEvents(e){
-            initRouter();
+
+        routeToMyEvents(e) {
             Router.go("/myEvents");
         }
 }
