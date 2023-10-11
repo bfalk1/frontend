@@ -1,12 +1,12 @@
 import { LitElement} from 'lit';
 import { Router } from "@vaadin/router";
-import {FirstPageTemplate} from './FirstPage-template';
+import {EnterprisePageTemplate} from './enterprisePage-template';
 import { initRouter } from "../../router";
 
 
-class FirstPage extends LitElement {
+export class EnterprisePage extends LitElement {
   render() {
-    return FirstPageTemplate(this);
+    return EnterprisePageTemplate(this);
   }
   static get properties() {
     return {
@@ -35,10 +35,10 @@ class FirstPage extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        fetch("http://localhost:5001/api")
+        fetch("http://localhost:5001/api/enterprise")
         .then(response => response.json())
         .then(data => {
-          this.users = this.convertValuesToLowerCaseJson(data.Currentuser); // Assign the data
+          this.users = this.convertValuesToLowerCaseJson(data.companyInformation); // Assign the data
           console.log(this.users); // Log the data here
         })
         .catch(error => {
@@ -47,7 +47,7 @@ class FirstPage extends LitElement {
     }
 
     handleChangedValue(e) {
-        e.stopPropagation();
+        //e.stopPropagation();
         switch(e.detail.type) {
             case "Email" :
                 this.userEmailLogin(e.detail.value,null);
@@ -151,8 +151,9 @@ class FirstPage extends LitElement {
         if (this.currentUser.Password!== this.userPassword) {
             this.error = "Incorrect password or email";
         } else {
-            sessionStorage.setItem('Name', String(this.currentUser.Name));
-            sessionStorage.setItem('role', "user");
+            console.log(this.currentUser.CompanyName);
+            sessionStorage.setItem('Name', String(this.currentUser.CompanyName));
+            sessionStorage.setItem('role', 'enterprise');
             Router.go(`/home`);
         }
     }
@@ -169,7 +170,7 @@ class FirstPage extends LitElement {
                 return true; //Used for user login
             }
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.UserAttributes["registered-email"] = input;
         }
     }
 
@@ -177,8 +178,10 @@ class FirstPage extends LitElement {
         if (this.validateEmail(input,type)) {
             let foundUser = null;
 
+            console.log(this.users);
+
             this.users.forEach(user => {
-            if (user.email === this.convertAllCharsToLowerCase(input)) {
+            if (user.registeredemail === this.convertAllCharsToLowerCase(input)) {
                 foundUser = user;
             }
             });
@@ -272,4 +275,4 @@ class FirstPage extends LitElement {
 
 }
 
-customElements.define('first-page', FirstPage);
+customElements.define('enterprise-page', EnterprisePage);

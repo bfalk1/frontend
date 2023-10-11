@@ -1,6 +1,5 @@
 import { LitElement, html } from 'lit';
 import { PopupTemplate } from './popup-template';
-//import { string } from 'prop-types';
 
 export class PopupPage extends LitElement {
     render() {
@@ -29,9 +28,6 @@ export class PopupPage extends LitElement {
         }
         togglePopup(e) {
             this.popupOpen = !this.popupOpen
-            console.log(e);
-            
-            
         }
         closePopup(e) {
             this.popupOpen = false

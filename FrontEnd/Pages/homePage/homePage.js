@@ -11,7 +11,8 @@ export class HomePage extends LitElement {
             popupOpen: {type: Boolean},
             eventData: {type: Object},
             user: {type: Object},
-            succesfullyEnrolled: {type: String}
+            succesfullyEnrolled: {type: String},
+
         };
         }
     
@@ -21,6 +22,7 @@ export class HomePage extends LitElement {
             this.popupOpen = false
             this.eventData= [];
             this.currentUser = sessionStorage.getItem('Name');
+            this.role = sessionStorage.getItem('role');
             this.user = "";
             this.succesfullyEnrolled = null;
         }
@@ -35,7 +37,12 @@ export class HomePage extends LitElement {
             .catch(error => {
               console.error("Error fetching data:", error);
             });
-            this.fetchUserData({"Name":String(this.currentUser)});
+            if (this.role === "enterprise") {
+                console.log(this.currentUser);
+                this.fetchCompanyData({"CompanyName":String(this.currentUser)});
+            } else {
+                this.fetchUserData({"Name":String(this.currentUser)});
+            }
         }
 
         fetchUserData(userData) {
@@ -53,7 +60,24 @@ export class HomePage extends LitElement {
               .catch((error) => {
                 console.error("Error fetching data:", error);
               });
-          }
+        }
+
+        fetchCompanyData(userData) {
+            fetch("http://localhost:5001/api/findUserEnterprise", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                this.user = data; // Assign the data
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+        }
 
         togglePopup(e) {
             this.popupOpen = !this.popupOpen

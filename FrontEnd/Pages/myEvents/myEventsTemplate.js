@@ -11,7 +11,6 @@ export const MyEventsTemplate = (context) => {
 
     const openPopup = (e, eventData) => {
       context.setPopupData(eventData);
-      context.displayFile(context.submittedEvents,context.popupData.id);
       context.togglePopup(e);
     };
     
@@ -137,18 +136,38 @@ export const MyEventsTemplate = (context) => {
     </div>
 
     ${context.popupOpen ? html`
-      <div class="popup" @click=${handleBackgroundClick}>
-        <div class="popup-content">
-          <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
-          <h1 style="
-          border-bottom: 
-          lightgray;
-          text-align: center;
-          border-bottom-style: solid; 
-          margin-bottom:2px;
-          color: rgb(6, 28, 113);
-          margin-top: 0px">${context.popupData.title}</h1>
-          <p>${context.popupData.longdescription}</p>
+    <div class="popup" @focusout=${handleBackgroundClick}>
+    <div class="popup-content">
+      <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
+      <h1 style="
+      border-bottom: 
+      lightgray;
+      text-align: center;
+      border-bottom-style: solid; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">${context.popupData.eventTitle}</h1>
+      <h3 style="
+      text-align: center;
+      border-bottom-style: none; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">Event Details</h3>
+      <p>${context.popupData.eventDescription}</p>
+      <div>${context.popupData.eventStartDate} - ${context.popupData.eventEndDate}</div>
+      <h3 style="
+      text-align: center;
+      border-bottom-style: none; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">Company Details</h3>
+      <p>${context.popupData.longdescription}</p>
+      <h3 style="
+      text-align: center;
+      border-bottom-style: none; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">Attachments and Dowloads</h3>
           <button class="submit-button" @click=${(e) => context.fileSubmissionButton(e)}>Add Submission</button>
           ${context.filePopup ? html`
           <form 
@@ -165,17 +184,21 @@ export const MyEventsTemplate = (context) => {
           top: 300px;
           color:rgb(6, 28, 113);">${context.succesfullyUploaded}</h2>`
           :html``}
+        ${console.log(context.submittedEvents)}
         ${context.submittedEvents.some(event => event.id === context.popupData.id) ? html`
-        <h1 style="
-          border-bottom: 
-          lightgray;
-          text-align: center;
-          border-bottom-style: solid; 
-          margin-bottom:2px;
-          color: rgb(6, 28, 113);
-          margin-top: 0px;
-          position: relative;
-          top: 220px;">Submissions</h1>
+        <div style="position: relative;
+        top: 230px;">
+          <h1 style="
+            border-bottom: lightgray;
+            text-align: center;
+            border-bottom-style: solid; 
+            margin-bottom: 2px;
+            color: rgb(6, 28, 113);
+            margin-top: 0px;
+           ">Submissions
+          </h1>
+          <div>${context.filesToDisplay.find(item => item.id === context.popupData.id).link}</div>
+        </div>
         
         `: html``}
         </div>

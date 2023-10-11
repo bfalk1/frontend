@@ -4,6 +4,8 @@ import { InputString } from '../../Components/input-string/input-string';
 import { Navbar } from '../../Components/navbar/navbar';
 
 
+
+
 export const HomePageTemplate = (context) => {
   // Function to close the pop-up when clicked outside
   const handleBackgroundClick = (e) => {
@@ -111,11 +113,38 @@ export const HomePageTemplate = (context) => {
     
 
     ${context.popupOpen ? html`
-      <div class="popup" @click=${handleBackgroundClick}>
-        <div class="popup-content">
-          <button class="close-button" @click=${(e) => context.closePopup()} >X</button>
-          <h1>${context.popupData.title}</h1>
-          <p>${context.popupData.longdescription}</p>
+    <div class="popup" @focusout=${handleBackgroundClick}>
+    <div class="popup-content">
+      <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
+      <h1 style="
+      border-bottom: 
+      lightgray;
+      text-align: center;
+      border-bottom-style: solid; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">${context.popupData.eventTitle}</h1>
+      <h3 style="
+      text-align: center;
+      border-bottom-style: none; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">Event Details</h3>
+      <p>${context.popupData.eventDescription}</p>
+      <div>${context.popupData.eventStartDate} - ${context.popupData.eventEndDate}</div>
+      <h3 style="
+      text-align: center;
+      border-bottom-style: none; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">Company Details</h3>
+      <p>${context.popupData.longdescription}</p>
+      <h3 style="
+      text-align: center;
+      border-bottom-style: none; 
+      margin-bottom:2px;
+      color: rgb(6, 28, 113);
+      margin-top: 0px">Attachments and Dowloads</h3>
           <button class="enroll-button" @click=${(e) => context.handleEnroll(e,context.popupData)}>Enroll</button>
           ${context.succesfullyEnrolled !==null ? html`<h2 style="
           height:18.5px;

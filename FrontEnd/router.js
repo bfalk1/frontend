@@ -34,6 +34,30 @@ export function initRouter() {
       }
     },
     {
+      path: "/enterpriseLogin",
+      component: "enterprise-page", 
+      //action: () => import("./Pages/myEvents/myEvents") 
+      action: (context, commands) => {
+        // Load the profile page component and pass the context parameter
+        return import("./Pages/enterpriseLoginPage/enterprisePage").then((module) => {
+          const enterprisePageComponent = new module.EnterprisePage();
+          return enterprisePageComponent;
+        });
+      }
+    },
+    {
+      path: "/createjobposting",
+      component: "createjob-page", 
+      //action: () => import("./Pages/myEvents/myEvents") 
+      action: (context, commands) => {
+        // Load the profile page component and pass the context parameter
+        return import("./Pages/createJobPage/create-job").then((module) => {
+          const createJobPageComponent = new module.CreateJob();
+          return createJobPageComponent;
+        });
+      }
+    },
+    {
       path: "/profile/:userId", // Use a parameter to identify the user
       component: "profile-page", 
       action: (context, commands) => {

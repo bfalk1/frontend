@@ -14,6 +14,9 @@ export const searchBarTemplate = (context) => {
         text-indent: 30px;
        
     }
+    .searchbar:hover {
+        background-color: #d3d3d3;
+    }
     .container{
         width: ${context.width}px;
         margin-right:20px;

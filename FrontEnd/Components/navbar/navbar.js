@@ -13,6 +13,7 @@ export class Navbar extends LitElement {
         return {
             isDropdownOpen : {type: Boolean},
             inMainApplication : {type: Boolean},
+            entrepriseMode: {type: Boolean},
             triggerRerender : {type: Number}
         };
         }
@@ -23,12 +24,20 @@ export class Navbar extends LitElement {
             this.triggerRerender = 0;
             this.addEventListener('custom-string-event', this.handleChangedValue);
             this.inMainApplication = false;
+            this.entrepriseMode = false;
             this.currentUser = sessionStorage.getItem('Name');
-            console.log(this.currentUser);
+            this.role = sessionStorage.getItem('role');
         }
 
         connectedCallback() {
             super.connectedCallback();
+
+            if (this.role === "enterprise") {
+                this.entrepriseMode = true;
+            } else {
+                this.entrepriseMode = false;
+            }
+
             // This is very bad code, need to refactor later on
             var currentURL = window.location.href;
             if (currentURL === "http://localhost:8000/") {
@@ -47,7 +56,7 @@ export class Navbar extends LitElement {
         triggerReload() {
               this.triggerRerender+=1;
                 var currentURL = window.location.href;
-                if (currentURL === "http://localhost:8000/") {
+                if (currentURL === ("http://localhost:8000/" ||"http://localhost:8000/enterpriseLogin") ) {
                     this.inMainApplication = false;
                 } else {
                     this.inMainApplication = true;
@@ -76,6 +85,10 @@ export class Navbar extends LitElement {
 
         routeToMyEvents(e) {
             Router.go("/myEvents");
+        }
+
+        routeToJobPosting(e) {
+            Router.go("/createjobposting");
         }
 }
 

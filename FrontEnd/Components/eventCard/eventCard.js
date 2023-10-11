@@ -12,7 +12,8 @@ export class EventCard extends LitElement {
             description: { type: String },
             img: { type: String },
             placeholder: { type: String },
-            popupOpen: { type: Boolean }
+            popupOpen: { type: Boolean },
+            eventTitleitle: { type: String },
 
         };
     }
@@ -20,6 +21,11 @@ export class EventCard extends LitElement {
     constructor() {
         super();
         this.title = "";
+        this.eventTitle ="";
+        this.eventstartdate = "";
+        this.eventenddate = "";
+        this.eventdescription = "";
+        this.companyName = "";
         this.description = "";
         this.img = "";
         this.placeholder = "";
@@ -27,6 +33,12 @@ export class EventCard extends LitElement {
 
     }
 
+    connectedCallback(){
+        super.connectedCallback();
+        console.log(this.eventstartdate);
+    }
+
+    
     togglePopup(e) {
         this.popupOpen = !this.popupOpen
         console.log("here");

@@ -14,7 +14,7 @@ export class MyEventsPage extends LitElement {
             filePopup: { type: Boolean },
             succesfullyUploaded: { type: String },
             submittedEvents: {type: Object},
-            filesToDisplay: {type: Object}
+            filesToDisplay: {type: Array}
         };
     }
 
@@ -29,7 +29,7 @@ export class MyEventsPage extends LitElement {
         this.user = "";
         this.filePopup = false;
         this.succesfullyUploaded = null;
-        this.filesToDisplay = {};
+        this.filesToDisplay = [];
     }
 
     connectedCallback() {
@@ -54,8 +54,10 @@ export class MyEventsPage extends LitElement {
                   return false;
                 }
                 return true; 
-              });;
-            console.log(this.eventData);
+              });
+              for (const index in this.submittedEvents) {
+                this.displayFile(this.submittedEvents[index].submittedFileName,this.submittedEvents[index].id);
+              }
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
@@ -76,7 +78,7 @@ export class MyEventsPage extends LitElement {
             return true; 
           });
         }
-        this.succesfullyEnrolled = null;
+        this.succesfullyUploaded = null;
         this.filePopup = false;
         this.popupOpen = false;
     }
@@ -93,6 +95,13 @@ export class MyEventsPage extends LitElement {
         e.preventDefault();
         const fileInput = this.shadowRoot.querySelector('#fileToUpload');
         const file = fileInput.files[0];
+        const url = (window.URL.createObjectURL(file));
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank'; 
+        link.textContent = String(file.name);
+        link.setAttribute('download', file.name);
+        this.filesToDisplay.push({link,id});
         if (file) {
             // Create a FormData object to send the file to the server
             const formData = new FormData();
@@ -121,48 +130,28 @@ export class MyEventsPage extends LitElement {
         }
     }
 
-    async displayFile(filename,id) {
-        for (const index in filename) { // This is bad, needs to be changed
-            if (filename[index].id === id) {
-                filename = filename[index].submittedFileName;
-                break;
-            } else {
-                return;
-            }
-        }
+    displayFile(filename,id) {
         const userId = String(this.currentUser+id);
         fetch(`http://localhost:5001/api/files/${userId}/${filename}`)
-        .then(response => response.json())
-        .then(data => {
-          this.filesToDisplay = data.Currentuser; // Assign the data
-          console.log(this.filesToDisplay); // Log the data here
-        })
-        .catch(error => {
-          console.error("Error fetching data:", error);
-        });
-        /*
-        try {
-            const response = await fetch(`http://localhost:5001/api/files/${filename}`, {
-                method: 'POST',
-                body: JSON.stringify({ data: userId }),
-                headers: {
-                    'Content-Type': 'application/json', // Set the appropriate content type
-                },
-            });
-    
+        .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+              throw new Error('Network response was not ok');
             }
-    
-            // Handle the successful response here if needed
-        } catch (error) {
-            console.error('Error:', error);
-        }
-        */
+            return response.blob(); // Get the file data as a Blob
+          })
+          .then(blobData => { // Append the file data to the array
+            const url = (window.URL.createObjectURL(blobData));
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank'; 
+            link.textContent = String(filename);
+            link.setAttribute('download', filename);
+            this.filesToDisplay.push({link,id});
+          })
+          .catch(error => {
+            console.error("Error fetching data:", error);
+          });
     }
-
-
-
 }
 
     

@@ -1,4 +1,5 @@
 import { html, css } from 'lit';
+import { InputImage } from '../input-image/input-image';
 
 export const eventCardTemplate = (context) => {
   return html`<style>
@@ -26,10 +27,16 @@ export const eventCardTemplate = (context) => {
       .description {
         padding: 5px;
       }
+      .header-title {
+        border-bottom-style: None; 
+        margin-bottom:2px;
+        color: rgb(6, 28, 113);
+        margin-top: 0px
+      }
     </style>
     <div class="card">
-      <h3 class="title">${context.title}</h3>
+      <h3 class="header-title">${context.title}</h3>
       <p class="description">${context.description}</p>
-      <img class="card-img" src=${context.img} alt=${context.placeholder}>
+      <input-image .selectedFile=${context.img}></input-image>
     </div>`;
 };
