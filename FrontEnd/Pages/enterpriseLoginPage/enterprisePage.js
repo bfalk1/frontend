@@ -39,7 +39,6 @@ export class EnterprisePage extends LitElement {
         .then(response => response.json())
         .then(data => {
           this.users = this.convertValuesToLowerCaseJson(data.companyInformation); // Assign the data
-          console.log(this.users); // Log the data here
         })
         .catch(error => {
           console.error("Error fetching data:", error);
@@ -139,8 +138,6 @@ export class EnterprisePage extends LitElement {
     }
 
     memberLogin(e) {
-        console.log(this.currentUser);
-        console.log(this.userPassword);
         if (!this.currentUser) {
             this.error = "Please Enter valid Email Address";
             return;

@@ -14,7 +14,8 @@ export class CreateJob extends LitElement {
         eventData: {type: Array},
         popupOpen: {type: Boolean},
         file: {type: Object},
-        eventAttributes: {type: Object}
+        eventAttributes: {type: Object}, 
+        error: {type : String}
        
     };
     }
@@ -23,12 +24,12 @@ export class CreateJob extends LitElement {
         super();
         this.currentUser = sessionStorage.getItem('Name');
         this.user = "";
-        this.succesfullyUploaded = null;
         this.filePopup = false;
         this.popupOpen = false;
+        this.error = null;
         this.eventData = [];
-        this.file = [];
         this.eventAttributes=[];
+        this.missingFields = [];
         this.addEventListener('custom-string-event', this.handleChangedValue);
     }
 
@@ -66,13 +67,18 @@ export class CreateJob extends LitElement {
     }
 
     addEvent(e) {
+        this.missingFields = [];
+        this.validateJobPosting();
+        if (this.missingFields.length!==0) {
+            this.error = "Missing Required Fields";
+            return;
+        }
+        this.error = "Successfully Uploaded";
         this.eventAttributes["id"]=this.generateUniqueID();
         this.eventAttributes["shortdescription"] = this.getFirst100Words(this.eventAttributes["longdescription"]);
         this.eventData.push(this.eventAttributes);
         this.eventData = [...this.eventData];
         this.eventAttributes = [];
-        console.log(this.eventAttributes);
-        this.closePopup();
     }
 
     getFirst100Words(text) {
@@ -92,6 +98,19 @@ export class CreateJob extends LitElement {
         }
     }
 
+    validateJobPosting() {
+        const requiredFields = ["Eventtitle", "companyName", "end-date","start-date",
+        "event-description","event-end-date","event-start-date","longdescription",
+        "title"];
+
+        for (const field of requiredFields) {
+            if (!this.eventAttributes.hasOwnProperty(field)) {
+            this.missingFields.push(field);
+            }
+        }
+        return this.missingFields;
+    }
+
     generateUniqueID() {
         const timestamp = Date.now();
         const random = Math.random().toString(36).substring(2);
@@ -103,7 +122,7 @@ export class CreateJob extends LitElement {
     }
 
     closePopup(e,id) {
-        this.succesfullyUploaded = null;
+        this.error = null;
         this.filePopup = false;
         this.popupOpen = false;
     }

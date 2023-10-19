@@ -84,6 +84,13 @@ const xptemplate = (context) =>{
     </div>
   
       <button class="button" @click=${(e) => context.addEvent(e)}>Add</button>
+      ${context.error !==null ? html`<h2 style="
+          height:18.5px;
+          margin-left: 5px;
+          position: absolute;
+            top: 92%;
+          color:rgb(6, 28, 113);">${context.error}</h2>`
+          :html``}
     </div>
     `;
   

@@ -145,14 +145,13 @@ export const HomePageTemplate = (context) => {
       margin-bottom:2px;
       color: rgb(6, 28, 113);
       margin-top: 0px">Attachments and Dowloads</h3>
-          <button class="enroll-button" @click=${(e) => context.handleEnroll(e,context.popupData)}>Enroll</button>
           ${context.succesfullyEnrolled !==null ? html`<h2 style="
           height:18.5px;
           margin-left: 5px;
           position: relative;
           top: 300px;
           color:rgb(6, 28, 113);">${context.succesfullyEnrolled}</h2>`
-          :html``}
+          :html`<button class="enroll-button" @click=${(e) => context.handleEnroll(e,context.popupData)}>Enroll</button>`}
         </div>
       </div>`
       : html``}

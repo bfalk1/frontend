@@ -32,16 +32,9 @@ export class EventCard extends LitElement {
         this.popupOpen = false
 
     }
-
-    connectedCallback(){
-        super.connectedCallback();
-        console.log(this.eventstartdate);
-    }
-
     
     togglePopup(e) {
         this.popupOpen = !this.popupOpen
-        console.log("here");
     }
 
     closePopup(e) {

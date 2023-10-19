@@ -26,8 +26,8 @@ class FirstPage extends LitElement {
         this.error = null;
         this.UserAttributes = {};
         this.users = "";
-        this.currentUser = null;
-        this.userPassword = ""
+        this.currentUser = [];
+        this.inputtedPassword = null;
         this.employmentButton = false;
         this.validCrendentials = false;
         this.addEventListener('custom-string-event', this.handleChangedValue);
@@ -35,15 +35,6 @@ class FirstPage extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        fetch("http://localhost:5001/api")
-        .then(response => response.json())
-        .then(data => {
-          this.users = this.convertValuesToLowerCaseJson(data.Currentuser); // Assign the data
-          console.log(this.users); // Log the data here
-        })
-        .catch(error => {
-          console.error("Error fetching data:", error);
-        });
     }
 
     handleChangedValue(e) {
@@ -53,7 +44,7 @@ class FirstPage extends LitElement {
                 this.userEmailLogin(e.detail.value,null);
                 break;
             case "Password" :
-                this.userPassword = e.detail.value;
+                this.inputtedPassword = e.detail.value;
                 this.UserAttributes["Password"] = e.detail.value;
                 break;
             case "Confirm Password":
@@ -89,11 +80,7 @@ class FirstPage extends LitElement {
         this.studentCheckBoxClicked = true;
         this.error = null;
         this.currentUser = null;
-        this.userPassword = null;
-    }
-
-    employeecheckBox(e) {
-        this.employeeCheckBoxClicked = true;
+        this.inputtedPassword = null;
     }
 
     validSignUpCredentials() {
@@ -132,26 +119,22 @@ class FirstPage extends LitElement {
         } else {
             this.error = null;
         }
-
-        sessionStorage.setItem('Name', String(this.UserAttributes["FirstName"]+this.UserAttributes["LastName"]));
+        this.UserAttributes["events"] = [];
         this.addUser(this.UserAttributes);
-        Router.go(`/home`);
     }
 
     memberLogin(e) {
-        console.log(this.currentUser);
-        console.log(this.userPassword);
         if (!this.currentUser) {
             this.error = "Please Enter valid Email Address";
             return;
-        } else if (!this.userEmailPassword) {
+        } else if (!this.inputtedPassword) {
             this.error = "Please Enter Password";
             return;
         }
-        if (this.currentUser.Password!== this.userPassword) {
+        if (this.currentUser.Password!== this.inputtedPassword) {
             this.error = "Incorrect password or email";
         } else {
-            sessionStorage.setItem('Name', String(this.currentUser.Name));
+            sessionStorage.setItem('email', this.currentUser.email);
             sessionStorage.setItem('role', "user");
             Router.go(`/home`);
         }
@@ -169,30 +152,27 @@ class FirstPage extends LitElement {
                 return true; //Used for user login
             }
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.UserAttributes[type] = this.convertAllCharsToLowerCase(input);
         }
     }
 
     userEmailLogin(input,type) {
+        fetch(`http://localhost:5001/api?username=${input}`)
+        .then(response => response.json())
+        .then(data => {
+          // Log the response from the API
+          this.currentUser["Password"] = data.Password;
+          this.currentUser["Name"] = data.Name;
+          this.currentUser["email"] = input;
+        })
+        .catch(error => {
+           this.error = "User Not Found"
+        });
         if (this.validateEmail(input,type)) {
-            let foundUser = null;
-
-            this.users.forEach(user => {
-            if (user.email === this.convertAllCharsToLowerCase(input)) {
-                foundUser = user;
-            }
-            });
-
-            if (foundUser) {
-                this.currentUser = foundUser;
-                this.error = null;
-            } else {
-                this.error = "User not found";
-            }
+            this.currentUser["email"] = input;
         } else {
             this.error = "Invalid Email";
         }
-
     }
 
     userEmailPassword(input) {
@@ -253,7 +233,6 @@ class FirstPage extends LitElement {
     }
 
     addUser(newUser) {
-        console.log(JSON.stringify(newUser));
         fetch("http://localhost:5001/api/users", {
           method: "POST",
           headers: {
@@ -263,7 +242,13 @@ class FirstPage extends LitElement {
         })
           .then(response => response.json())
           .then(data => {
-            console.log("User added successfully:");
+            if (data.message ==="Account exists under this email") {
+                this.error = "Account exists under this email";
+            } else {
+                sessionStorage.setItem('email', this.UserAttributes["email"]);
+                sessionStorage.setItem('role', "user");
+                Router.go(`/home`);
+            }
           })
           .catch(error => {
             console.error("Error adding user:", error);

@@ -25,7 +25,7 @@ export class Navbar extends LitElement {
             this.addEventListener('custom-string-event', this.handleChangedValue);
             this.inMainApplication = false;
             this.entrepriseMode = false;
-            this.currentUser = sessionStorage.getItem('Name');
+            this.currentUser = sessionStorage.getItem('email');
             this.role = sessionStorage.getItem('role');
         }
 

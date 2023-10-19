@@ -21,7 +21,7 @@ export class HomePage extends LitElement {
             this.popupData = {}
             this.popupOpen = false
             this.eventData= [];
-            this.currentUser = sessionStorage.getItem('Name');
+            this.currentUser = {"email":sessionStorage.getItem('email')};
             this.role = sessionStorage.getItem('role');
             this.user = "";
             this.succesfullyEnrolled = null;
@@ -29,37 +29,35 @@ export class HomePage extends LitElement {
 
         connectedCallback() {
             super.connectedCallback();
-            fetch("http://localhost:5001/api/events")
-            .then(response => response.json())
-            .then(data => {
-              this.eventData = data.eventData; // Assign the data // Log the data here
+            if (this.eventData.length === 0) {
+                fetch("http://localhost:5001/api/events")
+                .then(response => response.json())
+                .then(data => {
+                this.eventData = data; // Assign the data // Log the data here
             })
             .catch(error => {
               console.error("Error fetching data:", error);
             });
-            if (this.role === "enterprise") {
+            }
+            this.fetchUserData(String(this.currentUser.email));
+            /*if (this.role === "enterprise") {
                 console.log(this.currentUser);
                 this.fetchCompanyData({"CompanyName":String(this.currentUser)});
             } else {
                 this.fetchUserData({"Name":String(this.currentUser)});
-            }
+            }*/
         }
 
-        fetchUserData(userData) {
-            fetch("http://localhost:5001/api/findUser", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
+        fetchUserData(input) {
+            fetch(`http://localhost:5001/api/home/?username=${input}`)
+            .then(response => response.json())
+            .then(data => {
+            // Log the response from the API
+            this.currentUser["events"] = data.events;
             })
-              .then((response) => response.json())
-              .then((data) => {
-                this.user = data; // Assign the data
-              })
-              .catch((error) => {
-                console.error("Error fetching data:", error);
-              });
+            .catch(error => {
+            this.error = "User Not Found"
+            });
         }
 
         fetchCompanyData(userData) {
@@ -93,13 +91,14 @@ export class HomePage extends LitElement {
         }
 
         handleEnroll(e,eventID) {
-            if (this.isInputMatchingKey(eventID.id,this.user.events)) {
+            if (this.isInputMatchingKey(eventID.id,this.currentUser.events)) {
                 this.succesfullyEnrolled = " You have already registered for this event";
                 return;
             } else {
-                this.addEventToUser(this.user.Name, eventID)
+                this.addUserToEvent(this.currentUser.email, eventID)
                     .then((data) => {
                         this.succesfullyEnrolled = "Sucessfully Regitered";
+                        this.addEventToUser(this.currentUser.email, eventID)
                     })
                     .catch((error) => {
                         this.succesfullyEnrolled = "Application Error";
@@ -116,9 +115,32 @@ export class HomePage extends LitElement {
             return false;
         }
 
-        async addEventToUser(userId, eventId) {
+        async addUserToEvent(userId, eventId) {
             try {
               const response = await fetch(`http://localhost:5001/addEvent/${userId}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ eventId }),
+              });
+          
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+          
+              const data = await response.json();
+              return data;
+            } catch (error) {
+              console.error('Error:', error);
+              throw error;
+            }
+        }
+
+        async addEventToUser(userId, eventId) {
+            eventId["submittions"] = [];
+            try {
+              const response = await fetch(`http://localhost:5001/user/addEvent/${userId}`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

@@ -16,6 +16,46 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
+const mongoose = require('mongoose');
+
+
+mongoose.connect('mongodb+srv://julianbrickman:Jemba123@cluster0.j21pkaw.mongodb.net/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: 'Master',
+})
+.then(() => {
+  console.log('Connected to MongoDB Atlas');
+})
+.catch(err => {
+  console.error('Error connecting to MongoDB Atlas', err);
+});
+
+
+// Create a User model
+const collectionName = 'Users'; // Replace with your collection name
+//const User = mongoose.model(collectionName, new mongoose.Schema({}), collectionName);
+
+/*
+mongoose.connection.collection(collectionName).insertOne(dataToSave, (error, result) => {
+  if (error) {
+    console.error('Error logging user:', error);
+  } else {
+    console.log('User logged:', dataToSave);
+  }
+});
+*/
+
+  /*User.find()
+  .then((users) => {
+    console.log('All users:', users);
+  })
+  .catch((error) => {
+    console.error('Error retrieving users:', error);
+  });
+  */
+
+
 eventData = [
   {
     "id": 1,
@@ -274,6 +314,7 @@ let Currentuser = [
       "submitted": false,
       "submittedFileName":"",
       "title": "Graphic Designer",
+      "Users":["julianbrickman"],
       "EndDate": "2023-10-15",
       "StartDate": "2023-10-15",
       "companyName": "Microsoft",
@@ -308,6 +349,7 @@ const upload = multer({ storage });
 
 app.post('/upload', upload.single('fileToUpload'), (req, res) => {
   const userId = req.body.userId;
+  console.log(req.body);
   // File has been uploaded, and req.file contains information about the uploaded file
   // You can save the file, process it, or save details in a database from here
 
@@ -324,7 +366,42 @@ app.get('/api/files/:userId/:filename', (req, res) => {
 });
 
 app.get("/api", (req,res) => {
-  res.json({Currentuser});
+  const username = req.query.username;
+  mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
+    if (error) {
+      console.error('Error finding user:', error);
+    } else if (result) {
+      res.json({"Password": result.Password, "Name": result.Name});
+    } else {
+      console.log('User not found');
+    }
+  });
+})
+
+app.get("/api/home", (req,res) => {
+  const username = req.query.username;
+  mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
+    if (error) {
+      console.error('Error finding user:', error);
+    } else if (result) {
+      res.json({"events": result.events});
+    } else {
+      console.log('User not found');
+    }
+  });
+})
+
+app.get("/api/eventPage", (req,res) => {
+  const username = req.query.username;
+  mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
+    if (error) {
+      console.error('Error finding user:', error);
+    } else if (result) {
+      res.json({events});
+    } else {
+      console.log('User not found');
+    }
+  });
 })
 
 app.get("/api/enterprise", (req,res) => {
@@ -347,29 +424,117 @@ app.post('/addEvent/:userId', (req, res) => {
   const userId = req.params.userId;
   const eventId = req.body.eventId;
 
-  // Find the user by ID
-  const user = Currentuser.find(user => user.Name === userId);
-
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' });
-  }
-
-  // Add the new event ID to the user's events array
-  user.events.push(eventId);
-  console.log(user.events);
-
-  res.json({ message: 'Event added successfully', user });
+  mongoose.connection.collection("Events").findOneAndUpdate(
+    { id: eventId.id },
+    { $push: { "enrolledUsers": userId } },
+    (error, result) => {
+      if (error) {
+        console.error('Error adding user to event:', error);
+        res.status(500).json({ message: 'Error adding user to event' });
+      } else if (result.value) {
+        console.log('User added to event:', userId);
+        res.json({ message: 'User added to event successfully' });
+      } else {
+        res.status(404).json({ message: 'Event not found' });
+      }
+    }
+  );
 });
 
-app.get("/api/events", (req,res) => {
-  res.json({eventData});
+app.post('/user/addEvent/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const eventId = req.body.eventId;
+
+  mongoose.connection.collection("Users").findOneAndUpdate(
+    { "email": userId },
+    { $push: { "events": eventId } },
+    (error, result) => {
+      if (error) {
+        console.error('Error adding user to event:', error);
+        res.status(500).json({ message: 'Error adding user to event' });
+      } else if (result.value) {
+        console.log('Event added to User:', userId);
+        res.json({ message: 'User added to event successfully' });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    }
+  );
+});
+
+app.post('/user/addSubmission/:userId', (req, res) => {
+  //const userId = req.params.userId;
+  //const eventId = req.body[1].eventId
+  //const submissionData = req.body[2].submission; 
+  console.log(req.body);
+  /*
+  // Find the user with the given email
+  mongoose.connection.collection("Users").findOne({ "email": userId }, (error, user) => {
+    if (error) {
+      console.error('Error finding user:', error);
+      res.status(500).json({ message: 'Error finding user' });
+    } else if (user) {
+      for (let i=0;i<user.events.length-1;i++) {
+        if (eventId === String(user.events[i].id)) {
+          user.events[i].submissions.push(submissionData);
+        }
+      }
+        mongoose.connection.collection("Users").updateOne(
+          { "email": userId },
+          { $set: { "events": user.events } },
+          (updateError) => {
+            if (updateError) {
+              console.error('Error adding submission to event:', updateError);
+              res.status(500).json({ message: 'Error adding submission to event' });
+            } else {
+              console.log('Submission added to event:', eventId);
+              res.json({ message: 'Submission added to event successfully' });
+            }
+          }
+        );
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  });
+  */
+});
+
+
+app.get("/api/events", async (req,res) => {
+  try {
+    const eventArray = await mongoose.connection.collection("Events").find({}).toArray();
+    
+    if (eventArray.length > 0) {
+      console.log('Events retrieved:');
+      res.json(eventArray);
+    } else {
+      console.log('No events found.');
+      res.status(404).json({ message: 'No events found' });
+    }
+  } catch (error) {
+    console.error('Error querying events:', error);
+    res.status(500).json({ message: 'Error querying events' });
+  }
 })
 
 app.post("/api/users", (req, res) => {
-  console.log(req.body);
   const newUser = req.body;
-  users.push(newUser);
-  res.json({ message: "User added successfully", newUser });
+  mongoose.connection.collection(collectionName).findOne({"email": req.body.email }, (error, result) => {
+    if (error) {
+      console.error('Error finding user:', error);
+    } else if (result) {
+      res.json({ message: "Account exists under this email"});
+    } else {
+      mongoose.connection.collection(collectionName).insertOne(newUser, (error, result) => {
+        if (error) {
+          console.error('Error logging user:', error);
+        } else {
+          console.log('User logged:', newUser);
+        }
+      });
+      res.json({ message: "User added successfully"});
+    }
+  });
 });
 
 app.post("/api/findUser", (req, res) => {
