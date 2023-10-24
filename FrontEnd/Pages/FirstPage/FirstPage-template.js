@@ -33,10 +33,12 @@ export const FirstPageTemplate = (context) => {
     "width:400px; 
     height: 467px;
     position: relative;
-    background-color:whitesmoke;
+    background-color:white;
     border-radius: 20px;
     top: 150px;
-    left: 150px;"
+    left: 150px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
+    
     >
       <div
       style=

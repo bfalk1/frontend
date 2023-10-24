@@ -5,11 +5,11 @@ export const infoboxTemplate = (context) => {
   return html`
     <style>
       .box {
-        width: 40%;
+        width: 45%;
         height: 60%;
         position: absolute;
         right: 5%;
-        top: 22%;
+        top: 20%;
         background-color: #f4f4f4;
         border: 1px solid lightgrey;
         border-radius: 10px;
@@ -29,11 +29,13 @@ export const infoboxTemplate = (context) => {
       }
 
       .description {
-        font-size: 16px;
-        text-align: center;
-        color: #666;
-        margin-bottom: 30px;
-      }
+        font-size: 32px; /* Increase the font size */
+        font-weight: bold; /* Make the text bold */
+        text-align: left; /* Align the text to the left */
+        color: black;
+        padding:5%
+    }
+
 
       .features {
         display: flex;
@@ -46,9 +48,13 @@ export const infoboxTemplate = (context) => {
         text-align: center;
         max-width: 30%;
       }
-
       .icon {
-        font-size: 36px;
+        width:130px;
+        margin-bottom: 10px;
+        color: #0078d4; /* Use your brand color */
+      }
+      .icons {
+        width:150px;
         margin-bottom: 10px;
         color: #0078d4; /* Use your brand color */
       }
@@ -64,19 +70,18 @@ export const infoboxTemplate = (context) => {
       }
     </style>
     <div class="box">
-      <h1 class="title">Blinq</h1>
-      <p class="description">Your platform for competing for jobs by showcasing your skills and building experience through projects.</p>
+      <p class="description">Need a Job? Showcase your skills in hackathon style competition, WIN BIG PRIZES. </p>
       <div class="features">
         <div class="feature">
-          <span class="icon">🏆</span>
+        <img src="/Assets/CompetitionB.png" class="icon" alt="Logo">
           <p>Compete for Jobs</p>
         </div>
         <div class="feature">
-          <span class="icon">📚</span>
+        <img src="/Assets/ExperienceB.png" class="icon" alt="Logo">
           <p>Gain Experience</p>
         </div>
         <div class="feature">
-          <span class="icon">👥</span>
+        <img src="/Assets/RecrutingB.png" class="icon" alt="Logo">
           <p>Simplify Recruiting</p>
         </div>
       </div>

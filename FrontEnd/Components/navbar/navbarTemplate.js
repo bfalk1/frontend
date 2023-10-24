@@ -61,9 +61,12 @@ export const NavbarTemplate = (context) => {
       display: block;
       cursor: pointer;
     }
-    </style>
+    .logo {
+       height:150px;
+      }
+    </style> 
       <div class="navbar">
-      <span class="navbar-title">Blinq</span>
+      <img src="/Assets/TLogo.png" class="logo" alt="Logo">
       ${context.inMainApplication ? html` 
       <button class="button" @click=${(e) => context.routeToFirst(e)}>Landing Page</button>
       <button class="button" @click=${(e) => context.routeToHome(e)}>Home</button>
