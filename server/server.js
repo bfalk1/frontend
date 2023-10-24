@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const mongoose = require('mongoose');
+const { info } = require('console');
 
 
 mongoose.connect('mongodb+srv://julianbrickman:Jemba123@cluster0.j21pkaw.mongodb.net/', {
@@ -347,6 +348,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+//Not in use
 app.post('/upload', upload.single('fileToUpload'), (req, res) => {
   const userId = req.body.userId;
   console.log(req.body);
@@ -356,6 +358,7 @@ app.post('/upload', upload.single('fileToUpload'), (req, res) => {
   res.status(200).send('File uploaded successfully!');
 });
 
+//Not in use
 app.get('/api/files/:userId/:filename', (req, res) => {
   const userId = req.params.userId; // Get the user ID from the URL parameters
   const filename = req.params.filename;
@@ -365,6 +368,7 @@ app.get('/api/files/:userId/:filename', (req, res) => {
   res.sendFile(filePath);
 });
 
+//First page User login
 app.get("/api", (req,res) => {
   const username = req.query.username;
   mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
@@ -377,7 +381,28 @@ app.get("/api", (req,res) => {
     }
   });
 })
+//Search Bar
+app.get("/api/searchBar", async (req,res) => {
+  try {
+    const userArray = await mongoose.connection.collection("Users").find({}).toArray();
+    const infoArray = [];
+    for (let i=0;i<userArray.length;i++) {
+        infoArray.push({"Name":userArray[i].Name,"email":userArray[i].email})
+    }
+    if (userArray.length > 0) {
+      console.log('users retrieved:');
+      res.json(infoArray);
+    } else {
+      console.log('No users found.');
+      res.status(404).json({ message: 'No users found' });
+    }
+  } catch (error) {
+    console.error('Error querying users:', error);
+    res.status(500).json({ message: 'Error querying users' });
+  }
+})
 
+//Home Page, users enrolled events
 app.get("/api/home", (req,res) => {
   const username = req.query.username;
   mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
@@ -391,6 +416,7 @@ app.get("/api/home", (req,res) => {
   });
 })
 
+//Dont think this is in use
 app.get("/api/eventPage", (req,res) => {
   const username = req.query.username;
   mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
@@ -404,10 +430,12 @@ app.get("/api/eventPage", (req,res) => {
   });
 })
 
+//Needs to be updated
 app.get("/api/enterprise", (req,res) => {
   res.json({companyInformation});
 })
 
+//Needs to be updated
 app.post("/api/findUserEnterprise", (req, res) => {
   const userData = req.body; // This will contain the userData parameter sent from the frontend
   // Assuming you want to find a user based on some criteria (e.g., FirstName)
@@ -419,7 +447,7 @@ app.post("/api/findUserEnterprise", (req, res) => {
     res.status(404).json({ message: "User not found" });
   }
 });
-
+//Adding enrolled users to an event
 app.post('/addEvent/:userId', (req, res) => {
   const userId = req.params.userId;
   const eventId = req.body.eventId;
@@ -441,6 +469,7 @@ app.post('/addEvent/:userId', (req, res) => {
   );
 });
 
+//adding a event to a user
 app.post('/user/addEvent/:userId', (req, res) => {
   const userId = req.params.userId;
   const eventId = req.body.eventId;
@@ -461,22 +490,21 @@ app.post('/user/addEvent/:userId', (req, res) => {
     }
   );
 });
-
-app.post('/user/addSubmission/:userId', (req, res) => {
-  //const userId = req.params.userId;
-  //const eventId = req.body[1].eventId
-  //const submissionData = req.body[2].submission; 
-  console.log(req.body);
-  /*
+//Adding a submission to a users event
+app.post('/user/addSubmission/:userId',upload.single('fileToUpload'), (req, res) => {
+  const file = req.file;
+  const userId = req.body.userId;
+  const eventId = req.body.eventId;
+  
   // Find the user with the given email
   mongoose.connection.collection("Users").findOne({ "email": userId }, (error, user) => {
     if (error) {
       console.error('Error finding user:', error);
       res.status(500).json({ message: 'Error finding user' });
     } else if (user) {
-      for (let i=0;i<user.events.length-1;i++) {
+      for (let i=0;i<user.events.length;i++) {
         if (eventId === String(user.events[i].id)) {
-          user.events[i].submissions.push(submissionData);
+          user.events[i].submissions.push(file);
         }
       }
         mongoose.connection.collection("Users").updateOne(
@@ -496,10 +524,9 @@ app.post('/user/addSubmission/:userId', (req, res) => {
       res.status(404).json({ message: 'User not found' });
     }
   });
-  */
 });
 
-
+//Get events to be displayed
 app.get("/api/events", async (req,res) => {
   try {
     const eventArray = await mongoose.connection.collection("Events").find({}).toArray();
@@ -516,7 +543,7 @@ app.get("/api/events", async (req,res) => {
     res.status(500).json({ message: 'Error querying events' });
   }
 })
-
+//adding new user to the database if he does not exist
 app.post("/api/users", (req, res) => {
   const newUser = req.body;
   mongoose.connection.collection(collectionName).findOne({"email": req.body.email }, (error, result) => {
@@ -536,7 +563,21 @@ app.post("/api/users", (req, res) => {
     }
   });
 });
+//finding a user, used in profile section
+app.get("/api/profile", (req,res) => {
+  const username = req.query.username;
+  mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
+    if (error) {
+      console.error('Error finding user:', error);
+    } else if (result) {
+      res.json(result);
+    } else {
+      console.log('User not found');
+    }
+  });
+})
 
+//not used
 app.post("/api/findUser", (req, res) => {
   const userData = req.body; // This will contain the userData parameter sent from the frontend
   // Assuming you want to find a user based on some criteria (e.g., FirstName)
@@ -548,11 +589,11 @@ app.post("/api/findUser", (req, res) => {
     res.status(404).json({ message: "User not found" });
   }
 });
-
+//not used
 app.get("/api/currentUser", (req,res) => {
   res.json({Currentuser})
 })
-
+//not used
 app.get("/api/fullUserList", (req,res) => {
   res.json({userlist})
 })

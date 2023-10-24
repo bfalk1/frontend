@@ -184,7 +184,6 @@ export const MyEventsTemplate = (context) => {
           top: 300px;
           color:rgb(6, 28, 113);">${context.succesfullyUploaded}</h2>`
           :html``}
-        ${console.log(context.submittedEvents)}
         ${context.submittedEvents.some(event => event.id === context.popupData.id) ? html`
         <div style="position: relative;
         top: 230px;">

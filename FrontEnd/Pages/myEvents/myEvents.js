@@ -100,79 +100,23 @@ export class MyEventsPage extends LitElement {
         link.setAttribute('download', file.name);
         this.filesToDisplay.push({link,id});
             if (file) {
-                // Create a FormData object to send the file to the server
                 const formData = new FormData();
                 formData.append('userId',String(this.currentUser.email));
                 formData.append('eventId',String(id));
                 formData.append('fileToUpload', file);
-
-                console.log(formData);
-          
-                // Send the file to the server using a fetch request
                 fetch(`http://localhost:5001/user/addSubmission/${this.currentUser.email}`, {
                 method: 'POST',
                 body: formData,
                 })
-                console.log(formData)
                     .then(response => response.json())
                     .then(data => {
-                    console.log(data);
+                        this.succesfullyUploaded = "Submission Sucessful";
                     })
                     .catch(error => {
-                    console.error('Error:', error);
+                        this.succesfullyUploaded = "Application Error";
+                        console.error('Error:', error);
                     });
-            
-            // Create a FormData object to send the file to the server
-            /*
-            const formData = []
-            formData.push({'userId':String(this.currentUser.email)});
-            formData.push({'eventId':String(id)});
-            formData.push(file);
-            console.log(JSON.stringify({ formData }));
-            */
-            /*
-            const formData = new FormData();
-            formData.append('userId',String(this.currentUser));
-            formData.append('eventId',String(id));
-            formData.append('fileToUpload', file);
-            console.log(formData)
-        
-            fetch(`http://localhost:5001/user/addSubmission/${this.currentUser.email}`, {
-                method: 'POST',
-                body: formData,
-              })
-              console.log(formData)
-                .then(response => response.json())
-                .then(data => {
-                  console.log(data);
-                })
-                .catch(error => {
-                  console.error('Error:', error);
-                });
-               */
-        }
-      
-            // Send the file to the server using a fetch request
-            /*
-            fetch('http://localhost:5001/upload', {
-              method: 'POST',
-              body: formData,
-            })
-              .then((response) => {
-                if (response.ok) {
-                  // Handle a successful file upload (e.g., display a success message)
-                  this.succesfullyUploaded = "Submission Sucessful";
-                  this.filePopup = false;
-                } else {
-                  // Handle an error in the file upload process
-                  this.succesfullyUploaded = "Application Error"
-                }
-              })
-              .catch((error) => {
-                console.error('Error uploading file:', error);
-              });
-        }
-        */
+            }
     }
 
     displayFile(filename,id) {

@@ -31,15 +31,15 @@ export class SearchBar extends LitElement {
 
     fetchUsers(e) {
         if (!this.usersFetchedSuccesfully) {
-            fetch("http://localhost:5001/api/fullUserList")
-            .then(response => response.json())
-            .then(data => {
-              this.users = data.userlist;
-              this.usersFetchedSuccesfully = true;// Log the data here
-            })
-            .catch(error => {
-              console.error("Error fetching data:", error);
-            });
+            fetch(`http://localhost:5001/api/searchBar`)
+                .then(response => response.json())
+                .then(data => {
+                this.users = data;
+                this.usersFetchedSuccesfully = true;
+                })
+                .catch(error => {
+                this.error = "User Not Found"
+                });
         } else {
             return;
         }
@@ -56,6 +56,7 @@ export class SearchBar extends LitElement {
        }
        var tempArray = [];
        for (let i = 0; i <= this.usersInSearch.length-1; i++) {
+            console.log(this.usersInSearch[i])
             if (this.usersInSearch[i].Name.trim().toLowerCase().includes(e.target.value.trim().toLowerCase())) {
                 tempArray.push(this.usersInSearch[i]);
             }

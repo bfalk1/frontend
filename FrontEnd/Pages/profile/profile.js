@@ -28,7 +28,8 @@ export class ProfilePage extends LitElement {
               "Description": ""
             }
             this.user = "";
-            this.currentUser = sessionStorage.getItem('Name');
+            this.currentUser = {"email":sessionStorage.getItem('email')};
+            this.role = sessionStorage.getItem('role');
             this.isCurrentUsersPage = false;
             this.addEventListener('custom-user-search-event', this.findSearchedUser);
             this.addEventListener('custom-string-event', this.handleChangedValue);
@@ -38,33 +39,27 @@ export class ProfilePage extends LitElement {
           super.connectedCallback();
           if (!this.user) {
             this.isCurrentUsersPage = true;
-            this.fetchUserData({"Name":String(this.currentUser)});
+            this.fetchUserData(String(this.currentUser));
             return;
           }
-          this.fetchUserData({"Name":String(this.user)});
-          if (this.user.trim().toLowerCase() !== this.currentUser.trim().toLowerCase()) {
+          this.fetchUserData(String(this.user));
+          if (this.user.toLowerCase() !== this.currentUser.email.toLowerCase()) {
             this.isCurrentUsersPage = false;
           } else {
             this.isCurrentUsersPage = true;
           }
       }
 
-      fetchUserData(userData) {
-        fetch("http://localhost:5001/api/findUser", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
+      fetchUserData(input) {
+        fetch(`http://localhost:5001/api/profile?username=${input}`)
+        .then(response => response.json())
+        .then(data => {
+          this.user = data;
+          console.log(this.currentUser)
         })
-          .then((response) => response.json())
-          .then((data) => {
-            this.user = data; // Assign the data
-            console.log(this.user); // Log the data here
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
+        .catch(error => {
+           this.error = "User Not Found"
+        });
       }
 
       findSearchedUser(e) {
