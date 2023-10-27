@@ -13,6 +13,7 @@ export const inputPasswordTemplate = (context) => {
         border-color: lightgray;
         margin-left: 5px;
         margin-right: 5px;
+       
     }
     </style>
     <input 

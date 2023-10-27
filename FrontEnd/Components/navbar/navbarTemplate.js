@@ -15,7 +15,7 @@ export const NavbarTemplate = (context) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 60px; /* Adjust the height as needed */
+      height: 80px; /* Adjust the height as needed */
     }
 
     .navbar-title {

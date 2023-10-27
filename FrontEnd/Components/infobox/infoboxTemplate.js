@@ -6,34 +6,32 @@ export const infoboxTemplate = (context) => {
     <style>
       .box {
         width: 45%;
-        height: 60%;
+        height: 65%;
         position: absolute;
         right: 5%;
         top: 20%;
-        background-color: #f4f4f4;
+        background-color: white;
         border: 1px solid lightgrey;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
+        padding:2%;
         
       }
 
       .title {
         font-size: 28px;
-        margin: 0;
-        margin-bottom: 20px;
-        color: #333;
+        color: 62929E;
       }
 
       .description {
-        font-size: 32px; /* Increase the font size */
+        font-size: 25px; /* Increase the font size */
         font-weight: bold; /* Make the text bold */
         text-align: left; /* Align the text to the left */
         color: black;
-        padding:5%
+        padding-left:5%
     }
 
 
@@ -41,12 +39,12 @@ export const infoboxTemplate = (context) => {
         display: flex;
         justify-content: space-around;
         width: 80%;
-        margin-bottom: 30px;
       }
 
       .feature {
         text-align: center;
         max-width: 30%;
+        font-size: 17px;
       }
       .icon {
         width:130px;
@@ -55,7 +53,7 @@ export const infoboxTemplate = (context) => {
       }
       .icons {
         width:150px;
-        margin-bottom: 10px;
+    
         color: #0078d4; /* Use your brand color */
       }
       
@@ -67,6 +65,7 @@ export const infoboxTemplate = (context) => {
         cursor: pointer;
         border-radius: 10px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        
       }
     </style>
     <div class="box">

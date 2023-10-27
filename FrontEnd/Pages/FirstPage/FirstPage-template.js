@@ -5,6 +5,7 @@ import { Navbar } from '../../Components/navbar/navbar';
 import {Infobox} from '../../Components/infobox/infobox'
 
 export const FirstPageTemplate = (context) => {
+  const headerText = context.studentCheckBoxClicked ? "Sign Up" : "Login";
     return html `
     <style>
     .button {
@@ -13,7 +14,7 @@ export const FirstPageTemplate = (context) => {
         padding: 10px 20px;
         border: none;
         cursor: pointer;
-        border-radius: 10px;
+        border-radius:6px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     }
     .inputText {
@@ -27,16 +28,16 @@ export const FirstPageTemplate = (context) => {
       margin-right: 5px;
   }
 </style>
-    <div style="position: fixed;">
     <div 
     style=
-    "width:400px; 
-    height: 467px;
+    "width:30%; 
+    height: 70%;
     position: relative;
     background-color:white;
-    border-radius: 20px;
-    top: 150px;
-    left: 150px;
+    border-radius: 10px;
+    position: absolute;
+    left:10%;
+    top: 20%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
     
     >
@@ -44,32 +45,26 @@ export const FirstPageTemplate = (context) => {
       style=
       " background-color: rgb(6, 28, 113);
       border-radius: 10px;
-      height: 50px;
+      height: 60px;
       text-align: center;
-      width: 400px;
-      font-size: x-large;
+      width: 100%;
+      font-size: 30px;
       font-family: sans-serif;
       color: white;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);"
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;"
       >
-      Sign Up</div>
+      ${headerText}</div>
       <div style ="
       position: relative;
       top: 18px;
       width: 300px;
       left: 50px;
-      
       ">
-      <header style=
-        "background-color: rgb(6, 28, 113);
-        height: 30px;
-        border-radius: 10px;
-        color: white;
-        font-size: x-large;
-        text-align: center;
-        padding: 10px 0;
-        width: 100%;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">Already a Member ?</header>
+      
 
     </div>
     ${context.studentCheckBoxClicked ? html`<style>
@@ -111,7 +106,7 @@ export const FirstPageTemplate = (context) => {
       height: 600px;
       width: 804px;
       position: relative;
-      top: -166px;
+      top: 0%;
       left: -100px;
       background-color: white;
       border-radius: 10px;
@@ -257,34 +252,41 @@ export const FirstPageTemplate = (context) => {
   </div>` : 
   html ``}
     <div style="
-      width: 297px;
-      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 55%;
+      height: 50%;
       border-style: solid;
       border-color: lightgrey;
-      position: relative;
-      left: 49px;
-      top: 13px;
-      border-top-style: none;
+      border-radius: 10px;
       border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;">
+      border-bottom-right-radius: 10px;
+      margin: 0 auto; /* Center the container horizontally */
+      margin-top:40px;
+      padding:30px;
+      "
+      >
       <p style="
-      margin: 0px;
-      position: relative;
-      top: 30px;
-      text-align: center;
-      font-size: x-large;
-      color: rgb(6, 28, 113);"
-      >Login</p>
+    font-size: x-large;
+    color: black;
+    font-weight: bold; /* Optionally make the font bold */
+">
+    Welcome!
+</p>
+
       
       <input-string style="position: relative;
-      top: 80px;"
+      top: 20px;
+      "
         width=278
         placeholder="Email"
         type="Email">
       </input-string>
       <input-password 
       style="position: relative;
-      top: 85px;"
+      top: 30px; "
         width=278
         placeholder="Password"
         type="Password">
@@ -293,7 +295,7 @@ export const FirstPageTemplate = (context) => {
       height:18.5px;
       margin-left: 5px;
       position: relative;
-      top: 88px;
+      top: px;
       color: rgb(6, 28, 113);
       text-align: center;
         ">
@@ -301,26 +303,37 @@ export const FirstPageTemplate = (context) => {
       </div>
       <button class="button" id="myButton" style=
       "position: relative;
-      top: 120px;
-      left: 73px;
-      width: 150px;"
+      top: 20px;
+      width: 100%;
+      font-size:15px;"
       @click=${(e) => context.memberLogin(e)}
-      >Login</button>
+      >Ready</button>
     </div>
-      <button class="button" id="myButton" style=
-      "position: relative;
-      top: 22px;
-      left: 10px;"
+      <div style="display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; 
+      padding:20px;">
+        <button id="myButton" style=
+      "background-color: rgba(250,235,240,255);
+        color: black;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 6px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+        width: 75%;
+        "
       @click=${(e) => context.studentcheckBox(e)}
       >
-      Student sign up</button>
-      <button class="button" style=
+      Don't have an account? Sign up</button></div>
+      <!-- <button class="button" style=
       "position: relative;
       top: 22px;
       left: 106px;"
       @click=${(e) => context.employeecheckBox(e)}
       >
-      Enterprise sign up</button>
+      Enterprise sign up</button> -->
   </div>
   
 </div>

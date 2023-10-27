@@ -162,6 +162,12 @@ export const ProfileTemplate = (context) => {
         border-radius: 10px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     }
+    .card-button {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background:none;
+    }
       .xp{
 
       }
@@ -200,6 +206,7 @@ export const ProfileTemplate = (context) => {
               description=${event.shortdescription}
               img=${event.img}
               placeholder=""
+               
             ></event-card>
           </button>
         `)}

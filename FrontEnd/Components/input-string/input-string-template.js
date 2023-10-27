@@ -4,7 +4,6 @@ export const inputStringTemplate = (context) => {
     return html `
     <style>
     .inputText {
-        flex: 1;
         border-radius: 5px;
         width: ${context.width}px;
         background-color: #faf7f7;

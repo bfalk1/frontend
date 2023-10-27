@@ -14,7 +14,7 @@ export class EventCard extends LitElement {
             placeholder: { type: String },
             popupOpen: { type: Boolean },
             eventTitleitle: { type: String },
-
+            colour: {type: Object}
         };
     }
 
@@ -30,6 +30,7 @@ export class EventCard extends LitElement {
         this.img = "";
         this.placeholder = "";
         this.popupOpen = false
+        this.colour = 
 
     }
     
