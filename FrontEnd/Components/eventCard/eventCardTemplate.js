@@ -1,5 +1,6 @@
 import { html, css } from 'lit';
 import { InputImage } from '../input-image/input-image';
+import {CountdownTimer} from '../countdown-timer/countdown-timer';
 
 export const eventCardTemplate = (context) => {
   return html`<style>
@@ -38,5 +39,6 @@ export const eventCardTemplate = (context) => {
       <h3 class="header-title">${context.title}</h3>
       <p class="description">${context.description}</p>
       <input-image .selectedFile=${context.img}></input-image>
+      <countdown-timer></countdown-timer>
     </div>`;
 };

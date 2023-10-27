@@ -366,6 +366,7 @@ app.get('/api/files/:userId/:filename', (req, res) => {
   console.log(userId);
   console.log(filename);
   const filePath = path.join(__dirname, 'uploads/',userId+"/" ,  filename);
+  console.log(filePath);
   res.sendFile(filePath);
 });
 

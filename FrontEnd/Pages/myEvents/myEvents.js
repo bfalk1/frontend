@@ -34,10 +34,12 @@ export class MyEventsPage extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        this.fetchUserData({"Name":String(this.currentUser)});
+        if (this.eventData.length ===0 ) {
+            this.fetchUserData();
+        }
     }
 
-    fetchUserData(userData) {
+    fetchUserData() {
         if (this.eventData.length === 0) {
             fetch(`http://localhost:5001/api/home/?username=${this.currentUser.email}`)
             .then(response => response.json())
@@ -51,9 +53,9 @@ export class MyEventsPage extends LitElement {
                 }
                 return true; 
               });
-              //for (const index in this.submittedEvents) {
-               // this.displayFile(this.submittedEvents[index].submittedFileName,this.submittedEvents[index].id);
-              //}
+              for (const index in this.submittedEvents) {
+               this.displayFile(this.submittedEvents[index].submissions[0],this.submittedEvents[index].id);
+              }
             })
             .catch(error => {
             this.error = "User Not Found"
@@ -69,7 +71,7 @@ export class MyEventsPage extends LitElement {
         if (this.succesfullyUploaded === "Submission Sucessful") {
         this.eventData = this.eventData.filter(event => {
             if (event.id === id) {
-              this.submittedEvents.push(event); 
+              this.submittedEvents.push(event);
               return false;
             }
             return true; 
@@ -92,12 +94,14 @@ export class MyEventsPage extends LitElement {
         e.preventDefault();
         const fileInput = this.shadowRoot.querySelector('#fileToUpload');
         const file = fileInput.files[0];
+        console.log(file)
         const url = (window.URL.createObjectURL(file));
         const link = document.createElement('a');
         link.href = url;
         link.target = '_blank'; 
         link.textContent = String(file.name);
         link.setAttribute('download', file.name);
+        console.log(file)
         this.filesToDisplay.push({link,id});
             if (file) {
                 const formData = new FormData();
@@ -120,8 +124,9 @@ export class MyEventsPage extends LitElement {
     }
 
     displayFile(filename,id) {
-        const userId = String(this.currentUser+id);
-        fetch(`http://localhost:5001/api/files/${userId}/${filename}`)
+        console.log(filename.filename);
+        const userId = String(this.currentUser.email+id);
+        fetch(`http://localhost:5001/api/files/${userId}/${filename.filename}`)
         .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -133,8 +138,8 @@ export class MyEventsPage extends LitElement {
             const link = document.createElement('a');
             link.href = url;
             link.target = '_blank'; 
-            link.textContent = String(filename);
-            link.setAttribute('download', filename);
+            link.textContent = String(filename.filename);
+            link.setAttribute('download', filename.filename);
             this.filesToDisplay.push({link,id});
           })
           .catch(error => {
