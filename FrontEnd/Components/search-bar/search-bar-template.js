@@ -53,9 +53,9 @@ export const searchBarTemplate = (context) => {
     <div class="searchContainer" style="height:79px;position: relative;
     top: 28px;left: 3px;">
     ${context.usersInSearch ? html` 
-    ${context.usersInSearch[0] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[0].Name)}>${context.usersInSearch[0].Name}</div>` : html ``}
-    ${context.usersInSearch[1] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[1].Name)}>${context.usersInSearch[1].Name}</div>` : html ``}
-    ${context.usersInSearch[2] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[2].Name)}>${context.usersInSearch[2].Name}</div>` : html ``}
+    ${context.usersInSearch[0] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[0].email)}>${context.usersInSearch[0].Name}</div>` : html ``}
+    ${context.usersInSearch[1] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[1].email)}>${context.usersInSearch[1].Name}</div>` : html ``}
+    ${context.usersInSearch[2] ? html`<div class="searchbar" @click=${(e) =>context.routeToSearchedUser(e,context.usersInSearch[2].email)}>${context.usersInSearch[2].Name}</div>` : html ``}
     ${context.usersInSearch && context.usersInSearch.length ===0 ? html `<div class="searchbar">No Users Found</div>`: 
     html``}`
     

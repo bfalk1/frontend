@@ -187,7 +187,7 @@ export const MyEventsTemplate = (context) => {
         ${context.submittedEvents.some(event => event.id === context.popupData.id) ? html`
         <div style="position: relative;
         top: 230px;">
-          <h1 style="
+          <h1 id="fileLinksContainer" style="
             border-bottom: lightgray;
             text-align: center;
             border-bottom-style: solid; 

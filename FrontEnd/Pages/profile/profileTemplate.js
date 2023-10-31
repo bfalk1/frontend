@@ -2,6 +2,7 @@ import { html} from 'lit';
 import { EventCard } from '../../Components/eventCard/eventCard';
 import { PopupPage } from '../../Components/popup/popup';
 import { InputString } from '../../Components/input-string/input-string';
+import { InputParagraph } from '../../Components/input-paragraph/input-paragraph';
 
 const xptemplate = (context) =>{
   return html`
@@ -25,21 +26,21 @@ const xptemplate = (context) =>{
   <h1>Add New Experience</h1>
   <div class="row">
   <div class="input-component">
-  <input-string width=250px; placeholder="Position" type="Position"></input-string>
+  <input-string width=250px; placeholder="Position" type="position"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="Company" type="Company"></input-string>
+  <input-string width=250px; placeholder="Company" type="company"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="Start Date" type="Start Date"></input-string>
+  <input-string width=250px; placeholder="Start Date" type="StartDate"></input-string>
 </div>
 </div>
 <div class="row">
   <div class="input-component">
-  <input-string width=250px; placeholder="End Date" type="End Date"></input-string>
+  <input-string width=250px; placeholder="End Date" type="EndDate"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="Description" type="Description"></input-string>
+  <input-paragraph width=250 placeholder="Description" type="description"></input-paragraph>
   </div>
 </div>
 

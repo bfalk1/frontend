@@ -24,7 +24,19 @@ class FirstPage extends LitElement {
         this.studentCheckBoxClicked = false;
         this.employeeCheckBoxClicked = false;
         this.error = null;
-        this.UserAttributes = {};
+        this.UserAttributes = {
+            "name":"",
+            "FirstName":"",
+            "LastName":"",
+            "email":"",
+            "school":"",
+            "gpa":"",
+            "year":"",
+            "Password":"",
+            "aboutMe":"",
+            "events":[],
+            "experience":[]
+        };
         this.users = "";
         this.currentUser = [];
         this.inputtedPassword = null;
