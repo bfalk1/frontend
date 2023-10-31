@@ -31,7 +31,6 @@ export class ProfilePage extends LitElement {
             this.currentUser = {"email":sessionStorage.getItem('email')};
             this.role = sessionStorage.getItem('role');
             this.isCurrentUsersPage = false;
-            this.addEventListener('custom-user-search-event', this.findSearchedUser);
             this.addEventListener('custom-string-event', this.handleChangedValue);
         }
 
@@ -39,7 +38,7 @@ export class ProfilePage extends LitElement {
           super.connectedCallback();
           if (!this.user) {
             this.isCurrentUsersPage = true;
-            this.fetchUserData(String(this.currentUser));
+            this.fetchUserData(String(this.currentUser.email));
             return;
           }
           this.fetchUserData(String(this.user));
@@ -61,13 +60,10 @@ export class ProfilePage extends LitElement {
            this.error = "User Not Found"
         });
       }
-
-      findSearchedUser(e) {
-        console.log("hello world");
-      }
        
         addExperience(e){
           this.experience.push(this.newXP);
+          console.log(this.experience);
         }
 
         editPersonalInformation(e) {
@@ -92,7 +88,7 @@ export class ProfilePage extends LitElement {
               case "End Date" :
                 this.newXP['End Date'] = e.detail.value
                   break;
-              case "Description" :
+              case "description" :
                 this.newXP.Description = e.detail.value
                   break;
               default: 

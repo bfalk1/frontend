@@ -2,6 +2,7 @@ import { html} from 'lit';
 import { EventCard } from '../../Components/eventCard/eventCard';
 import { PopupPage } from '../../Components/popup/popup';
 import { InputString } from '../../Components/input-string/input-string';
+import { InputParagraph } from '../../Components/input-paragraph/input-paragraph';
 
 const xptemplate = (context) =>{
   return html`
@@ -39,7 +40,7 @@ const xptemplate = (context) =>{
   <input-string width=250px; placeholder="End Date" type="End Date"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="Description" type="Description"></input-string>
+  <input-paragraph width=250 placeholder="Description" type="description"></input-paragraph>
   </div>
 </div>
 

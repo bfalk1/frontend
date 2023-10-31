@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const multer = require('multer'); 
+const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,7 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const mongoose = require('mongoose');
-const { info } = require('console');
 
 
 mongoose.connect('mongodb+srv://julianbrickman:Jemba123@cluster0.j21pkaw.mongodb.net/', {
@@ -31,12 +31,39 @@ mongoose.connect('mongodb+srv://julianbrickman:Jemba123@cluster0.j21pkaw.mongodb
 .catch(err => {
   console.error('Error connecting to MongoDB Atlas', err);
 });
+/*
+const API_KEY = 'e8de5fbb6aa4f856d875af382033a1f9';
+const DOMAIN = 'blinq.co';
+
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+
+const mailgun = new Mailgun(formData);
+const client = mailgun.client({ username: 'api', key: API_KEY });
+
+const messageData = {
+  from: 'Excited User <blinqauth@gmail.com>',
+  to: 'julianbrickman@gmail.com',
+  subject: 'Hello',
+  text: 'Testing some Mailgun awesomeness!',
+};
+
+client.messages
+  .create(DOMAIN, messageData)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+*/
+
 
 
 // Create a User model
 const collectionName = 'Users'; // Replace with your collection name
-//const User = mongoose.model(collectionName, new mongoose.Schema({}), collectionName);
 
+//const User = mongoose.model(collectionName, new mongoose.Schema({}), collectionName);
 /*
 mongoose.connection.collection(collectionName).insertOne(dataToSave, (error, result) => {
   if (error) {
@@ -57,127 +84,8 @@ mongoose.connection.collection(collectionName).insertOne(dataToSave, (error, res
   */
 
 
-eventData = [
-  {
-    "id": 1,
-    "title": "Web Dev",
-    "eventTitle" : "Google Web Developer challenge",
-    "eventStartDate":"2023/04/21",
-    "eventEndDate" :"2024/06/29",
-    "eventDescription": "Good jobe finder code lots",
-    "EndDate": "2023-10-15",
-    "StartDate": "2023-10-15",
-    "companyName": "Google",
-    "shortdescription": "A conference on the latest technology trends and innovations.",
-    "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-  },
-  {
-    "id": 2,
-    "title": "Junior Developer",
-    "eventTitle" : "Google Web Developer challenge",
-    "eventStartDate":"2023/04/21",
-    "eventEndDate" :"2024/06/29",
-    "eventDescription": "Good jobe finder code lots",
-    "EndDate": "2023-10-15",
-    "StartDate": "2023-10-15",
-    "companyName": "Apple",
-    "shortdescription": "A conference on the latest technology trends and innovations.",
-    "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-  },
-  {
-    "id": 3,
-    "title": "Graphic Designer",
-    "eventTitle" : "Google Web Developer challenge",
-    "eventStartDate":"2023/04/21",
-    "eventEndDate" :"2024/06/29",
-    "eventDescription": "Good jobe finder code lots",
-    "EndDate": "2023-10-15",
-    "StartDate": "2023-10-15",
-    "companyName": "Microsoft",
-    "shortdescription": "A conference on the latest technology trends and innovations.",
-    "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-  },
-  {
-    "id": 4,
-    "title": "Web Dev",
-    "eventTitle" : "Google Web Developer challenge",
-    "eventStartDate":"2023/04/21",
-    "eventEndDate" :"2024/06/29",
-    "eventDescription": "Good jobe finder code lots",
-    "EndDate": "2023-10-15",
-    "StartDate": "2023-10-15",
-    "companyName": "Google",
-    "shortdescription": "A conference on the latest technology trends and innovations.",
-    "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-  },
-  {
-    "id": 5,
-    "title": "Junior Developer",
-    "eventTitle" : "Google Web Developer challenge",
-    "eventStartDate":"2023/04/21",
-    "eventEndDate" :"2024/06/29",
-    "eventDescription": "Good jobe finder code lots",
-    "EndDate": "2023-10-15",
-    "StartDate": "2023-10-15",
-    "companyName": "Apple",
-    "shortdescription": "A conference on the latest technology trends and innovations.",
-    "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-  },
-  {
-    "id": 6,
-    "title": "Graphic Designer",
-    "eventTitle" : "Google Web Developer challenge",
-    "eventStartDate":"2023/04/21",
-    "eventEndDate" :"2024/06/29",
-    "eventDescription": "Good jobe finder code lots",
-    "EndDate": "2023-10-15",
-    "StartDate": "2023-10-15",
-    "companyName": "Microsoft",
-    "shortdescription": "A conference on the latest technology trends and innovations.",
-    "longdescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "img": "https://media-cldnry.s-nbcnews.com/image/upload/t_social_share_1024x768_scale,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-  },
 
-];
 
-let userlist = [
-  {
-    "Name": "ben falkner"
-  },
-  {
-    "Name": "julian brickman"
-  },
-  {
-    "Name": "Alice Smith"
-  },
-  {
-    "Name": "John Doe"
-  },
-  {
-    "Name": "Emily Johnson"
-  },
-  {
-    "Name": "Michael Brown"
-  },
-  {
-    "Name": "Sarah Davis"
-  },
-  {
-    "Name": "Daniel Wilson"
-  },
-  {
-    "Name": "Olivia Anderson"
-  },
-  {
-    "Name": "Matthew Taylor"
-  }
-
-];
 
 let companyInformation = [
   {
@@ -326,7 +234,6 @@ let Currentuser = [
   }
 ];
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // Access the userId from the request body
@@ -359,12 +266,10 @@ app.post('/upload', upload.single('fileToUpload'), (req, res) => {
   res.status(200).send('File uploaded successfully!');
 });
 
-//Not in use
+//Get files
 app.get('/api/files/:userId/:filename', (req, res) => {
   const userId = req.params.userId; // Get the user ID from the URL parameters
   const filename = req.params.filename;
-  console.log(userId);
-  console.log(filename);
   const filePath = path.join(__dirname, 'uploads/',userId+"/" ,  filename);
   console.log(filePath);
   res.sendFile(filePath);

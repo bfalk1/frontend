@@ -56,20 +56,18 @@ export class SearchBar extends LitElement {
        }
        var tempArray = [];
        for (let i = 0; i <= this.usersInSearch.length-1; i++) {
-            console.log(this.usersInSearch[i])
+            console.log(this.usersInSearch[i].Name);
             if (this.usersInSearch[i].Name.trim().toLowerCase().includes(e.target.value.trim().toLowerCase())) {
                 tempArray.push(this.usersInSearch[i]);
             }
        }
        this.usersInSearch = tempArray;
-       console.log(this.usersInSearch);
     }
 
     routeToSearchedUser (e,userName) {
-        this.usersInSearch = null;
         this.shadowRoot.querySelector('.inputText').value = "";
         const userId = userName.trim();
-        console.log(userId);
+        this.usersInSearch = null;
         Router.go(`/profile/${userId}`);
     }
 }
