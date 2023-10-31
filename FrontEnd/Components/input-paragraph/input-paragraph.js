@@ -45,7 +45,6 @@ export class InputParagraph extends LitElement {
         } else {
             this.value = this.shadowRoot.querySelector('.inputTextExpanded').value;
         }
-        console.log(this.value);
         const customEvent = new CustomEvent('custom-string-event', {
             detail: {
                 type: this.type,

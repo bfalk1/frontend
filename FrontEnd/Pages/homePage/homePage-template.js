@@ -45,6 +45,35 @@ export const HomePageTemplate = (context) => {
         overflow: hidden;
       }
 
+      .container-popup {
+        width: 50%;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+  
+      a {
+        color: #007BFF;
+        text-decoration: none;
+      }
+  
+      p {
+        font-family: arial,sans-serif;
+        color: #292929;
+        font-size: large;
+      }
+    
+      a:hover {
+          text-decoration: underline;
+      }
+  
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+
       .popup {
         position: fixed;
         top: 0;
@@ -135,31 +164,17 @@ export const HomePageTemplate = (context) => {
 
     ${context.popupOpen ? html`
     <div class="popup" @focusout=${handleBackgroundClick}>
-    <div class="popup-content">
-      <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
-      <h1 style="
-      border-bottom: 
-      lightgray;
-      text-align: center;
-      border-bottom-style: solid; 
-      margin-bottom:2px;
-      color: rgb(6, 28, 113);
-      margin-top: 0px">${context.popupData.eventTitle}</h1>
-      <h3 style="
-      text-align: center;
-      border-bottom-style: none; 
-      margin-bottom:2px;
-      color: rgb(6, 28, 113);
-      margin-top: 0px">Event Details</h3>
-      <p>${context.popupData.eventDescription}</p>
-      <div>${context.popupData.eventStartDate} - ${context.popupData.eventEndDate}</div>
-      <h3 style="
-      text-align: center;
-      border-bottom-style: none; 
-      margin-bottom:2px;
-      color: rgb(6, 28, 113);
-      margin-top: 0px">Company Details</h3>
-      <p>${context.popupData.longdescription}</p>
+    <body>
+    <div class="container-popup">
+    <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
+        <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113);
+        border-bottom-style: solid; margin-bottom:2px;margin-top: 10px">${context.popupData.eventTitle}</h2>
+        <p>${context.popupData.eventDescription}</p>
+        <p>${context.popupData.eventStartDate} - ${context.popupData.eventEndDate}</p>
+        <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113);
+        border-bottom-style: solid; margin-bottom:2px;margin-top: 30px">${context.popupData.companyName} Company Information</h2>
+        <p>${context.popupData.longdescription}</p>
+      </body>
       <h3 style="
       text-align: center;
       border-bottom-style: none; 

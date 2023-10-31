@@ -436,8 +436,8 @@ app.post('/user/addSubmission/:userId',upload.single('fileToUpload'), (req, res)
 //add experience to the user 
 app.post('/user/addExperience/:userId', (req, res) => {
   const userId = req.params.userId;
-  const jobInfo = req.body.eventId;
-  console.log(userId);
+  const jobInfo = req.body.experience;
+  console.log(jobInfo);
 
   mongoose.connection.collection("Users").findOneAndUpdate(
     { "email": userId },
@@ -449,6 +449,27 @@ app.post('/user/addExperience/:userId', (req, res) => {
       } else if (result.value) {
         console.log('job added to User:', userId);
         res.json({ message: 'Job added sucessfully' });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    }
+  );
+});
+
+app.post('/user/addskill/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const SkillInfo = req.body.skill;
+
+  mongoose.connection.collection("Users").findOneAndUpdate(
+    { "email": userId },
+    { $push: { "skills": SkillInfo} },
+    (error, result) => {
+      if (error) {
+        console.error('Error adding skill:', error);
+        res.status(500).json({ message: 'Error adding skill to user' });
+      } else if (result.value) {
+        console.log('skill added to User:', userId);
+        res.json({ message: 'skill added sucessfully' });
       } else {
         res.status(404).json({ message: 'User not found' });
       }

@@ -19,16 +19,17 @@ export const inputImageTemplate = (context) => {
     input[type="file"] {
         display: none;
     }
-    .drop-zone img {
-        /* Set maximum width for the displayed image */
-        max-width: 100%;
-        /* Set maximum height for the displayed image */
-        max-height: 100%;
-        /* Center the image within the container */
-        display: block;
-        margin: 0 auto;
-        /* Prevent resizing when clicked */
-        pointer-events: none;
+    .drop-zone {
+        width: ${context.imageClicked ? html`300px;`:html`100%;`}
+        ${context.selectedFile.length === 0? html`border-style: 2px dashed;
+        border-width: 2px;
+        border-style: dashed;
+        border-color: lightgray;`: html``}
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom:10px;
     }
 
     

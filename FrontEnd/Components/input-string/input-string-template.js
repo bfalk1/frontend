@@ -5,7 +5,7 @@ export const inputStringTemplate = (context) => {
     <style>
     .inputText {
         border-radius: 5px;
-        width: ${context.width}px;
+        width: ${context.width};
         background-color: #faf7f7;
         height: 30px;
         border-style: solid;

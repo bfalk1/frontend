@@ -12,8 +12,11 @@ export class ProfilePage extends LitElement {
         return {
           experience: {type: Object},
           newXP: {type: Object},
-          user: {type: Object},
-          error: {type: String}
+          user: {type: Array},
+          eventData: {type: Object},
+          popupData: {type: Object},
+          error: {type: String},
+          popupOpen: {type: Boolean}
 
         };
         }
@@ -22,14 +25,20 @@ export class ProfilePage extends LitElement {
             super();
             this.experience = [];
             this.error = "";
+            this.popupData = [];
             this.newXP = {
               "company": "",
               "position": "",
               "StartDate": "",
               "EndDate": "",
-              "description": ""
+              "description": "",
+              "city":"",
+              "country":"",
+              "province":""
             }
             this.user = "";
+            this.popupOpen = false;
+            this.eventData= [];
             this.currentUser = {"email":sessionStorage.getItem('email')};
             this.role = sessionStorage.getItem('role');
             this.isCurrentUsersPage = false;
@@ -56,17 +65,41 @@ export class ProfilePage extends LitElement {
         .then(response => response.json())
         .then(data => {
           this.user = data;
-          console.log(this.currentUser)
+          this.user.events.filter(event => {
+            if (event.submissions.length!==0) {
+              this.eventData.push(event); 
+              return false;
+            }
+            return true; 
+          });
+          this.user.experience.filter(ex => {
+            if (ex.length!==0) {
+              this.experience.push(ex); 
+              return false;
+            }
+            return true; 
+          });
+          /*
+          for (const index in this.submittedEvents) {
+           this.displayFile(this.submittedEvents[index].submissions[0],this.submittedEvents[index].id);
+          }
+          */
         })
         .catch(error => {
            this.error = "User Not Found"
         });
       }
+
+      closePopup(e,id) {
+        this.filePopup = false;
+        this.popupOpen = false;
+    }
        
         addExperience(e){
           if (this.validateExperienceInput(this.newXP)) {
             this.experience.push(this.newXP);
-            this.addExperienceToUser(this.currentUser.email,this.experience);
+            this.experience = [... this.experience];
+            this.addExperienceToUser(this.currentUser.email,this.experience[this.experience.length-1]);
           } else {
             this.error = "Please fill out all fields";
           }
@@ -90,27 +123,52 @@ export class ProfilePage extends LitElement {
           console.log("here");
         }
 
+        saveSkill(e) {
+          this.addskillToUser(this.user.email,this.user.skills[this.user.skills.length-1])
+        }
+
+        togglePopup(e) {
+          this.popupOpen = !this.popupOpen
+        }
+
+        setPopupData(event){
+          this.popupData = event;
+        }
+
 
         handleChangedValue(e) {
           e.stopPropagation();
           
           switch(e.detail.type) {
               case "company" :
-                  this.newXP.Company = e.detail.value
-                  console.log(this.user);
+                  this.newXP.company = e.detail.value
+                  break;
+              case "city" :
+                  this.newXP.city = e.detail.value
+                  break;
+              case "country" :
+                  this.newXP.country = e.detail.value
+                  break;
+              case "province" :
+                  this.newXP.province = e.detail.value
                   break;
               case "position" :
-                  this.newXP.Position = e.detail.value
+                  this.newXP.position = e.detail.value
                   break;
               case "StartDate":
-                  this.newXP['Start Date'] = e.detail.value
+                  this.newXP['StartDate'] = e.detail.value
                   break;
               case "EndDate" :
-                this.newXP['End Date'] = e.detail.value
+                this.newXP['EndDate'] = e.detail.value
                   break;
               case "description" :
-                this.newXP.Description = e.detail.value
+                this.newXP.description = e.detail.value
                   break;
+              case "skill" :
+                if (e.detail.value.length > 0) {
+                  this.user.skills.push(e.detail.value);
+                }
+                break;
               default: 
                   this.validateString(e.detail.value,e.detail.type);
                   return;     
@@ -128,7 +186,6 @@ export class ProfilePage extends LitElement {
     }
 
     async addExperienceToUser(userId, experience) {
-      console.log("here");
       try {
         const response = await fetch(`http://localhost:5001/user/addExperience/${userId}`, {
           method: 'POST',
@@ -149,7 +206,32 @@ export class ProfilePage extends LitElement {
         throw error;
       }
   }
+
+  async addskillToUser(userId, skill) {
+    console.log(skill);
+    try {
+      const response = await fetch(`http://localhost:5001/user/addskill/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({skill}),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
+
 }
+
 
 
 customElements.define('profile-page', ProfilePage);

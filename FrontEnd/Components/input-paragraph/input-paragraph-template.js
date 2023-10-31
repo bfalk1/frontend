@@ -17,24 +17,23 @@ export const inputParagraphTemplate = (context) => {
     .inputTextExpanded {
         flex: 1;
         border-radius: 5px;
-        width: ${context.width*3}px;
+        width: 100%;
         background-color: #faf7f7;
-        height: ${context.width*2}px;
+        height: 100%;
         border-style: solid;
         border-color: lightgray;
         margin-left: 5px;
         margin-right: 5px;
-        transform: translate(-20%, -50%);
+        position: fixed;  /* Position fixed to make it relative to the viewport */
+        top: 50%;         /* Center vertically */
+        left: 50%;        /* Center horizontally */
+        transform: translate(-50%, -50%);
     }
     .input-container {
         position: relative;
         width: 100%; 
     }
     .input-container-expanded {
-        position: relative;
-        width: 100%; 
-        width: ${context.width*3}px;
-        height: ${context.width*2}px;
     }
     </style>
         ${context.expanded ? html
@@ -50,8 +49,8 @@ export const inputParagraphTemplate = (context) => {
         ></textarea>
         <svg fill="#d3d3d3" style="width: 30px;
         position: absolute;
-        top: -245px;
-        right: 146px;" height="30px" width="30px"  @click=${(e)=>context.expandTypingArea(e)} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M281.633,48.328C250.469,17.163,209.034,0,164.961,0C120.888,0,79.453,17.163,48.289,48.328 c-64.333,64.334-64.333,169.011,0,233.345C79.453,312.837,120.888,330,164.962,330c44.073,0,85.507-17.163,116.671-48.328 c31.165-31.164,48.328-72.599,48.328-116.672S312.798,79.492,281.633,48.328z M260.42,260.46 C234.922,285.957,201.021,300,164.962,300c-36.06,0-69.961-14.043-95.46-39.54c-52.636-52.637-52.636-138.282,0-190.919 C95,44.042,128.901,30,164.961,30s69.961,14.042,95.459,39.54c25.498,25.499,39.541,59.4,39.541,95.46 S285.918,234.961,260.42,260.46z"></path> <path d="M254.961,150H74.962c-8.284,0-15,6.716-15,15s6.716,15,15,15h179.999c8.284,0,15-6.716,15-15S263.245,150,254.961,150z"></path> </g> </g></svg>
+        top: 0px;
+        right: 0px;" height="30px" width="30px"  @click=${(e)=>context.expandTypingArea(e)} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M281.633,48.328C250.469,17.163,209.034,0,164.961,0C120.888,0,79.453,17.163,48.289,48.328 c-64.333,64.334-64.333,169.011,0,233.345C79.453,312.837,120.888,330,164.962,330c44.073,0,85.507-17.163,116.671-48.328 c31.165-31.164,48.328-72.599,48.328-116.672S312.798,79.492,281.633,48.328z M260.42,260.46 C234.922,285.957,201.021,300,164.962,300c-36.06,0-69.961-14.043-95.46-39.54c-52.636-52.637-52.636-138.282,0-190.919 C95,44.042,128.901,30,164.961,30s69.961,14.042,95.459,39.54c25.498,25.499,39.541,59.4,39.541,95.46 S285.918,234.961,260.42,260.46z"></path> <path d="M254.961,150H74.962c-8.284,0-15,6.716-15,15s6.716,15,15,15h179.999c8.284,0,15-6.716,15-15S263.245,150,254.961,150z"></path> </g> </g></svg>
         </div>`: 
     html`
         <div class="input-container">

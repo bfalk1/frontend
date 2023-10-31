@@ -30,17 +30,18 @@ export const PopupTemplate = (context) => {
       }
 
       .popup-content {
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         background-color: white;
         padding: 20px;
-        border-radius: 5px;
         text-align: left;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1010;
-        width: 70%;
-        height: 80%;
+        width: ${context.width ? `${context.width}px`:`80%`};
+        height: auto;
       }
       
       .close-button{
@@ -57,9 +58,7 @@ export const PopupTemplate = (context) => {
         cursor: pointer;
         border-radius: 10px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-        width: ${context.width}px;
-        height: ${context.height}px;
-        
+        display: inline-block;
     }
       
     </style>
