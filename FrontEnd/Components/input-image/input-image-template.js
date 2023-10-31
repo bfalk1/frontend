@@ -6,9 +6,7 @@ export const inputImageTemplate = (context) => {
     .file-label {
         cursor: pointer;
         background-color: rgb(6, 28, 113);
-        color: #fff;
         padding: 10px 20px;
-        border-radius: 5px;
     }
     
       .drop-zone img {
@@ -21,19 +19,18 @@ export const inputImageTemplate = (context) => {
     input[type="file"] {
         display: none;
     }
-    .drop-zone {
-        width: ${context.imageClicked ? html`300px;`:html`100%;`}
-        ${context.selectedFile.length === 0? html`border-style: 2px dashed;
-        border-width: 2px;
-        border-style: dashed;
-        border-color: lightgray;`: html``}
-        height: 250px;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom:10px;
+    .drop-zone img {
+        /* Set maximum width for the displayed image */
+        max-width: 100%;
+        /* Set maximum height for the displayed image */
+        max-height: 100%;
+        /* Center the image within the container */
+        display: block;
+        margin: 0 auto;
+        /* Prevent resizing when clicked */
+        pointer-events: none;
     }
+
     
     .image-preview {
         margin-top: 20px;

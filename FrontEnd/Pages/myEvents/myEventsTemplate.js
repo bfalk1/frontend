@@ -1,30 +1,38 @@
-import { html} from 'lit';
+import { html } from 'lit';
 import { EventCard } from '../../Components/eventCard/eventCard';
 import { Navbar } from '../../Components/navbar/navbar';
 
 export const MyEventsTemplate = (context) => {
-    const handleBackgroundClick = (e) => {
-        if (e.target.classList.contains('popup')) {
-            context.closePopup();
-        }
-    };
-
-    const openPopup = (e, eventData) => {
-      context.setPopupData(eventData);
-      context.togglePopup(e);
-    };
-    
-    return html`
-    <style>
-    .event-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      overflow-y: auto;
-      max-height: 800px;
-      padding-top:80px;
-      width:100%
+  const handleBackgroundClick = (e) => {
+    if (e.target.classList.contains('popup')) {
+      context.closePopup();
     }
+  };
+
+  const openPopup = (e, eventData) => {
+    context.setPopupData(eventData);
+    context.togglePopup(e);
+  };
+
+  return html`
+    <style>
+   .event-section {
+        background-color: white; /* Set the background color to white */
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 90%; /* Set maximum width for the section */
+        margin: 0 auto; /* Center the section horizontally */
+        margin-top: 105px;
+        margin-bottom: 50px;
+    }
+      .event-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2%;
+        padding-top: 2%;
+        width: 95%;
+        margin: 0 auto; /* Center the event grid horizontally */
+      }
 
       .popup {
         position: fixed;
@@ -55,12 +63,18 @@ export const MyEventsTemplate = (context) => {
       }
       .card-button {
         color: black;
-        background-color: rgba(243,242,240,255);
+        background-color: white;
+        width: 100%;
         display: inline-block;
         cursor: pointer;
-        border: none; /* Remove the border */
-        padding: 0; /* Remove padding */
-        margin: 0; /* Remove margin */
+        border: none;
+        padding: none;
+        margin: none;
+        transition: 0.3s; /* Add transition for smooth hover effect */
+      }
+      .card-button:hover {
+        
+        transform: scale(1.03); /* Scale up the button slightly */
       }
       .close-button{
         background-color: red;
@@ -100,18 +114,20 @@ export const MyEventsTemplate = (context) => {
     margin-bottom:2px;
     color: rgb(6, 28, 113);
     margin-top: 0px">Enrolled Events</h1>
+   <section class="event-section"> 
     <div class="event-grid">
-      ${context.eventData.map(event => html`
-        <button class="card-button" @click=${(e) => openPopup(e, event)}>
-          <event-card
-            title=${event.title}
-            description=${event.shortdescription}
-            img=${event.img}
-            placeholder=""
-          ></event-card>
-        </button>
-      `)}
-    </div>
+        ${context.eventData.map(event => html`
+          <button class="card-button" @click=${(e) => openPopup(e, event)}>
+            <event-card
+              title=${event.title}
+              description=${event.shortdescription}
+              img=${event.img}
+              placeholder=""
+            ></event-card>
+          </button>
+        `)}
+      </div>
+   </section>
     <h1 style="
     border-bottom: 
     lightgray; 
@@ -122,23 +138,24 @@ export const MyEventsTemplate = (context) => {
     margin-bottom:2px;
     color: rgb(6, 28, 113);
     margin-top: 0px">Submissions</h1>
-    <div class="event-grid">
-      ${context.submittedEvents.map(event => html`
-        <button class="card-button" @click=${(e) => openPopup(e, event)}>
-          <event-card
-            title=${event.title}
-            description=${event.shortdescription}
-            img=${event.img}
-            placeholder=""
-          ></event-card>
-        </button>
-      `)}
-    </div>
-
+    <section class="event-section"> 
+      <div class="event-grid">
+        ${context.submittedEvents.map(event => html`
+          <button class="card-button" @click=${(e) => openPopup(e, event)}>
+            <event-card
+              title=${event.title}
+              description=${event.shortdescription}
+              img=${event.img}
+              placeholder=""
+            ></event-card>
+          </button>
+        `)}
+      </div>
+    </section>
     ${context.popupOpen ? html`
     <div class="popup" @focusout=${handleBackgroundClick}>
     <div class="popup-content">
-      <button class="close-button" @click=${(e) => context.closePopup(e,context.popupData.id)} >X</button>
+      <button class="close-button" @click=${(e) => context.closePopup(e, context.popupData.id)} >X</button>
       <h1 style="
       border-bottom: 
       lightgray;
@@ -174,16 +191,16 @@ export const MyEventsTemplate = (context) => {
           style="position: relative;
           top: 54px;" action="/upload" method="POST" enctype="multipart/form-data">
           <input  type="file" name="fileToUpload" id="fileToUpload">
-          <input  type="submit" value="Upload File" @click=${(e) =>context.fileSubmission(e,context.popupData.id)}>
+          <input  type="submit" value="Upload File" @click=${(e) => context.fileSubmission(e, context.popupData.id)}>
         </form>`:
-        html ``}
-        ${context.succesfullyUploaded !==null ? html`<h2 style="
+        html``}
+        ${context.succesfullyUploaded !== null ? html`<h2 style="
           height:18.5px;
           margin-left: 5px;
           position: relative;
           top: 300px;
           color:rgb(6, 28, 113);">${context.succesfullyUploaded}</h2>`
-          :html``}
+        : html``}
         ${context.submittedEvents.some(event => event.id === context.popupData.id) ? html`
         <div style="position: relative;
         top: 230px;">

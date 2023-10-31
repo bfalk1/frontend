@@ -5,7 +5,7 @@ import { Navbar } from '../../Components/navbar/navbar';
 import {Infobox} from '../../Components/infobox/infobox'
 
 export const FirstPageTemplate = (context) => {
-  const headerText = context.studentCheckBoxClicked ? "Sign Up" : "Login";
+  
     return html `
     <style>
     .button {
@@ -28,45 +28,6 @@ export const FirstPageTemplate = (context) => {
       margin-right: 5px;
   }
 </style>
-    <div 
-    style=
-    "width:30%; 
-    height: 70%;
-    position: relative;
-    background-color:white;
-    border-radius: 10px;
-    position: absolute;
-    left:10%;
-    top: 20%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
-    
-    >
-      <div
-      style=
-      " background-color: rgb(6, 28, 113);
-      border-radius: 10px;
-      height: 60px;
-      text-align: center;
-      width: 100%;
-      font-size: 30px;
-      font-family: sans-serif;
-      color: white;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;"
-      >
-      ${headerText}</div>
-      <div style ="
-      position: relative;
-      top: 18px;
-      width: 300px;
-      left: 50px;
-      ">
-      
-
-    </div>
     ${context.studentCheckBoxClicked ? html`<style>
     .inputText {
       flex: 1;
@@ -98,160 +59,209 @@ export const FirstPageTemplate = (context) => {
 
   .row {
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   </style>
-  <div style="
-      height: 600px;
-      width: 804px;
-      position: relative;
-      top: 0%;
-      left: -100px;
-      background-color: white;
-      border-radius: 10px;
-      border-style: solid;
-      border-color: lightgray;
-     " class="container">
-     <div style="height: 55px;
-     background-color: rgb(6, 28, 113);
-     border-radius: 9px;
-     border-bottom-left-radius: 0;
-     border-bottom-right-radius: 0;
-     color: white;
-     text-align: center;
-     font-size: x-large;
-     margin-bottom: 10px;
-     border-bottom-style: solid;
-     border-color: lightgray;"
- >About You</div>
- <div class="row">
-    <div style="
-    text-align: center;
-    width: 100%;
-    color: rgb(6, 28, 113);
-    font-size: x-large;"
-    >Login Infomation</div>
- </div>
- <div class="row">
-          <div class="input-component">
-            <input-string
-            width=250px;
-            placeholder="Email"
-            type="email"
-            >
-            </input-string>
-          </div>
-          <div class="input-component">
-              <input-password 
-                width=250
-                placeholder="Password"
-                type="Password">
-              </input-password>
-          </div>
-          <div class="input-component">
-          <input-password
-            width=250
-            placeholder="Confirm Password"
-          type="Confirm Password"
+  <div style="display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;">
+      <div 
+        style=
+        "width: 65%;
+        height: 70%;
+        background-color:white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
+        >
+        
+      <div
+          style=
+          " background-color: rgb(6, 28, 113);
+          border-radius: 10px;
+          height: 60px;
+          text-align: center;
+          width: 100%;
+          font-size: 30px;
+          font-family: sans-serif;
+          color: white;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;"
           >
-          </input-password>
+          Signup</div>
+          
+          <div class="row">
+        <div style="
+        text-align: center;
+        width: 100%;
+        color: rgb(6, 28, 113);
+        font-size: x-large;
+        padding-top: 10px;"
+        >Login Infomation</div>
     </div>
-      </div>
-      <div class="row">
-    <div style="
-    text-align: center;
-    width: 100%;
-    color: rgb(6, 28, 113);
-    font-size: x-large;"
-    >Personal Information</div>
- </div>
-     <div class="row">
-          <div class="input-component">
-            <input-string
-            width=250
-            placeholder="First Name"
-            type="FirstName"
-            >
-            </input-string>
-          </div>
-          <div class="input-component">
-            <input-string
-            width=250
-            placeholder="Last Name"
-            type="LastName"
-            >
-            </input-string>
-          </div>
-          <div class="input-component">
-            <input-string
-            width=250
-            placeholder="Age"
-            type="Age"
-            >
-            </input-string>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="input-component">
+    <div class="row">
+              <div class="input-component">
                 <input-string
-                width=250
-                placeholder="Phone Number"
-                type="Phone Number"
+                width=250px;
+                placeholder="Email"
+                type="email"
                 >
                 </input-string>
+              </div>
+              <div class="input-component">
+                  <input-password 
+                    width=250
+                    placeholder="Password"
+                    type="Password">
+                  </input-password>
+              </div>
+              <div class="input-component">
+              <input-password
+                width=250
+                placeholder="Confirm Password"
+              type="Confirm Password"
+              >
+              </input-password>
+        </div>
           </div>
-          <div class="input-component">
-            <input-string
-            width=250
-            placeholder="School"
-            type="School"
-            >
-            </input-string>
+          <div class="row">
+        <div style="
+        text-align: center;
+        width: 100%;
+        color: rgb(6, 28, 113);
+        font-size: x-large;"
+        >Personal Information</div>
+    </div>
+        <div class="row">
+              <div class="input-component">
+                <input-string
+                width=250
+                placeholder="First Name"
+                type="FirstName"
+                >
+                </input-string>
+              </div>
+              <div class="input-component">
+                <input-string
+                width=250
+                placeholder="Last Name"
+                type="LastName"
+                >
+                </input-string>
+              </div>
+              <div class="input-component">
+                <input-string
+                width=250
+                placeholder="Age"
+                type="Age"
+                >
+                </input-string>
+              </div>
           </div>
-          <div class="input-component">
-            <input-string
-            width=250
-            placeholder="Years Completed"
-            type="Years Completed"
-            >
-            </input-string>
-          </div>
-      </div>
 
-      <div class="row">
-          <div class="input-component">
-            <input-string
-            width=250
-            placeholder="GPA"
-            type="GPA"
-            >
-            </input-string>
+          <div class="row">
+              <div class="input-component">
+                    <input-string
+                    width=250
+                    placeholder="Phone Number"
+                    type="Phone Number"
+                    >
+                    </input-string>
+              </div>
+              <div class="input-component">
+                <input-string
+                width=250
+                placeholder="School"
+                type="School"
+                >
+                </input-string>
+              </div>
+              <div class="input-component">
+                <input-string
+                width=250
+                placeholder="Years Completed"
+                type="Years Completed"
+                >
+                </input-string>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="input-component">
+                <input-string
+                width=250
+                placeholder="GPA"
+                type="GPA"
+                >
+                </input-string>
+              </div>
+          </div>
+          <div style="
+          height:18.5px;
+          margin-left: 5px;
+          color:rgb(6, 28, 113);
+            ">
+          ${context.error ? html`${context.error}` : html``}
+          </div>
+          <div class="button-container">
+            <button class="button" @click=${(e) => context.studentuncheckBox(e)}>
+              Back
+            </button>
+            <div>
+              <button class="button" id="'submitButton" @focusout=${(e) => context.routeToHome(e)}>
+                Skip
+              </button>
+              <button class="button" @click=${(e) => context.routeToHome(e)}>
+                Continue
+              </button>
+            </div>
           </div>
       </div>
+    </div>
+    </div>
+ ` : 
+  html `<div 
+    style=
+    "width: 30%;
+    height: 75%;
+    position: relative;
+    background-color:white;
+    border-radius: 10px;
+    position: absolute;
+    left:10%;
+    top: 20%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
+    
+    >
+      <div
+      style=
+      " background-color: rgb(6, 28, 113);
+      border-radius: 10px;
+      height: 60px;
+      text-align: center;
+      width: 100%;
+      font-size: 30px;
+      font-family: sans-serif;
+      color: white;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;"
+      >
+      Login</div>
       <div style="
-      height:18.5px;
-      margin-left: 5px;
-      color:rgb(6, 28, 113);
-        ">
-      ${context.error ? html`${context.error}` : html``}
-      </div>
-      <button class="button" id="'submitButton" @focusout=${(e) => context.routeToHome(e)} style=
-      "position: relative;
-      top: 131px;
-      left: 10px;"
-      >
-      I'll do this later</button>
-      <button class="button" @click=${(e) => context.routeToHome(e)} style=
-      "position: relative;
-      top: 131px;
-      left: 570px;"
-      >
-      Continue</button>
-  </div>` : 
-  html ``}
-    <div style="
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -264,7 +274,7 @@ export const FirstPageTemplate = (context) => {
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       margin: 0 auto; /* Center the container horizontally */
-      margin-top:40px;
+      margin-top:35px;
       padding:30px;
       "
       >
@@ -280,14 +290,14 @@ export const FirstPageTemplate = (context) => {
       <input-string style="position: relative;
       top: 20px;
       "
-        width=278
+        width=250
         placeholder="Email"
         type="Email">
       </input-string>
       <input-password 
       style="position: relative;
       top: 30px; "
-        width=278
+        width=250
         placeholder="Password"
         type="Password">
       </input-password>
@@ -337,7 +347,8 @@ export const FirstPageTemplate = (context) => {
   </div>
   
 </div>
-
+`}
+   
 ${!context.studentCheckBoxClicked ? html`<info-box></info-box>` : html``}
     `;
 }

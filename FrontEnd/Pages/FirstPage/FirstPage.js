@@ -94,6 +94,12 @@ class FirstPage extends LitElement {
         this.currentUser = null;
         this.inputtedPassword = null;
     }
+    studentuncheckBox(e) {
+        this.studentCheckBoxClicked = false;
+        this.error = null;
+        this.currentUser = null;
+        this.inputtedPassword = null;
+    }
 
     validSignUpCredentials() {
         if (this.currentUser) {

@@ -30,7 +30,6 @@ export class EventCard extends LitElement {
         this.img = "";
         this.placeholder = "";
         this.popupOpen = false
-        this.colour = 
 
     }
     

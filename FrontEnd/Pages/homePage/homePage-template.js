@@ -23,14 +23,26 @@ export const HomePageTemplate = (context) => {
 
   return html`
     <style>
+      .event-section {
+        background-color: white; /* Set the background color to white */
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 90%; /* Set maximum width for the section */
+        margin: 0 auto; /* Center the section horizontally */
+        margin-top: 105px;
+        
+    }
+    
+
       .event-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        overflow-y: auto;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2%;
         max-height: 800px;
-        padding-top:80px;
-        width:100%
+        padding-top: 2%;
+        width: 95%;
+        margin: 0 auto; /* Center the event grid horizontally */
+        overflow: hidden;
       }
 
       .popup {
@@ -62,13 +74,20 @@ export const HomePageTemplate = (context) => {
       }
       .card-button {
         color: black;
-        background-color: rgba(243,242,240,255);
+        background-color: white;
+        width: 100%;
         display: inline-block;
         cursor: pointer;
-        border: none; /* Remove the border */
-        padding: 0; /* Remove padding */
-        margin: 0; /* Remove margin */
+        border: none;
+        padding: none;
+        margin: none;
+        transition: 0.3s; /* Add transition for smooth hover effect */
       }
+      .card-button:hover {
+        
+        transform: scale(1.03); /* Scale up the button slightly */
+      }
+      
       .close-button{
         background-color: red;
         position: absolute;
@@ -92,24 +111,26 @@ export const HomePageTemplate = (context) => {
     border-bottom: 
     lightgray; 
     position: relative;
-    top: 68px;
+    top: 90px;
     text-align: center;
     border-bottom-style: solid; 
-    margin-bottom:2px;
+    padding-bottom: 10px;
     color: rgb(6, 28, 113);
     margin-top: 0px">Upcoming Events</h1>
-    <div class="event-grid">
-      ${context.eventData.map(event => html`
-        <button class="card-button" @click=${(e) => openPopup(e, event)}>
-          <event-card
-            title=${event.title}
-            description=${event.shortdescription}
-            img=${event.img}
-            placeholder=""
-          ></event-card>
-        </button>
-      `)}
-    </div>
+    <section class="event-section">
+      <div class="event-grid">
+        ${context.eventData.map(event => html`
+          <button class="card-button" @click=${(e) => openPopup(e, event)}>
+            <event-card
+              title=${event.title}
+              description=${event.shortdescription}
+              img=${event.img}
+              placeholder=""
+            ></event-card>
+          </button>
+        `)}
+      </div>
+    </section>
     
 
     ${context.popupOpen ? html`
