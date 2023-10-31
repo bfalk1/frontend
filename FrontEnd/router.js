@@ -77,7 +77,7 @@ export function initRouter() {
       }
     },
     {
-      path: "/profile/:userId", // Use a parameter to identify the user
+      path: "/profile", // Use a parameter to identify the user
       component: "profile-page", 
       action: (context, commands) => {
         const userHasAccess = checkUserAccess(); // replace this with your condition
@@ -88,8 +88,9 @@ export function initRouter() {
         }
         // Load the profile page component and pass the context parameter
         return import("./Pages/profile/profile").then((module) => {
+          const userSelected = sessionStorage.getItem('searchedUser');
           const profileComponent = new module.ProfilePage();
-          profileComponent.user = context.params.userId;
+          profileComponent.user = userSelected;
           return profileComponent;
         });
       }

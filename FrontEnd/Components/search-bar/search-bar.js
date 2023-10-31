@@ -67,8 +67,9 @@ export class SearchBar extends LitElement {
     routeToSearchedUser (e,userName) {
         this.shadowRoot.querySelector('.inputText').value = "";
         const userId = userName.trim();
+        sessionStorage.setItem('searchedUser',userId);
         this.usersInSearch = null;
-        Router.go(`/profile/${userId}`);
+        Router.go(`/profile`);
     }
 }
 

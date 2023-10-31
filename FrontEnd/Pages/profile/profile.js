@@ -12,7 +12,8 @@ export class ProfilePage extends LitElement {
         return {
           experience: {type: Object},
           newXP: {type: Object},
-          user: {type: Object}
+          user: {type: Object},
+          error: {type: String}
 
         };
         }
@@ -20,12 +21,13 @@ export class ProfilePage extends LitElement {
         constructor() {
             super();
             this.experience = [];
+            this.error = "";
             this.newXP = {
-              "Company": "",
-              "Position": "",
-              "Start Date": "",
-              "End Date": "",
-              "Description": ""
+              "company": "",
+              "position": "",
+              "StartDate": "",
+              "EndDate": "",
+              "description": ""
             }
             this.user = "";
             this.currentUser = {"email":sessionStorage.getItem('email')};
@@ -62,9 +64,27 @@ export class ProfilePage extends LitElement {
       }
        
         addExperience(e){
-          this.experience.push(this.newXP);
-          console.log(this.experience);
+          if (this.validateExperienceInput(this.newXP)) {
+            this.experience.push(this.newXP);
+            this.addExperienceToUser(this.currentUser.email,this.experience);
+          } else {
+            this.error = "Please fill out all fields";
+          }
         }
+
+        validateExperienceInput(newXP) {
+          // Define an array of required fields
+          const requiredFields = ["company", "position", "StartDate", "EndDate", "description"];
+          
+          // Check if all required fields are filled
+          for (let field of requiredFields) {
+              if (!newXP[field] || newXP[field].trim() === "") {
+                  return false;
+              }
+          }
+      
+          return true;
+      }
 
         editPersonalInformation(e) {
           console.log("here");
@@ -75,17 +95,17 @@ export class ProfilePage extends LitElement {
           e.stopPropagation();
           
           switch(e.detail.type) {
-              case "Company" :
+              case "company" :
                   this.newXP.Company = e.detail.value
                   console.log(this.user);
                   break;
-              case "Position" :
+              case "position" :
                   this.newXP.Position = e.detail.value
                   break;
-              case "Start Date":
+              case "StartDate":
                   this.newXP['Start Date'] = e.detail.value
                   break;
-              case "End Date" :
+              case "EndDate" :
                 this.newXP['End Date'] = e.detail.value
                   break;
               case "description" :
@@ -107,9 +127,28 @@ export class ProfilePage extends LitElement {
         }
     }
 
-    disconnectedCallback() {
-      super.disconnectedCallback();
-    }
+    async addExperienceToUser(userId, experience) {
+      console.log("here");
+      try {
+        const response = await fetch(`http://localhost:5001/user/addExperience/${userId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({experience}),
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error:', error);
+        throw error;
+      }
+  }
 }
 
 

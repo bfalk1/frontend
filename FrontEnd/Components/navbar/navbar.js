@@ -80,7 +80,8 @@ export class Navbar extends LitElement {
             Router.go("/home");
         }
         routeToProfile(){
-            Router.go(`/profile/${this.currentUser}`);
+            sessionStorage.setItem('searchedUser',this.currentUser);
+            Router.go(`/profile`);
         }
 
         routeToMyEvents(e) {

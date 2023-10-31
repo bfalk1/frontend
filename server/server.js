@@ -433,6 +433,28 @@ app.post('/user/addSubmission/:userId',upload.single('fileToUpload'), (req, res)
   });
 });
 
+//add experience to the user 
+app.post('/user/addExperience/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const jobInfo = req.body.eventId;
+  console.log(userId);
+
+  mongoose.connection.collection("Users").findOneAndUpdate(
+    { "email": userId },
+    { $push: { "experience": jobInfo} },
+    (error, result) => {
+      if (error) {
+        console.error('Error adding job:', error);
+        res.status(500).json({ message: 'Error adding job to user' });
+      } else if (result.value) {
+        console.log('job added to User:', userId);
+        res.json({ message: 'Job added sucessfully' });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    }
+  );
+});
 //Get events to be displayed
 app.get("/api/events", async (req,res) => {
   try {
