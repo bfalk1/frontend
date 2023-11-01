@@ -56,8 +56,7 @@ export class SearchBar extends LitElement {
        }
        var tempArray = [];
        for (let i = 0; i <= this.usersInSearch.length-1; i++) {
-            console.log(this.usersInSearch[i].Name);
-            if (this.usersInSearch[i].Name.trim().toLowerCase().includes(e.target.value.trim().toLowerCase())) {
+            if (this.usersInSearch[i].Name !==undefined && this.usersInSearch[i].Name.trim().toLowerCase().includes(e.target.value.trim().toLowerCase())) {
                 tempArray.push(this.usersInSearch[i]);
             }
        }

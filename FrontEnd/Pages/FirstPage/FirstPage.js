@@ -25,7 +25,6 @@ class FirstPage extends LitElement {
         this.employeeCheckBoxClicked = false;
         this.error = null;
         this.UserAttributes = {
-            "Name":"",
             "FirstName":"",
             "LastName":"",
             "email":"",
@@ -33,11 +32,11 @@ class FirstPage extends LitElement {
             "gpa":"",
             "year":"",
             "Password":"",
-            "aboutMe":"",
             "province":"",
             "city":"",
             "events":[],
-            "experience":[]
+            "experience":[],
+            "skills":[]
         };
         sessionStorage.clear();
         this.users = "";
@@ -104,15 +103,19 @@ class FirstPage extends LitElement {
         this.inputtedPassword = null;
     }
 
-    validSignUpCredentials() {
-        if (this.currentUser) {
-            return true;
+    areAllFieldsFilled(userAttributes) {
+        for (const key in userAttributes) {
+            if (userAttributes.hasOwnProperty(key)) {
+                const value = userAttributes[key];
+                if (Array.isArray(value)) {
+                    continue;
+                }
+                if (typeof value === 'string' && value.trim() === "") {
+                    return false;
+                }
+            }
         }
-        if (this.UserAttributes["Password"]!== undefined && this.UserAttributes["email"]!== undefined) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     convertValuesToLowerCaseJson(users) {
@@ -134,13 +137,14 @@ class FirstPage extends LitElement {
     }
 
     routeToHome(e) {
-        if (!this.validSignUpCredentials()) {
+        if (!this.areAllFieldsFilled(this.UserAttributes)) {
             this.error = "Invalid Sign up credentials";
             return;
         } else {
             this.error = null;
         }
         this.UserAttributes["Name"] = this.UserAttributes["FirstName"]+" "+this.UserAttributes["LastName"];
+        this.UserAttributes["aboutMe"] ="";
         console.log(this.UserAttributes);
         this.addUser(this.UserAttributes);
     }
@@ -206,7 +210,7 @@ class FirstPage extends LitElement {
     validateAge(input,type) {
         if (input >= 15 && input <= 100) {
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.UserAttributes[type] = String(input);
         } else {
             this.error = "Please Enter a Valid Age";
         }
@@ -215,14 +219,14 @@ class FirstPage extends LitElement {
     validateGPA(input,type) {
         if (input >= 1.5 && input <= 4.3) {
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.UserAttributes[type] = String(input);
         } else {
             this.error = "Please Enter a Valid Age";
         }
     }
 
     validateString(input,type) {
-        const alphabetRegex = /^[a-zA-Z ]*$/;
+        const alphabetRegex =  /^[a-zA-Z \p{P}]*$/u;
         if (alphabetRegex.test(input)) {
             this.error = null;
             this.UserAttributes[type] = input;
@@ -234,7 +238,7 @@ class FirstPage extends LitElement {
     validateYearsCompleted(input,type) {
         if (input >= 0 && input <= 4) {
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.UserAttributes[type] = String(input);
         } else {
             this.error = "Invalid Input";
         }
@@ -244,14 +248,10 @@ class FirstPage extends LitElement {
         const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
         if (phoneRegex.test(input)) {
             this.error = null;
-            this.UserAttributes[type] = input;
+            this.UserAttributes[type] = String(input);
         } else {
            this.error = "Invalid Input";
         }
-    }
-
-    buildEmploymentSection() {
-        this.employmentButton = true;
     }
 
     addUser(newUser) {
