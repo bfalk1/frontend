@@ -5,19 +5,13 @@ export const infoboxTemplate = (context) => {
   return html`
     <style>
       .box {
-        width: 45%;
-        height: 65%;
-        position: absolute;
-        right: 5%;
-        top: 20%;
+        width: 100%;
         background-color: white;
         border: 1px solid lightgrey;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding:2%;
+        flex: 1;
+        padding: 40px;
         
       }
 

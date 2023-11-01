@@ -16,23 +16,31 @@ export const MyEventsTemplate = (context) => {
 
   return html`
     <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh; /* This ensures the container takes up the full viewport height */
+    }
    .event-section {
         background-color: white; /* Set the background color to white */
         border-radius: 15px;
         padding: 20px;
         max-width: 90%; /* Set maximum width for the section */
         margin: 0 auto; /* Center the section horizontally */
-        margin-top: 105px;
+        margin-top: 0px;
         margin-bottom: 50px;
     }
-      .event-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2%;
-        padding-top: 2%;
-        width: 95%;
-        margin: 0 auto; /* Center the event grid horizontally */
-      }
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 99%;
+      border-radius: 5px;
+      padding: 1%;
+      margin-top: 10px;
+      overflow-y: auto;
+    }
     .container-popup {
       width: 50%;
       background-color: #ffffff;
@@ -133,41 +141,41 @@ export const MyEventsTemplate = (context) => {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
       }
     </style>
+    <div class="container">
+  ${context.eventData.length > 0 ? html`<section class="event-section"> 
+  <h1 style="
+   border-bottom: 
+   lightgray; 
+   text-align: center;
+   border-bottom-style: solid; 
+   margin-bottom:2px;
+   color: rgb(6, 28, 113);
+   margin-top: 0px">Enrolled Events</h1>
+   <div class="event-grid">
+       ${context.eventData.map(event => html`
+         <button class="card-button" @click=${(e) => openPopup(e, event)}>
+           <event-card
+             title=${event.title}
+             description=${event.shortdescription}
+             img=${event.img}
+             placeholder=""
+           ></event-card>
+         </button>
+       `)}
+     </div>
+  </section>`:html `<section class="event-section"><h3 style=" text-align: center;
+  border-bottom-style: none; 
+  margin-bottom:2px;
+  color: rgb(6, 28, 113);">No Ongoing events, Check some out on the Home Page</h3></section>`}
+    <section class="event-section"> 
     <h1 style="
     border-bottom: 
     lightgray; 
-    position: relative;
-    top: 68px;
-    text-align: center;
-    border-bottom-style: solid; 
-    margin-bottom:2px;
-    color: rgb(6, 28, 113);
-    margin-top: 0px">Enrolled Events</h1>
-   <section class="event-section"> 
-    <div class="event-grid">
-        ${context.eventData.map(event => html`
-          <button class="card-button" @click=${(e) => openPopup(e, event)}>
-            <event-card
-              title=${event.title}
-              description=${event.shortdescription}
-              img=${event.img}
-              placeholder=""
-            ></event-card>
-          </button>
-        `)}
-      </div>
-   </section>
-    <h1 style="
-    border-bottom: 
-    lightgray; 
-    position: relative;
-    top: 68px;
     text-align: center;
     border-bottom-style: solid; 
     margin-bottom:2px;
     color: rgb(6, 28, 113);
     margin-top: 0px">Submissions</h1>
-    <section class="event-section"> 
       <div class="event-grid">
         ${context.submittedEvents.map(event => html`
           <button class="card-button" @click=${(e) => openPopup(e, event)}>
@@ -233,6 +241,7 @@ export const MyEventsTemplate = (context) => {
         
         `: html``}
         </div>
+      </div>
       </div>
       
       `: html``}

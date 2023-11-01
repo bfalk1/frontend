@@ -8,6 +8,75 @@ export const FirstPageTemplate = (context) => {
   
     return html `
     <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+  }
+  
+  .container {
+      display: flex;
+      background-color: #fff;
+      width: 100%;
+      height: 80%;
+      position: absolute;
+      top: 11%;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+  }
+  
+  .promo-section, .login-section {
+      flex: 1;
+      padding: 40px;
+      margin-right:10px;
+  }
+  
+  .icons {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+  }
+  
+  .icons div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .login-section input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+  }
+  
+  .login-btn, .create-account-btn, .ready-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+  }
+  
+  .login-btn {
+      background-color: #1877F2;
+  }
+  
+  .create-account-btn {
+      background-color: #42B72A;
+  }
+  
+  .ready-btn {
+      background-color: #3B5998;
+  }
+  
     .button {
         background-color: rgb(6, 28, 113);
         color: #fff;
@@ -183,7 +252,7 @@ export const FirstPageTemplate = (context) => {
                 <input-string
                 width=250
                 placeholder="School"
-                type="School"
+                type="school"
                 >
                 </input-string>
               </div>
@@ -191,7 +260,7 @@ export const FirstPageTemplate = (context) => {
                 <input-string
                 width=250
                 placeholder="Years Completed"
-                type="Years Completed"
+                type="year"
                 >
                 </input-string>
               </div>
@@ -202,7 +271,7 @@ export const FirstPageTemplate = (context) => {
                 <input-string
                 width=250
                 placeholder="GPA"
-                type="GPA"
+                type="gpa"
                 >
                 </input-string>
               </div>
@@ -231,100 +300,43 @@ export const FirstPageTemplate = (context) => {
     </div>
     </div>
  ` : 
-  html `<div 
-    style=
-    "width: 30%;
-    height: 75%;
-    position: relative;
-    background-color:white;
-    border-radius: 10px;
-    position: absolute;
-    left:10%;
-    top: 20%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
-    
-    >
-      <div
-      style=
-      " background-color: rgb(6, 28, 113);
-      border-radius: 10px;
-      height: 60px;
-      text-align: center;
-      width: 100%;
-      font-size: 30px;
-      font-family: sans-serif;
-      color: white;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;"
-      >
-      Login</div>
-      <div style="
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 55%;
-      height: 50%;
-      border-style: solid;
-      border-color: lightgrey;
-      border-radius: 10px;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      margin: 0 auto; /* Center the container horizontally */
-      margin-top:35px;
-      padding:30px;
-      "
-      >
-      <p style="
-    font-size: x-large;
-    color: black;
-    font-weight: bold; /* Optionally make the font bold */
-">
-    Welcome!
-</p>
+  html `
+  <body>
 
-      
-      <input-string style="position: relative;
-      top: 20px;
-      "
-        width=250
+    <div class="container">
+        <!-- Promotional Section -->
+        <div class="promo-section">
+        ${!context.studentCheckBoxClicked ? html`<info-box></info-box>` : html``}
+        </div>
+        <div class="login-section">
+        <div style="position:absolute;top:20%;width: 40%;
+        height: 42%;
+        border: 1.5px solid lightgray;
+        border-radius: 10px;
+        padding-top: 10px;">
+        <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113);
+        border-bottom-style: solid;text-align:center;">Login</h2>
+        <input-string style="padding-bottom:10px;"
+        width=97%
         placeholder="Email"
         type="Email">
       </input-string>
       <input-password 
-      style="position: relative;
-      top: 30px; "
-        width=250
+        width=97%
         placeholder="Password"
         type="Password">
       </input-password>
-      <div style="
-      height:18.5px;
-      margin-left: 5px;
-      position: relative;
-      top: px;
-      color: rgb(6, 28, 113);
-      text-align: center;
-        ">
       ${context.error ? html`${context.error}` : html``}
-      </div>
       <button class="button" id="myButton" style=
-      "position: relative;
-      top: 20px;
-      width: 100%;
-      font-size:15px;"
+      "
+    width: 98.5%;
+    margin-left: 5px;
+    margin-top: 10px;
+    font-size: 15px;
+    padding-bottom: 10px;"
       @click=${(e) => context.memberLogin(e)}
       >Ready</button>
-    </div>
-      <div style="display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; 
-      padding:20px;">
-        <button id="myButton" style=
+      <button id="myButton" style=
       "background-color: rgba(250,235,240,255);
         color: black;
         padding: 5px 10px;
@@ -332,24 +344,21 @@ export const FirstPageTemplate = (context) => {
         cursor: pointer;
         border-radius: 6px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-        width: 75%;
+        width: 98.5%;
+        margin-left: 5px;
+        margin-top: 10px;
+        font-size: 15px;
+        padding-bottom: 10px;
         "
       @click=${(e) => context.studentcheckBox(e)}
       >
-      Don't have an account? Sign up</button></div>
-      <!-- <button class="button" style=
-      "position: relative;
-      top: 22px;
-      left: 106px;"
-      @click=${(e) => context.employeecheckBox(e)}
-      >
-      Enterprise sign up</button> -->
-  </div>
-  
-</div>
+      Don't have an account? Sign up</button>
+      </div>
+        </div>
+    </div>
+
+</body>
 `}
-   
-${!context.studentCheckBoxClicked ? html`<info-box></info-box>` : html``}
     `;
 }
 

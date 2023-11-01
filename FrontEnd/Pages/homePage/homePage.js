@@ -29,6 +29,7 @@ export class HomePage extends LitElement {
 
         connectedCallback() {
             super.connectedCallback();
+            console.log(this.currentUser);
             if (this.eventData.length === 0) {
                 fetch("http://localhost:5001/api/events")
                 .then(response => response.json())

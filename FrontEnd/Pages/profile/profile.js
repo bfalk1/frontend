@@ -65,6 +65,7 @@ export class ProfilePage extends LitElement {
         .then(response => response.json())
         .then(data => {
           this.user = data;
+          console.log(this.user);
           this.user.events.filter(event => {
             if (event.submissions.length!==0) {
               this.eventData.push(event); 

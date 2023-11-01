@@ -25,13 +25,12 @@ export class Navbar extends LitElement {
             this.addEventListener('custom-string-event', this.handleChangedValue);
             this.inMainApplication = false;
             this.entrepriseMode = false;
-            this.currentUser = sessionStorage.getItem('email');
-            this.role = sessionStorage.getItem('role');
+            this.currentUser = "";
+            this.role = "";
         }
 
         connectedCallback() {
             super.connectedCallback();
-
             if (this.role === "enterprise") {
                 this.entrepriseMode = true;
             } else {
@@ -60,6 +59,9 @@ export class Navbar extends LitElement {
                     this.inMainApplication = false;
                 } else {
                     this.inMainApplication = true;
+                    this.currentUser = sessionStorage.getItem('email');
+                    this.role = sessionStorage.getItem('role');
+                    console.log(this.currentUser);
                 }
           
         }

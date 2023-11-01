@@ -25,7 +25,7 @@ class FirstPage extends LitElement {
         this.employeeCheckBoxClicked = false;
         this.error = null;
         this.UserAttributes = {
-            "name":"",
+            "Name":"",
             "FirstName":"",
             "LastName":"",
             "email":"",
@@ -34,9 +34,12 @@ class FirstPage extends LitElement {
             "year":"",
             "Password":"",
             "aboutMe":"",
+            "province":"",
+            "city":"",
             "events":[],
             "experience":[]
         };
+        sessionStorage.clear();
         this.users = "";
         this.currentUser = [];
         this.inputtedPassword = null;
@@ -73,13 +76,13 @@ class FirstPage extends LitElement {
             case "email" :
                 this.validateEmail(e.detail.value,e.detail.type);
                 break;
-            case "Years Completed":
+            case "year":
                 this.validateYearsCompleted(e.detail.value,e.detail.type);
                 break;
             case "Phone Number":
                 this.validatePhoneNumber(e.detail.value,e.detail.type);
                 break;
-            case "GPA":
+            case "gpa":
                 this.validateGPA(e.detail.value,e.detail.type);
                 break;
             default: 
@@ -137,7 +140,8 @@ class FirstPage extends LitElement {
         } else {
             this.error = null;
         }
-        this.UserAttributes["events"] = [];
+        this.UserAttributes["Name"] = this.UserAttributes["FirstName"]+" "+this.UserAttributes["LastName"];
+        console.log(this.UserAttributes);
         this.addUser(this.UserAttributes);
     }
 

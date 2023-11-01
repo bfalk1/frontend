@@ -33,16 +33,15 @@ export const HomePageTemplate = (context) => {
         
     }
     
-
       .event-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2%;
-        max-height: 800px;
-        padding-top: 2%;
-        width: 95%;
-        margin: 0 auto; /* Center the event grid horizontally */
-        overflow: hidden;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        width: 99%;
+        border-radius: 5px;
+        padding: 1%;
+        margin-top: 10px;
+        overflow-y: auto;
       }
 
       .container-popup {
@@ -135,18 +134,15 @@ export const HomePageTemplate = (context) => {
           left: 10%%;
       }
     </style>
-
+    <section class="event-section">
     <h1 style="
     border-bottom: 
     lightgray; 
-    position: relative;
-    top: 90px;
     text-align: center;
     border-bottom-style: solid; 
     padding-bottom: 10px;
     color: rgb(6, 28, 113);
     margin-top: 0px">Upcoming Events</h1>
-    <section class="event-section">
       <div class="event-grid">
         ${context.eventData.map(event => html`
           <button class="card-button" @click=${(e) => openPopup(e, event)}>
