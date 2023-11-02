@@ -33,16 +33,17 @@ export const HomePageTemplate = (context) => {
         
     }
     
-      .event-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        width: 99%;
-        border-radius: 5px;
-        padding: 1%;
-        margin-top: 10px;
-        overflow-y: auto;
-      }
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(24%, 1fr)); /* Adjusted grid-template-columns */
+      gap: 20px;
+      width: 100%; /* Set width to 100% */
+      border-radius: 5px;
+      padding: 1%;
+      margin-top: 10px;
+      overflow-y: auto;
+  }
+
 
       .container-popup {
         width: 50%;

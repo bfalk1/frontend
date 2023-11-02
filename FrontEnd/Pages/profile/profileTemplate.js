@@ -113,14 +113,11 @@ const openPopup = (e, eventData) => {
         justify-content: space-between; /* Space elements evenly */
       }
       .event-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        width: 99%;
-        border-radius: 5px;
-        padding: 1%;
+        display: flex; /* Use flexbox to create a flex container */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        width: 95%; /* Set the width of the container */
         margin-top: 10px;
-        overflow-y: auto;
+        padding: 1%;
       }
 
       .experience-box {

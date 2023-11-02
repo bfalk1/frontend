@@ -12,21 +12,23 @@ export const FirstPageTemplate = (context) => {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-  }
-  
-  .container {
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
       background-color: #fff;
       width: 95%;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      align-items: center; /* Center children vertically */
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      margin-top: 8%;
-      
-  }
+      border-radius: 5px;
+      margin-top: 100px;
+      padding: 20px; /* Add padding as needed */
+      margin-left:0.5%;
+    }
   
   .promo-section{
       padding-top:30px;
@@ -323,7 +325,7 @@ export const FirstPageTemplate = (context) => {
  ` :
       html`
   
-  
+  <body>
     <div class="container">
       <!-- Promotional Section -->
       <div class="promo-section">
@@ -333,10 +335,11 @@ export const FirstPageTemplate = (context) => {
         <div style="
          border: 1.5px solid lightgray;
          border-radius: 10px;
-         
+         padding:20px;
         ">
-           <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113); border-bottom-style: solid;text-align:center;">Login</h2>
-          <input-string style="padding-bottom:10px;"
+           <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113); border-bottom-style: solid;text-align:center; padding-bottom: 20px;">Login</h2>
+           
+           <input-string 
              width=97%
              placeholder="Email"
              type="Email">
@@ -347,10 +350,11 @@ export const FirstPageTemplate = (context) => {
              type="Password">
           </input-password>
            ${context.error ? html`${context.error}` : html``}
+           
           <button class="button" id="myButton" style=
           "width: 98.5%;
             margin-left: 5px;
-            margin-top: 10px;
+            margin-top: 30px;
             font-size: 15px;
             padding-bottom: 10px;"
           @click=${(e) => context.memberLogin(e)}
@@ -365,9 +369,10 @@ export const FirstPageTemplate = (context) => {
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
             width: 98.5%;
             margin-left: 5px;
-            margin-top: 10px;
+            margin-top: 20px;
             font-size: 15px;
             padding-bottom: 10px;
+            margin-bottom:20px;
             "
           @click=${(e) => context.studentcheckBox(e)}
           >
@@ -375,7 +380,7 @@ export const FirstPageTemplate = (context) => {
         </div>
       </div>
     </div>
-
+</body>
 
 `}
     `;
