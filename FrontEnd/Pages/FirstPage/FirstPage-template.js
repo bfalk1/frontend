@@ -11,23 +11,23 @@ export const FirstPageTemplate = (context) => {
     body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       height: 100vh;
       margin: 0;
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      margin-top: 100px;
     }
 
     .container {
       background-color: #fff;
-      width: 95%;
       display: flex;
-      align-items: center; /* Center children vertically */
+      align-items:center;
+      justify-content: center;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
+      max-width: 1000px;
       margin-top: 100px;
-      padding: 20px; /* Add padding as needed */
-      margin-left:0.5%;
     }
   
   .promo-section{
@@ -131,13 +131,22 @@ export const FirstPageTemplate = (context) => {
 
 
   .row {
-      display: flex;
+    display: flex;
+      justify-content: space-between;
+      
+      margin-bottom: 10px;
+      
+      width:80%;
+  }
+  .header{
+      text-align: center;
       margin-bottom: 10px;
       width:100%;
   }
 
   .input-component {
-    width: 30%;
+    width: 35%;
+     
   }
   .button-container {
     display: flex;
@@ -155,40 +164,24 @@ export const FirstPageTemplate = (context) => {
       <div 
         style=
         "width: 65%;
-        height: 70%;
+        height: 65%;
         background-color:white;
         border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);"
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        
+        "
         >
         
-      <div
-          style=
-          " background-color: rgb(6, 28, 113);
-          border-radius: 10px;
-          height: 60px;
-          text-align: center;
-          width: 100%;
-          font-size: 30px;
-          font-family: sans-serif;
-          color: white;
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;"
-          >
-          Signup</div>
+        <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113); border-bottom-style: solid;text-align:center; padding-bottom: 20px;">Signup</h2>
           
-          <div class="row">
-        <div style="
-        text-align: center;
-        width: 100%;
-        color: rgb(6, 28, 113);
-        font-size: x-large;
-        padding-top: 10px;"
-        >Login Infomation</div>
+          <div class="header">
+          </div>
+          <div class="header" style="color: rgb(6, 28, 113);
+        font-size: x-large; text-align: left; margin-left: 11%;">
+        Login Information
     </div>
-    <div class="row">
+    <div style="display: flex; justify-content: center;">
+    <div class="row" style="">
               <div class="input-component" style="position: relative;
               top: 10px">
                 <input-string
@@ -214,14 +207,12 @@ export const FirstPageTemplate = (context) => {
               </input-password>
         </div>
           </div>
-          <div class="row">
-        <div style="
-        text-align: center;
-        width: 90%;
-        color: rgb(6, 28, 113);
-        font-size: x-large;"
-        >Personal Information</div>
+          </div>
+          <div class="header" style="color: rgb(6, 28, 113);
+        font-size: x-large;text-align: left; margin-left: 11%;">
+        Personal Information
     </div>
+    <div style="display: flex; justify-content: center;">
         <div class="row">
               <div class="input-component">
                 <input-string
@@ -248,7 +239,8 @@ export const FirstPageTemplate = (context) => {
                 </input-string>
               </div>
           </div>
-
+          </div>
+          <div style="display: flex; justify-content: center;">
           <div class="row">
               <div class="input-component">
                     <input-string
@@ -275,7 +267,8 @@ export const FirstPageTemplate = (context) => {
                 </input-string>
               </div>
           </div>
-
+          </div>
+          <div style="display: flex; justify-content: center;">
           <div class="row">
               <div class="input-component">
                 <input-string
@@ -302,6 +295,7 @@ export const FirstPageTemplate = (context) => {
                 </input-string>
               </div>
           </div>
+          </div>
           <div style="
           height:18.5px;
           margin-left: 5px;
@@ -310,11 +304,11 @@ export const FirstPageTemplate = (context) => {
           ${context.error ? html`${context.error}` : html``}
           </div>
           <div class="button-container">
-            <button class="button" @click=${(e) => context.studentuncheckBox(e)}>
+            <button class="button" style="" @click=${(e) => context.studentuncheckBox(e)}>
               Back
             </button>
             <div>
-              <button class="button" @click=${(e) => context.routeToHome(e)}>
+              <button class="button" style="" @click=${(e) => context.routeToHome(e)}>
                 Continue
               </button>
             </div>
@@ -325,7 +319,7 @@ export const FirstPageTemplate = (context) => {
  ` :
       html`
   
-  <body>
+    <div style="display: flex; justify-content: center; width: 100vw;">
     <div class="container">
       <!-- Promotional Section -->
       <div class="promo-section">
@@ -380,7 +374,7 @@ export const FirstPageTemplate = (context) => {
         </div>
       </div>
     </div>
-</body>
+    </div>
 
 `}
     `;
