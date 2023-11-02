@@ -105,6 +105,7 @@ const openPopup = (e, eventData) => {
         padding: 1%;
         margin-top: 80px;
         border-radius:10px;
+        position: relative;
         
       }
       .h-stack {
@@ -199,11 +200,11 @@ const openPopup = (e, eventData) => {
     </style>
     <div class="container">
       <div class="profile-box">
-      ${context.isCurrentUsersPage ? html`<div class="button-container" style="display: flex; justify-content: flex-end;">
-      <svg style="width:20px;position:relative;top: 2px;
-      left: 30px;
-  "viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/></svg>
-      <pop-up width=30 height=30 buttonTitle="" .content=${personalInfoTemplate(context)}></pop-up>
+      ${context.isCurrentUsersPage ? html`<div class="button-container" style="position: absolute;
+      top: 10px; 
+      right: 10px; ">
+   <pop-up buttonTitle="+" .content=${personalInfoTemplate(context)}></pop-up>
+
       </div>
       `
       :html``}
@@ -220,6 +221,7 @@ const openPopup = (e, eventData) => {
         <div>
         <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113);
         border-bottom-style: solid;">About Me</h2>
+        ${console.log(context.user.aboutMe)}
         <p>${context.user.aboutMe}</p>
         </div>
         <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113);
@@ -472,24 +474,25 @@ const personalInfoTemplate = (context) =>{
 }
   </style>
   <div>
-  <h1>Add New Experience</h1>
+  <h1 style="border-bottom: lightgray; color:rgb(6, 28, 113);
+  border-bottom-style: solid; margin-bottom:2px;margin-top: 10px;margin-bottom:10px;">Edit Personal Information</h1>
   <div class="row">
   <div class="input-component">
   <input-string width=250px; placeholder="FirstName" type="FirstName"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="School" type="School"></input-string>
+  <input-string width=250px; placeholder="School" type="school"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="GPA" type="GPA"></input-string>
+  <input-string width=250px; placeholder="GPA" type="gpa"></input-string>
 </div>
 </div>
 <div class="row">
   <div class="input-component">
-  <input-string width=250px; placeholder="Expected graduation Year" type="Expected graduation Year"></input-string>
+  <input-string width=250px; placeholder="years completed" type="year"></input-string>
   </div>
   <div class="input-component">
-  <input-string width=250px; placeholder="About me" type="aboutMe"></input-string>
+  <input-paragraph width=250 placeholder="About Me" type="aboutMe"></input-paragraph>
   </div>
 </div>
 

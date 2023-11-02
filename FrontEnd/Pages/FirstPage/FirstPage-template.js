@@ -131,6 +131,11 @@ export const FirstPageTemplate = (context) => {
   .row {
       display: flex;
       margin-bottom: 10px;
+      width:100%;
+  }
+
+  .input-component {
+    width: 30%;
   }
   .button-container {
     display: flex;
@@ -182,9 +187,10 @@ export const FirstPageTemplate = (context) => {
         >Login Infomation</div>
     </div>
     <div class="row">
-              <div class="input-component">
+              <div class="input-component" style="position: relative;
+              top: 10px">
                 <input-string
-                width=250px;
+                width=90%;
                 placeholder="Email"
                 type="email"
                 >
@@ -192,14 +198,14 @@ export const FirstPageTemplate = (context) => {
               </div>
               <div class="input-component">
                   <input-password 
-                    width=250
+                    width=90%
                     placeholder="Password"
                     type="Password">
                   </input-password>
               </div>
               <div class="input-component">
               <input-password
-                width=250
+                width=90%
                 placeholder="Confirm Password"
               type="Confirm Password"
               >
@@ -209,7 +215,7 @@ export const FirstPageTemplate = (context) => {
           <div class="row">
         <div style="
         text-align: center;
-        width: 100%;
+        width: 90%;
         color: rgb(6, 28, 113);
         font-size: x-large;"
         >Personal Information</div>
@@ -217,7 +223,7 @@ export const FirstPageTemplate = (context) => {
         <div class="row">
               <div class="input-component">
                 <input-string
-                width=250
+                width=90%
                 placeholder="First Name"
                 type="FirstName"
                 >
@@ -225,7 +231,7 @@ export const FirstPageTemplate = (context) => {
               </div>
               <div class="input-component">
                 <input-string
-                width=250
+                width=90%
                 placeholder="Last Name"
                 type="LastName"
                 >
@@ -233,7 +239,7 @@ export const FirstPageTemplate = (context) => {
               </div>
               <div class="input-component">
                 <input-string
-                width=250
+                width=90%
                 placeholder="Age"
                 type="Age"
                 >
@@ -244,7 +250,7 @@ export const FirstPageTemplate = (context) => {
           <div class="row">
               <div class="input-component">
                     <input-string
-                    width=250
+                    width=90%
                     placeholder="Phone Number"
                     type="Phone Number"
                     >
@@ -252,7 +258,7 @@ export const FirstPageTemplate = (context) => {
               </div>
               <div class="input-component">
                 <input-string
-                width=250
+                width=90%
                 placeholder="School"
                 type="school"
                 >
@@ -260,7 +266,7 @@ export const FirstPageTemplate = (context) => {
               </div>
               <div class="input-component">
                 <input-string
-                width=250
+                width=90%
                 placeholder="Years Completed"
                 type="year"
                 >
@@ -271,9 +277,25 @@ export const FirstPageTemplate = (context) => {
           <div class="row">
               <div class="input-component">
                 <input-string
-                width=250
+                width=90%
                 placeholder="GPA"
                 type="gpa"
+                >
+                </input-string>
+              </div>
+              <div class="input-component">
+                <input-string
+                width=90%
+                placeholder="City of residence"
+                type="city"
+                >
+                </input-string>
+              </div>
+              <div class="input-component">
+                <input-string
+                width=90%
+                placeholder="Province"
+                type="province"
                 >
                 </input-string>
               </div>
@@ -290,9 +312,6 @@ export const FirstPageTemplate = (context) => {
               Back
             </button>
             <div>
-              <button class="button" id="'submitButton" @focusout=${(e) => context.routeToHome(e)}>
-                Skip
-              </button>
               <button class="button" @click=${(e) => context.routeToHome(e)}>
                 Continue
               </button>

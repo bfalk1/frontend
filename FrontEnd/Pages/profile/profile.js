@@ -16,7 +16,8 @@ export class ProfilePage extends LitElement {
           eventData: {type: Object},
           popupData: {type: Object},
           error: {type: String},
-          popupOpen: {type: Boolean}
+          popupOpen: {type: Boolean},
+          triggerRerender : {type: Number}
 
         };
         }
@@ -36,7 +37,7 @@ export class ProfilePage extends LitElement {
               "country":"",
               "province":""
             }
-            this.user = "";
+            this.user = [];
             this.popupOpen = false;
             this.eventData= [];
             this.currentUser = {"email":sessionStorage.getItem('email')};
@@ -121,7 +122,7 @@ export class ProfilePage extends LitElement {
       }
 
         editPersonalInformation(e) {
-          console.log("here");
+          
         }
 
         saveSkill(e) {
@@ -135,7 +136,6 @@ export class ProfilePage extends LitElement {
         setPopupData(event){
           this.popupData = event;
         }
-
 
         handleChangedValue(e) {
           e.stopPropagation();
@@ -168,7 +168,11 @@ export class ProfilePage extends LitElement {
               case "skill" :
                 if (e.detail.value.length > 0) {
                   this.user.skills.push(e.detail.value);
-                }
+              }
+              break;
+              case "aboutMe":
+                this.user["aboutMe"]=e.detail.value;
+                this.triggerRerender+=1; //Needs to be changed
                 break;
               default: 
                   this.validateString(e.detail.value,e.detail.type);
@@ -180,7 +184,7 @@ export class ProfilePage extends LitElement {
         const alphabetRegex = /^[a-zA-Z ]*$/;
         if (alphabetRegex.test(input)) {
             this.error = null;
-            this.user[type] = input;
+            this.user[type] = String(input);
         } else {
            this.error = "Invalid Input";
         }
