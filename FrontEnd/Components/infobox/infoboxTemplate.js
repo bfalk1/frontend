@@ -11,7 +11,7 @@ export const infoboxTemplate = (context) => {
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         flex: 1;
-        padding: 40px;
+        padding: 5%;
         
       }
 
@@ -31,14 +31,17 @@ export const infoboxTemplate = (context) => {
 
       .features {
         display: flex;
-        justify-content: space-around;
-        width: 80%;
+        justify-content: space-between;
+        align-items: center;
+        padding:20px;
+        padding-left:40px; 
+        padding-right:40px; 
+        
       }
-
       .feature {
         text-align: center;
         max-width: 30%;
-        font-size: 17px;
+        font-size: 15px;
       }
       .icon {
         width:130px;
@@ -47,7 +50,6 @@ export const infoboxTemplate = (context) => {
       }
       .icons {
         width:150px;
-    
         color: #0078d4; /* Use your brand color */
       }
       
@@ -67,7 +69,7 @@ export const infoboxTemplate = (context) => {
       <div class="features">
         <div class="feature">
         <img src="/Assets/CompetitionB.png" class="icon" alt="Logo">
-          <p>Compete for Jobs</p>
+          <p >Compete for Jobs</p>
         </div>
         <div class="feature">
         <img src="/Assets/ExperienceB.png" class="icon" alt="Logo">
@@ -78,9 +80,9 @@ export const infoboxTemplate = (context) => {
           <p>Simplify Recruiting</p>
         </div>
       </div>
-      <pop-up 
+      <!-- <pop-up 
     buttonTitle = "Learn more"
-    >
+    > -->
     </pop-up>
     </div>
     

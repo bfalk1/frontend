@@ -2,11 +2,11 @@ import { html } from 'lit';
 import { InputString } from '../../Components/input-string/input-string';
 import { InputPassword } from '../../Components/input-password/input-password';
 import { Navbar } from '../../Components/navbar/navbar';
-import {Infobox} from '../../Components/infobox/infobox'
+import { Infobox } from '../../Components/infobox/infobox'
 
 export const FirstPageTemplate = (context) => {
-  
-    return html `
+
+  return html`
     <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,27 +14,32 @@ export const FirstPageTemplate = (context) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
   }
   
   .container {
-      display: flex;
       background-color: #fff;
-      width: 100%;
-      height: 80%;
-      position: absolute;
-      top: 11%;
+      width: 95%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
+      margin-top: 8%;
+      
   }
   
-  .promo-section, .login-section {
-      flex: 1;
-      padding: 40px;
-      margin-right:10px;
+  .promo-section{
+      padding-top:30px;
+      padding-bottom: 30px;
+      padding-left:30px;
+     
   }
-  
+  .login-section {
+    padding-right: 30px;
+    padding-left: 100px;
+    
+  }
+
   .icons {
       display: flex;
       justify-content: space-between;
@@ -49,7 +54,7 @@ export const FirstPageTemplate = (context) => {
   
   .login-section input {
       width: 100%;
-      padding: 10px;
+      padding: 20px;
       margin: 10px 0;
       border: 1px solid #ddd;
       border-radius: 4px;
@@ -121,10 +126,7 @@ export const FirstPageTemplate = (context) => {
   .labelClass {
       color: #aeaeae;
   }
-  .container {
-      width: 800px;
-      margin: 0 auto; /* Center the container horizontally */
-  }
+
 
   .row {
       display: flex;
@@ -299,72 +301,70 @@ export const FirstPageTemplate = (context) => {
       </div>
     </div>
     </div>
- ` : 
-  html `
-  <body>
-
+ ` :
+      html`
+  
+  
     <div class="container">
-        <!-- Promotional Section -->
-        <div class="promo-section">
+      <!-- Promotional Section -->
+      <div class="promo-section">
         ${!context.studentCheckBoxClicked ? html`<info-box></info-box>` : html``}
-        </div>
-        <div class="login-section">
-        <div style="position:absolute;top:20%;width: 40%;
-        height: 42%;
-        border: 1.5px solid lightgray;
-        border-radius: 10px;
-        padding-top: 10px;">
-        <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113);
-        border-bottom-style: solid;text-align:center;">Login</h2>
-        <input-string style="padding-bottom:10px;"
-        width=97%
-        placeholder="Email"
-        type="Email">
-      </input-string>
-      <input-password 
-        width=97%
-        placeholder="Password"
-        type="Password">
-      </input-password>
-      ${context.error ? html`${context.error}` : html``}
-      <button class="button" id="myButton" style=
-      "
-    width: 98.5%;
-    margin-left: 5px;
-    margin-top: 10px;
-    font-size: 15px;
-    padding-bottom: 10px;"
-      @click=${(e) => context.memberLogin(e)}
-      >Ready</button>
-      <button id="myButton" style=
-      "background-color: rgba(250,235,240,255);
-        color: black;
-        padding: 5px 10px;
-        border: none;
-        cursor: pointer;
-        border-radius: 6px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-        width: 98.5%;
-        margin-left: 5px;
-        margin-top: 10px;
-        font-size: 15px;
-        padding-bottom: 10px;
-        "
-      @click=${(e) => context.studentcheckBox(e)}
-      >
-      Don't have an account? Sign up</button>
       </div>
+      <div class="login-section" >
+        <div style="
+         border: 1.5px solid lightgray;
+         border-radius: 10px;
+         
+        ">
+           <h2 style="border-bottom: lightgray; color:rgb(6, 28, 113); border-bottom-style: solid;text-align:center;">Login</h2>
+          <input-string style="padding-bottom:10px;"
+             width=97%
+             placeholder="Email"
+             type="Email">
+          </input-string>
+           <input-password 
+             width=97%
+            placeholder="Password"
+             type="Password">
+          </input-password>
+           ${context.error ? html`${context.error}` : html``}
+          <button class="button" id="myButton" style=
+          "width: 98.5%;
+            margin-left: 5px;
+            margin-top: 10px;
+            font-size: 15px;
+            padding-bottom: 10px;"
+          @click=${(e) => context.memberLogin(e)}
+          >Ready</button>
+          <button id="myButton" style=
+           "background-color: rgba(250,235,240,255);
+            color: black;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+            width: 98.5%;
+            margin-left: 5px;
+            margin-top: 10px;
+            font-size: 15px;
+            padding-bottom: 10px;
+            "
+          @click=${(e) => context.studentcheckBox(e)}
+          >
+          Don't have an account? Sign up</button>
         </div>
+      </div>
     </div>
 
-</body>
+
 `}
     `;
 }
 
 function buildPreviousEmployment() {
-    console.log("here");
-    return html`<div class="row">
+  console.log("here");
+  return html`<div class="row">
     <div class="input-component">
       <input-string
       width=250
