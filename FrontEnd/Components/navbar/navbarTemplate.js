@@ -6,16 +6,16 @@ export const NavbarTemplate = (context) => {
     return html`
     <style>
     .navbar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      width: 90%;
       color: white;
       background-color: rgb(6, 28, 113);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 80px; /* Adjust the height as needed */
+      height: 70px; /* Adjust the height as needed */
+      border-radius: 10px;
+      margin-top: 5px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .navbar-title {
@@ -65,8 +65,10 @@ export const NavbarTemplate = (context) => {
        height:150px;
       }
     </style> 
+      <div style="display: flex; justify-content: center;"> 
       <div class="navbar">
       <img src="/Assets/TLogo.png" class="logo" alt="Logo">
+      <button class="button" @click=${(e) => context.routeToAbout(e)}>About Us</button>
       ${context.inMainApplication ? html` 
       <button class="button" @click=${(e) => context.routeToFirst(e)}>Landing Page</button>
       <button class="button" @click=${(e) => context.routeToHome(e)}>Home</button>
@@ -75,11 +77,13 @@ export const NavbarTemplate = (context) => {
       `
       : html` <button class="button" @click=${(e) => context.routeToMyEvents(e)}>My Events</button>`}
       <button class="button" @click=${(e) => context.routeToProfile(e)}>Profile</button>
+      
       <div style="flex-grow: 1;"></div>
       <search-bar width=250></search-bar>` 
       
       
       : html``}
+      </div>
       </div>
     `;
 }

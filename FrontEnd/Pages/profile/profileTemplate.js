@@ -103,7 +103,7 @@ const openPopup = (e, eventData) => {
         border-radius: 5px;
         box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.3);
         padding: 1%;
-        margin-top: 80px;
+        margin-top: 50px;
         border-radius:10px;
         position: relative;
         

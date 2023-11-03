@@ -16,7 +16,7 @@ export const FirstPageTemplate = (context) => {
       display: flex;
       align-items:center;
       justify-content: center;
-      margin-top: 100px;
+      margin-top: 0px;
     }
 
     .container {
@@ -27,7 +27,7 @@ export const FirstPageTemplate = (context) => {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       max-width: 1000px;
-      margin-top: 100px;
+      margin-top: 50px;
     }
   
   .promo-section{
