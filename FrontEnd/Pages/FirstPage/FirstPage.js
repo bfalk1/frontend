@@ -1,6 +1,7 @@
 import { LitElement} from 'lit';
 import { Router } from "@vaadin/router";
 import {FirstPageTemplate} from './FirstPage-template';
+import { apiUrl } from '../../config.js';
 import { initRouter } from "../../router";
 
 
@@ -44,11 +45,13 @@ class FirstPage extends LitElement {
         this.inputtedPassword = null;
         this.employmentButton = false;
         this.validCrendentials = false;
+        this.pageHeight = 0;
         this.addEventListener('custom-string-event', this.handleChangedValue);
     }
 
     connectedCallback() {
         super.connectedCallback();
+        this.pageHeight = document.documentElement.scrollHeight;
     }
 
     handleChangedValue(e) {
@@ -183,7 +186,7 @@ class FirstPage extends LitElement {
     }
 
     userEmailLogin(input,type) {
-        fetch(`http://localhost:5001/api?username=${input}`)
+        fetch(`${apiUrl}/api?username=${input}`)
         .then(response => response.json())
         .then(data => {
           // Log the response from the API
@@ -255,7 +258,7 @@ class FirstPage extends LitElement {
     }
 
     addUser(newUser) {
-        fetch("http://localhost:5001/api/users", {
+        fetch(`${apiUrl}/api/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import { LitElement } from 'lit';
 import { ProfileTemplate } from './profileTemplate';
+import { apiUrl } from '../../config.js';
 import { Navbar } from '../../Components/navbar/navbar';
 import { Router } from "@vaadin/router";
 
@@ -62,7 +63,7 @@ export class ProfilePage extends LitElement {
       }
 
       fetchUserData(input) {
-        fetch(`http://localhost:5001/api/profile?username=${input}`)
+        fetch(`${apiUrl}/api/profile?username=${input}`)
         .then(response => response.json())
         .then(data => {
           this.user = data;
@@ -192,7 +193,7 @@ export class ProfilePage extends LitElement {
 
     async addExperienceToUser(userId, experience) {
       try {
-        const response = await fetch(`http://localhost:5001/user/addExperience/${userId}`, {
+        const response = await fetch(`${apiUrl}/user/addExperience/${userId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -215,7 +216,7 @@ export class ProfilePage extends LitElement {
   async addskillToUser(userId, skill) {
     console.log(skill);
     try {
-      const response = await fetch(`http://localhost:5001/user/addskill/${userId}`, {
+      const response = await fetch(`${apiUrl}/user/addskill/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import {HomePageTemplate} from './homePage-template';
+import { apiUrl } from '../../config.js';
 
 export class HomePage extends LitElement {
     render() {
@@ -31,7 +32,7 @@ export class HomePage extends LitElement {
             super.connectedCallback();
             console.log(this.currentUser);
             if (this.eventData.length === 0) {
-                fetch("http://localhost:5001/api/events")
+                fetch(`${apiUrl}/api/events`)
                 .then(response => response.json())
                 .then(data => {
                 this.eventData = data; // Assign the data // Log the data here
@@ -50,7 +51,7 @@ export class HomePage extends LitElement {
         }
 
         fetchUserData(input) {
-            fetch(`http://localhost:5001/api/home/?username=${input}`)
+            fetch(`${apiUrl}/api/home/?username=${input}`)
             .then(response => response.json())
             .then(data => {
             // Log the response from the API
@@ -62,7 +63,7 @@ export class HomePage extends LitElement {
         }
 
         fetchCompanyData(userData) {
-            fetch("http://localhost:5001/api/findUserEnterprise", {
+            fetch(`${apiUrl}/api/findUserEnterprise`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -118,7 +119,7 @@ export class HomePage extends LitElement {
 
         async addUserToEvent(userId, eventId) {
             try {
-              const response = await fetch(`http://localhost:5001/addEvent/${userId}`, {
+              const response = await fetch(`${apiUrl}/addEvent/${userId}`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -141,7 +142,7 @@ export class HomePage extends LitElement {
         async addEventToUser(userId, eventId) {
             eventId["submittions"] = [];
             try {
-              const response = await fetch(`http://localhost:5001/user/addEvent/${userId}`, {
+              const response = await fetch(`${apiUrl}/user/addEvent/${userId}`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

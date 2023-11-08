@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { MyEventsTemplate } from './myEventsTemplate';
+import { apiUrl } from '../../config.js';
 
 export class MyEventsPage extends LitElement {
     render() {
@@ -41,7 +42,7 @@ export class MyEventsPage extends LitElement {
 
     fetchUserData() {
         if (this.eventData.length === 0) {
-            fetch(`http://localhost:5001/api/home/?username=${this.currentUser.email}`)
+            fetch(`${apiUrl}/api/home/?username=${this.currentUser.email}`)
             .then(response => response.json())
             .then(data => {
             // Log the response from the API
@@ -108,7 +109,7 @@ export class MyEventsPage extends LitElement {
                 formData.append('userId',String(this.currentUser.email));
                 formData.append('eventId',String(id));
                 formData.append('fileToUpload', file);
-                fetch(`http://localhost:5001/user/addSubmission/${this.currentUser.email}`, {
+                fetch(`${apiUrl}/user/addSubmission/${this.currentUser.email}`, {
                 method: 'POST',
                 body: formData,
                 })
@@ -126,7 +127,7 @@ export class MyEventsPage extends LitElement {
     displayFile(filename,id) {
         console.log(filename.filename);
         const userId = String(this.currentUser.email+id);
-        fetch(`http://localhost:5001/api/files/${userId}/${filename.filename}`)
+        fetch(`${apiUrl}/api/files/${userId}/${filename.filename}`)
         .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');

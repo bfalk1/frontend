@@ -278,6 +278,7 @@ app.get('/api/files/:userId/:filename', (req, res) => {
 //First page User login
 app.get("/api", (req,res) => {
   const username = req.query.username;
+  console.log(username);
   mongoose.connection.collection(collectionName).findOne({"email": username }, (error, result) => {
     if (error) {
       console.error('Error finding user:', error);
