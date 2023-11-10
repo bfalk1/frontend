@@ -6,16 +6,13 @@ export const NavbarTemplate = (context) => {
     return html`
     <style>
     .navbar {
-      width: 90%;
+      width: 100%;
       color: white;
       background-color: rgb(6, 28, 113);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 70px; /* Adjust the height as needed */
-      border-radius: 10px;
-      margin-top: 5px;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .navbar-title {
@@ -67,7 +64,7 @@ export const NavbarTemplate = (context) => {
     </style> 
       <div style="display: flex; justify-content: center;"> 
       <div class="navbar">
-      <img src="/Assets/TLogo.png" class="logo" alt="Logo">
+      <img src="/Assets/logo.png" class="logo" alt="Logo">
       <button class="button" @click=${(e) => context.routeToAbout(e)}>About Us</button>
       ${context.inMainApplication ? html` 
       <button class="button" @click=${(e) => context.routeToFirst(e)}>Landing Page</button>

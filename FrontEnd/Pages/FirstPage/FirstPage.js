@@ -12,6 +12,7 @@ class FirstPage extends LitElement {
     return {
         ButtonClicked: { Type: Boolean},
         studentCheckBoxClicked: { Type: Boolean},
+        privacyCheckBoxClicked: { Type: Boolean},
         employeeCheckBoxClicked: { Type: Boolean},
         error: { Type: String},
         employmentButton: { Type: String},
@@ -22,6 +23,7 @@ class FirstPage extends LitElement {
         super();
         this.ButtonClicked = false;
         this.studentCheckBoxClicked = false;
+        this.privacyCheckBoxClicked = false;
         this.employeeCheckBoxClicked = false;
         this.error = null;
         this.UserAttributes = {
@@ -96,6 +98,11 @@ class FirstPage extends LitElement {
         this.currentUser = null;
         this.inputtedPassword = null;
     }
+    handleCheckboxChange(e) {
+        this.privacyCheckBoxClicked = !this.privacyCheckBoxClicked;
+
+    }
+
     studentuncheckBox(e) {
         this.studentCheckBoxClicked = false;
         this.error = null;
@@ -148,6 +155,7 @@ class FirstPage extends LitElement {
         console.log(this.UserAttributes);
         this.addUser(this.UserAttributes);
     }
+   
 
     memberLogin(e) {
         if (!this.currentUser) {
@@ -275,6 +283,10 @@ class FirstPage extends LitElement {
           .catch(error => {
             console.error("Error adding user:", error);
           });
+      }
+      routeToPrivacy(e) {
+        Router.go(`/privacy`);
+         
       }
 
 }
